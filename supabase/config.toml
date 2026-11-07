@@ -1,0 +1,11 @@
+[functions.rumbochat-agent]
+verify_jwt = false
+
+[functions.admin-auth]
+verify_jwt = false
+
+[functions.admin-prompt]
+verify_jwt = false
+
+[functions.admin-documents]
+verify_jwt = false
