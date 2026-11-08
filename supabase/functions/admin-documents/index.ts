@@ -361,3 +361,4 @@ function decodeXmlEntities(s: string): string {
     .replace(/&quot;/g, '"')
     .replace(/&apos;/g, "'");
 }
+

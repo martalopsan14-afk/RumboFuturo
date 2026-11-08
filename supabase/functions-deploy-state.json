@@ -1,0 +1,21 @@
+{
+  "projectId": "72611570",
+  "functions": {
+    "admin-auth": {
+      "hasChanged": false,
+      "hash": "12cf296bf308175fc33d3b042e86eda18329b874f59bffc200c8aadbb867a7e4"
+    },
+    "admin-documents": {
+      "hasChanged": false,
+      "hash": "cf647fe49ee38760a4e754fbd574260da6691b3dab245001d579ce8aa3297b58"
+    },
+    "admin-prompt": {
+      "hasChanged": false,
+      "hash": "49e88ece6dad5b9401af85338e6c01e102f15e3283b31588c4f076c932a5b920"
+    },
+    "rumbochat-agent": {
+      "hasChanged": false,
+      "hash": "51d242e96f4a8967b60d432904abdfc3a822b77b4a1a8ccc6280664653220ad8"
+    }
+  }
+}

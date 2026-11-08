@@ -160,3 +160,4 @@ Deno.serve(async (req) => {
 
   return makeResponse({ error: "Acción no válida" }, 400);
 });
+

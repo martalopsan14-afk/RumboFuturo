@@ -111,3 +111,4 @@ Deno.serve(async (req) => {
 
   return makeResponse({ error: "Método no permitido" }, 405);
 });
+

@@ -9,16 +9,16 @@ type Step = "profile" | "level" | "interests" | "format" | "loading" | "result";
 
 const JOURNALIST_LEVELS = [
   "Estudiante de Periodismo",
-  "Recién graduado en Periodismo",
-  "Profesional del ámbito de la comunicación",
-  "Otro perfil relacionado",
+  "Recién graduado/a en Periodismo",
+  "Profesional de la comunicación",
+  "Otro perfil relacionado con el periodismo",
 ];
 
 const RESEARCHER_LEVELS = [
-  "Investigador universitario",
-  "Profesor o profesional de la comunicación",
-  "Investigador de otra especialidad",
-  "Otro perfil profesional",
+  "Investigador/a de la Facultad de Comunicación",
+  "Investigador/a de otra área",
+  "Profesional cualificado que busca colaboradores",
+  "Otro perfil investigador o profesional",
 ];
 
 const TOPIC_OPTIONS = [
@@ -26,10 +26,12 @@ const TOPIC_OPTIONS = [
   "Economía",
   "Deportes",
   "Moda",
-  "Cultura",
   "Feminismo",
-  "Políticas migratorias",
   "Cambio climático",
+  "Políticas migratorias",
+  "Cultura",
+  "Sociedad",
+  "Tecnología",
 ];
 
 export function RumboChatPage() {
@@ -109,8 +111,8 @@ export function RumboChatPage() {
     <>
       <PageHeader
         eyebrow="RumboChat"
-        title="Tu orientador personal de Rumbo Futuro"
-        description="Cuéntanos tu perfil, tus intereses y tus preferencias. Te recomendaremos la opción que mejor encaja contigo."
+        title="Encuentra tu próximo rumbo profesional"
+        description="¿No sabes qué especialidad periodística encaja contigo, qué formación elegir o con qué profesionales podrías colaborar? RumboChat te ayuda a encontrar la opción que mejor se adapta a tus intereses, tu perfil y tu disponibilidad."
       />
 
       <Section>
@@ -138,13 +140,13 @@ export function RumboChatPage() {
               />
               <div className="flex flex-col gap-4 sm:flex-row">
                 <ProfileCard
-                  title="Soy periodista emergente o talento en formación"
-                  description="Estudiante, recién graduado o profesional que quiere especializarse, formarse o encontrar un tutor."
+                  title="Soy periodista o talento emergente"
+                  description="Quiero encontrar una especialización, un curso, una jornada o un tutor."
                   onClick={() => selectProfile("journalist")}
                 />
                 <ProfileCard
                   title="Soy investigador o profesional"
-                  description="Buscas colaboradores para tus proyectos o deseas participar en encuentros de Rumbo Futuro."
+                  description="Quiero encontrar personas con las que colaborar en un proyecto o encuentro."
                   onClick={() => selectProfile("researcher")}
                 />
               </div>
