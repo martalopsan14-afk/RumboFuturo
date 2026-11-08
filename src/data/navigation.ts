@@ -5,6 +5,7 @@ export const PAGE_IDS = [
   'formacion-dual',
   'colaboradores',
   'saber-mas',
+  'rumbochat',
 ] as const;
 
 export type PageId = (typeof PAGE_IDS)[number];
@@ -68,6 +69,11 @@ export const NAV_ITEMS: NavItem[] = [
         ],
       },
     ],
+  },
+  {
+    label: 'RumboChat',
+    page: 'rumbochat',
+    children: [],
   },
 ];
 

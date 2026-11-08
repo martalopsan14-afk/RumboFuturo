@@ -7,6 +7,8 @@ import { TrabajoPage } from '@/pages/TrabajoPage';
 import { FormacionPage } from '@/pages/FormacionPage';
 import { ColaboradoresPage } from '@/pages/ColaboradoresPage';
 import { SaberMasPage } from '@/pages/SaberMasPage';
+import { RumboChatPage } from '@/pages/RumboChatPage';
+import { AdminPage } from '@/pages/AdminPage';
 import { useHashRoute } from '@/hooks/useHashRoute';
 import type { PageId } from '@/data/navigation';
 
@@ -17,10 +19,17 @@ const PAGE_COMPONENTS: Record<PageId, ComponentType> = {
   'formacion-dual': FormacionPage,
   colaboradores: ColaboradoresPage,
   'saber-mas': SaberMasPage,
+  rumbochat: RumboChatPage,
 };
 
 export default function App() {
   const route = useHashRoute();
+
+  // Admin route: render standalone, no public header/footer
+  if (route.type === 'admin') {
+    return <AdminPage />;
+  }
+
   const PageComponent = PAGE_COMPONENTS[route.page];
 
   useEffect(() => {

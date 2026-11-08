@@ -22,13 +22,17 @@ export function DesktopNav({ activePage }: DesktopNavProps) {
                 }`}
               >
                 {item.label}
-                <ChevronDown aria-hidden="true" className="h-4 w-4 transition duration-200 group-hover:rotate-180" />
+                {item.children.length > 0 && (
+                  <ChevronDown aria-hidden="true" className="h-4 w-4 transition duration-200 group-hover:rotate-180" />
+                )}
               </a>
-              <div className="invisible absolute left-1/2 top-full z-50 w-80 -translate-x-1/2 pt-3 opacity-0 transition duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                <div className="rounded-2xl border border-ink/10 bg-ivory p-2 shadow-xl">
-                  <NavChildList page={item.page} items={item.children} />
+              {item.children.length > 0 && (
+                <div className="invisible absolute left-1/2 top-full z-50 w-80 -translate-x-1/2 pt-3 opacity-0 transition duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                  <div className="rounded-2xl border border-ink/10 bg-ivory p-2 shadow-xl">
+                    <NavChildList page={item.page} items={item.children} />
+                  </div>
                 </div>
-              </div>
+              )}
             </li>
           );
         })}

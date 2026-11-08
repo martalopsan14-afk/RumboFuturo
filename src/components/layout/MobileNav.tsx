@@ -29,7 +29,9 @@ export function MobileNav({ id, isOpen, activePage, onNavigate }: MobileNavProps
             >
               {item.label}
             </a>
-            <NavChildList page={item.page} items={item.children} onNavigate={onNavigate} />
+            {item.children.length > 0 && (
+              <NavChildList page={item.page} items={item.children} onNavigate={onNavigate} />
+            )}
           </li>
         ))}
       </ul>

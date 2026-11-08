@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, ArrowLeft, Sparkles, Check, X, Loader2, RotateCcw } from "lucide-react';
+import { ArrowRight, ArrowLeft, Sparkles, Check, X, Loader2, RotateCcw } from 'lucide-react';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Section } from '@/components/ui/Section';
 import { SectionHeader } from '@/components/ui/SectionHeader';
