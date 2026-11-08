@@ -23,7 +23,6 @@ interface QuestionnaireAnswers {
   };
 }
 
-// Retrieve relevant RAG chunks based on keyword matching with the user's answers
 async function retrieveRagContext(
   supabase: ReturnType<typeof createClient>,
   answers: QuestionnaireAnswers,
@@ -36,7 +35,6 @@ async function retrieveRagContext(
     answers.format.duration === "course" ? "curso suscripción" : answers.format.duration === "event" ? "encuentro evento" : "",
   ].filter((t) => t.length > 0);
 
-  // Get all chunks (for a small knowledge base, we retrieve all and rank)
   const { data: chunks, error } = await supabase
     .from("rag_chunks")
     .select("content, document_id")
@@ -46,7 +44,6 @@ async function retrieveRagContext(
     return "";
   }
 
-  // Simple keyword-based scoring
   const scored = chunks.map((chunk) => {
     const lowerContent = chunk.content.toLowerCase();
     let score = 0;
@@ -69,7 +66,6 @@ async function retrieveRagContext(
   return topChunks.map((c) => c.content).join("\n\n---\n\n");
 }
 
-// Build the context string from Rumbo Futuro's static data
 function buildStaticContext(): string {
   return `INFORMACIÓN INTERNA DE RUMBO FUTURO:
 
@@ -89,7 +85,7 @@ COLABORADORES (no son acuerdos formales confirmados):
 - Diario Territorio Digital: medio digital de actualidad.
 - Universidad de Sevilla (US): universidad pública con actividad docente e investigadora en comunicación.
 - LabProCom: iniciativa vinculada a investigación y comunicación.
-- Equipo de investigación de la Facultad de Comunicación: equipos académicos en investigación en comunicación.
+- Secretariado de Divulgación Cultural y Científica de la US: equipos académicos e investigación en comunicación.
 
 VALOR DE RUMBO FUTURO: «Ofrecemos una formación práctica y flexible geográficamente que conecta a los periodistas emergentes con el mundo laboral a través de los investigadores, a un precio competitivo.»
 
@@ -123,7 +119,6 @@ Deno.serve(async (req) => {
 
   const answers = body.answers;
 
-  // Get the current system prompt from the database
   const { data: config, error: configError } = await supabase
     .from("agent_config")
     .select("system_prompt")
@@ -134,13 +129,9 @@ Deno.serve(async (req) => {
     return makeResponse({ error: "No hay system prompt configurado" }, 500);
   }
 
-  // Retrieve RAG context from uploaded documents
   const ragContext = await retrieveRagContext(supabase, answers);
-
-  // Build the static context from Rumbo Futuro's data
   const staticContext = buildStaticContext();
 
-  // Build the user message with questionnaire answers
   const profileLabel = answers.profile === "journalist"
     ? "Periodista emergente / talento en formación"
     : "Investigador o profesional";
@@ -153,13 +144,8 @@ Intereses y temáticas: ${answers.interests.join(", ")}
 
 Preferencias de formato:
 - Modalidad preferida: ${answers.format.modality === "online" ? "Online" : answers.format.modality === "in_person" ? "Presencial" : "Indiferente"}
-- Duración preferida: ${answers.format.duration === "course" ? "Curso de mayor duración (suscripción)" : answers.format.duration === "event" ? "Actividad puntual / encuentro" : "Indiferente"}
+- Duración preferida: ${answers.format.duration === "course" ? "Curso de mayor duración (suscripción)" : answers.format.duration === "event" ? "Actividad puntual / encuentro" : "Indiferente"}`;
 
-${answers.profile === "journalist"
-  ? "Mensaje inicial del usuario: «Hola, quiero una guía para saber qué curso es el mejor para mí»."
-  : "Mensaje inicial del usuario: «Hola, quiero una guía para saber qué usuarios estarían dispuestos a colaborar conmigo»."}`;
-
-  // Combine all context for the agent
   const fullContext = `${staticContext}
 
 ${ragContext ? `BASE DE CONOCIMIENTO (documentos subidos):
@@ -168,24 +154,21 @@ ${ragContext}
 
 NOTA: ${ragContext ? "Utiliza la información de arriba junto con la base de conocimiento." : "No hay documentos subidos a la base de conocimiento todavía. Utiliza solo la información interna disponible arriba."}`;
 
-  // Get OpenRouter API key from environment
   const openRouterKey = Deno.env.get("OPENROUTER_API_KEY");
 
   if (!openRouterKey) {
-    // Return a fallback response when no API key is configured
     return makeResponse({
-      recommendation: "Creemos que eres el candidato perfecto para... seguir atento al lanzamiento de Rumbo Futuro.",
+      recommendation: "Conoce más sobre X contactando con Rumbo Futuro para valorar tu incorporación a futuras convocatorias. Escríbenos a rumbofuturo@gmail.com",
       justification: answers.profile === "journalist"
-        ? `Por tus intereses en ${answers.interests.join(", ")} y tu preferencia por la modalidad ${answers.format.modality === "online" ? "online" : "presencial"}, te recomendamos estar atento al lanzamiento de nuestros primeros cursos y encuentros. Cuando estén disponibles, podremos ofrecerte una recomendación específica basada en tu perfil.`
-        : `Por tu perfil como ${answers.level} y tus intereses en ${answers.interests.join(", ")}, te invitamos a participar en los próximos encuentros de Rumbo Futuro. Cuando tengamos perfiles de colaboradores disponibles, podremos conectar tu proyecto con el talento adecuado.`,
-      cta: answers.profile === "journalist" ? "Conoce más sobre Formación Dual" : "Contacta con Rumbo Futuro",
+        ? `Por tus intereses en "${answers.interests.join(", ")}" y tu preferencia por la modalidad "${answers.format.modality === "online" ? "online" : "presencial"}", te invitamos a seguir atento al lanzamiento de los próximos cursos.`
+        : `Por tu perfil como "${answers.level}" y tus intereses en "${answers.interests.join(", ")}", te invitamos a participar en los próximos encuentros de Rumbo Futuro.`,
+      cta: "Escríbenos a rumbofuturo@gmail.com",
       ctaLink: answers.profile === "journalist" ? "#/formacion-dual" : null,
-      warning: "El agente de IA no está configurado. Falta la API key de OpenRouter. La recomendación mostrada es orientativa y no ha sido generada por el agente LangChain.",
+      warning: null,
       chunksUsed: [],
     });
   }
 
-  // Call OpenRouter API in free auto mode
   try {
     const openRouterResponse = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
@@ -196,7 +179,7 @@ NOTA: ${ragContext ? "Utiliza la información de arriba junto con la base de con
         "X-Title": "RumboChat Agent",
       },
       body: JSON.stringify({
-        model: "openrouter/auto", // free auto mode: OpenRouter routes to the best available free model
+        model: "openrouter/auto",
         messages: [
           { role: "system", content: config.system_prompt },
           { role: "system", content: fullContext },
@@ -208,7 +191,6 @@ NOTA: ${ragContext ? "Utiliza la información de arriba junto con la base de con
     });
 
     if (!openRouterResponse.ok) {
-      const errText = await openRouterResponse.text();
       return makeResponse({
         error: "Error en el agente de IA",
         details: `OpenRouter respondió con código ${openRouterResponse.status}`,
@@ -227,9 +209,9 @@ NOTA: ${ragContext ? "Utiliza la información de arriba junto con la base de con
     }
 
     return makeResponse({
-      recommendation: aiMessage,
+      recommendation: aiMessage.replace(/\*/g, '"'),
       justification: null,
-      cta: null,
+      cta: "Escríbenos a rumbofuturo@gmail.com",
       ctaLink: null,
       warning: null,
       chunksUsed: ragContext ? [1] : [],
@@ -243,4 +225,3 @@ NOTA: ${ragContext ? "Utiliza la información de arriba junto con la base de con
     }, 502);
   }
 });
-
