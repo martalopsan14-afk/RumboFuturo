@@ -91,7 +91,7 @@ export const NEWS_ITEMS: NewsItem[] = [
     excerpt: 'La Asociación de la Prensa de Madrid facilita la incorporación laboral de cinco recién graduados mediante su programa Primer Empleo.',
     body: 'Los seleccionados comenzarán su trayectoria profesional en medios de comunicación madrileños tras superar el proceso de selección del programa.',
     date: '2026-11-09',
-    image: `${NEWS_IMAGES}noticia%20mariela%202.jpeg`,
+    image: `${NEWS_IMAGES}Noticia%203%20Laura.png`,
     link: NEWS_SOURCE,
   },
 ];
