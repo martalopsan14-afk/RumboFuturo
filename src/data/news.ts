@@ -100,7 +100,7 @@ La alianza supone un nuevo impulso para FARTVE, presidida por Juan Ignacio Ocañ
 
 Las Antenas de Oro, que cuentan con 75 años de historia, reconocen anualmente la trayectoria y el trabajo de destacados profesionales de la radio, la televisión y otros ámbitos de la comunicación.`,
     date: '2026-11-08',
-    image: null,
+    image: `${NEWS_IMAGES}Noticia%203%20Laura.png`,
     link: NEWS_SOURCE,
   },
 ];
