@@ -46,7 +46,7 @@ function TeamMemberCard({ member }: { member: TeamMember }) {
       key={member.id}
       className="overflow-hidden rounded-2xl border border-ivory/20 bg-ivory/5"
     >
-      <div className="aspect-[4/5] overflow-hidden bg-ivory/10">
+      <div className="aspect-[3/4] overflow-hidden bg-ivory/10">
         {member.photo ? (
           <img
             src={member.photo}
