@@ -63,7 +63,7 @@ export const SOCIAL_PROFILES: SocialProfile[] = [
   {
     id: 'tiktok',
     label: 'TikTok',
-    handle: '@rumbofuturooy',
-    url: 'https://www.tiktok.com/@rumbofuturooy',
+    handle: '@rumbofuturoo',
+    url: 'https://www.tiktok.com/@rumbofuturoo',
   },
 ];
