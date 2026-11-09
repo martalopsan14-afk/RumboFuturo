@@ -16,11 +16,17 @@ export function NewsSection() {
           />
           <DemoTag />
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {NEWS_ITEMS.map((item) => (
-            <NewsCard key={item.id} item={item} />
-          ))}
-        </div>
+        {NEWS_ITEMS.length > 0 ? (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {NEWS_ITEMS.map((item) => (
+              <NewsCard key={item.id} item={item} />
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-3xl border border-dashed border-ink/20 bg-ivory p-8 text-graphite">
+            Las próximas publicaciones aparecerán aquí cuando se incorporen sus textos, fechas e imágenes oficiales.
+          </div>
+        )}
       </div>
     </Section>
   );

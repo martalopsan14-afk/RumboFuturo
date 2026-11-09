@@ -32,7 +32,7 @@ export function BenefitsSection() {
       <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
         <SectionHeader
           eyebrow="Nuestra propuesta de valor"
-          title="El talento está ahí. Las oportunidades deben llegar."
+          title="El talento está ahí. Nosotros hacemos llegar las oportunidades."
           description="Muchos jóvenes periodistas terminan su formación sin disponer de experiencia suficiente, contactos profesionales u oportunidades para demostrar sus capacidades. Rumbo Futuro existe para cerrar esa distancia."
         />
         <ul className="grid gap-5 self-center">

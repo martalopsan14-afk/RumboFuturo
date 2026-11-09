@@ -8,7 +8,7 @@ export interface EventItem {
   date: string | null;
   place: string | null;
   status: EventStatus;
-  image: string;
+  image: string | null;
 }
 
 export const EVENT_STATUS_LABELS: Record<EventStatus, string> = {
@@ -29,7 +29,7 @@ export const EVENTS: EventItem[] = [
     date: null,
     place: null,
     status: 'en_preparacion',
-    image: 'https://images.pexels.com/photos/7611198/pexels-photo-7611198.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    image: null,
   },
   {
     id: 'networking-labprocom',
@@ -41,7 +41,7 @@ export const EVENTS: EventItem[] = [
     date: null,
     place: null,
     status: 'proximamente',
-    image: 'https://images.pexels.com/photos/8761648/pexels-photo-8761648.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    image: null,
   },
   {
     id: 'consejo-periodistas',
@@ -53,7 +53,7 @@ export const EVENTS: EventItem[] = [
     date: null,
     place: null,
     status: 'en_preparacion',
-    image: 'https://images.pexels.com/photos/8349431/pexels-photo-8349431.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    image: null,
   },
   {
     id: 'asociacion-prensa',
@@ -65,6 +65,6 @@ export const EVENTS: EventItem[] = [
     date: null,
     place: null,
     status: 'en_preparacion',
-    image: 'https://images.pexels.com/photos/8761631/pexels-photo-8761631.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    image: null,
   },
 ];

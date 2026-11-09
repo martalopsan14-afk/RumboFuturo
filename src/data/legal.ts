@@ -2,34 +2,39 @@ export interface LegalDocument {
   id: string;
   title: string;
   body: string;
+  url: string | null;
 }
 
-// Pendiente de aclaración por el equipo: la referencia "ERP asistido por la IA" no se interpreta ni se usa como categoría jurídica.
 export const LEGAL_DOCUMENTS: LegalDocument[] = [
   {
     id: 'aviso-legal',
     title: 'Aviso legal',
-    body: 'Texto pendiente de revisión. Los datos identificativos de la empresa se incorporarán cuando estén validados.',
+    body: 'Documento pendiente de incorporación.',
+    url: null,
   },
   {
     id: 'politica-privacidad',
     title: 'Política de privacidad',
-    body: 'Texto pendiente de revisión. Describirá cómo se tratan los correos electrónicos de interés y las suscripciones.',
+    body: 'Documento pendiente de incorporación.',
+    url: null,
   },
   {
     id: 'politica-cookies',
     title: 'Política de cookies',
-    body: 'Texto pendiente de revisión. Se detallarán las cookies utilizadas por la web una vez confirmadas.',
+    body: 'Documento pendiente de incorporación.',
+    url: null,
   },
   {
     id: 'terminos-suscripcion',
     title: 'Términos y condiciones de suscripción',
-    body: 'Texto pendiente de revisión. Las condiciones definitivas se publicarán cuando las suscripciones estén aprobadas.',
+    body: 'Documento pendiente de incorporación.',
+    url: null,
   },
   {
     id: 'uso-inteligencia-artificial',
     title: 'Información sobre el uso de inteligencia artificial',
-    body: 'Texto pendiente de revisión. Explicará cómo se utiliza la inteligencia artificial en Rumbo Futuro.',
+    body: 'Documento pendiente de incorporación.',
+    url: null,
   },
 ];
 

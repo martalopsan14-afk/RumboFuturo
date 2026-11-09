@@ -10,13 +10,17 @@ function EventCard({ event }: { event: EventItem }) {
       id={event.id}
       className="group flex h-full scroll-mt-28 flex-col overflow-hidden rounded-3xl border border-ink/10 bg-ivory shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
     >
-      <div className="aspect-[16/9] overflow-hidden">
-        <img
-          src={event.image}
-          alt=""
-          loading="lazy"
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-        />
+      <div className="flex aspect-[16/9] items-center justify-center overflow-hidden bg-ivory-deep px-6 text-center font-sans text-xs font-semibold uppercase tracking-wider text-graphite-soft">
+        {event.image ? (
+          <img
+            src={event.image}
+            alt={event.title}
+            loading="lazy"
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+          />
+        ) : (
+          'Fotografía del evento pendiente de incorporar'
+        )}
       </div>
       <div className="flex flex-1 flex-col gap-4 p-6 sm:p-7">
         <div className="flex flex-wrap items-center gap-3">

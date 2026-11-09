@@ -11,7 +11,7 @@ export function HeroSection() {
         <div className="flex flex-col gap-7 animate-fade-up">
           <p className="font-editorial text-2xl italic text-coral sm:text-3xl">Tu talento, tu puerta al mundo</p>
           <h1 className="font-sans text-4xl leading-[1.1] text-ivory sm:text-5xl lg:text-6xl">
-            El futuro del periodismo empieza con una oportunidad
+            El futuro del periodismo empieza con tu oportunidad
           </h1>
           <p className="max-w-xl text-lg leading-relaxed text-ivory/85">
             Conectamos a periodistas emergentes con investigadores, expertos y profesionales de la comunicación para
@@ -30,7 +30,10 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="relative animate-fade-up [animation-delay:150ms]">
+        <div className="relative flex flex-col gap-5 animate-fade-up [animation-delay:150ms]">
+          <div className="flex min-h-16 items-center justify-center rounded-2xl border border-dashed border-ivory/35 bg-ivory/5 px-6 text-center font-sans text-xs font-semibold uppercase tracking-[0.16em] text-ivory/70">
+            Espacio para el logotipo oficial
+          </div>
           <div aria-hidden="true" className="absolute -right-4 -top-4 h-full w-full rounded-[2rem] border-2 border-coral sm:-right-6 sm:-top-6" />
           <img
             src={HERO_IMAGE_URL}

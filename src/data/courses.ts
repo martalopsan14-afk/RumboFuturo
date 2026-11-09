@@ -57,6 +57,38 @@ export const IN_PERSON_MODALITY: ModalityData = {
   formLabel: 'Te avisaremos cuando publiquemos la formación presencial',
 };
 
+export interface CourseDraft {
+  id: string;
+  name: string;
+  description: string;
+  status: 'Próximamente';
+  objectives: string[];
+  contents: string[];
+  modality: string;
+  duration: string;
+  price: string;
+  enrollment: string;
+  image: string | null;
+}
+
+export const COURSE_DRAFTS: CourseDraft[] = [
+  'Periodismo de Datos e Inteligencia Artificial',
+  'Campañas de Desinformación en materia de Inmigración',
+  'Fast Fashion y Políticas Medioambientales',
+].map((name, index) => ({
+  id: `curso-${index + 1}`,
+  name,
+  description: 'Descripción pendiente de validación.',
+  status: 'Próximamente',
+  objectives: [],
+  contents: [],
+  modality: 'Pendiente de confirmar',
+  duration: 'Pendiente de confirmar',
+  price: 'Pendiente de confirmar',
+  enrollment: 'Información de inscripción pendiente.',
+  image: null,
+}));
+
 export const SUBSCRIPTION_COPY = {
   title: 'Estamos preparando algo para tu futuro',
   description:

@@ -1,6 +1,6 @@
 import { InterestForm } from '@/components/forms/InterestForm';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { SUBSCRIPTION_COPY } from '@/data/courses';
+import { COURSE_DRAFTS, SUBSCRIPTION_COPY } from '@/data/courses';
 
 export function SubscriptionContent() {
   return (
@@ -17,6 +17,26 @@ export function SubscriptionContent() {
           <p className="leading-relaxed">{SUBSCRIPTION_COPY.access}</p>
           <p className="leading-relaxed">{SUBSCRIPTION_COPY.pricing}</p>
         </article>
+      </div>
+
+      <div className="flex flex-col gap-5 lg:col-span-2">
+        <div>
+          <p className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-coral">Oferta formativa</p>
+          <h3 className="mt-2 font-sans text-2xl text-ink">Cursos en preparación</h3>
+        </div>
+        <div className="grid gap-4 md:grid-cols-3">
+          {COURSE_DRAFTS.map((course) => (
+            <article key={course.id} className="flex flex-col gap-4 rounded-2xl border border-dashed border-ink/20 bg-ivory-deep/50 p-5">
+              <span className="self-start rounded-full bg-coral-soft px-3 py-1 font-sans text-xs font-semibold text-ink">{course.status}</span>
+              <h4 className="font-sans text-lg leading-snug text-ink">{course.name}</h4>
+              <p className="text-sm leading-relaxed text-graphite">{course.description}</p>
+              <dl className="mt-auto grid gap-2 border-t border-ink/10 pt-4 text-sm">
+                <div><dt className="font-semibold">Modalidad</dt><dd>{course.modality}</dd></div>
+                <div><dt className="font-semibold">Precio</dt><dd>{course.price}</dd></div>
+              </dl>
+            </article>
+          ))}
+        </div>
       </div>
 
       <article className="rounded-[2rem] border border-ink/10 bg-ivory p-8 shadow-xl sm:p-10">

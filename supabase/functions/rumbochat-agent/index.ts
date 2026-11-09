@@ -86,10 +86,10 @@ Enrique Jiménez García, Adrián Márquez Domínguez, Laura Prado Álvarez, Mar
 
 COLABORADORES (no son acuerdos formales confirmados):
 - Diario de Espartinas: medio de comunicación local de Espartinas.
-- Diario Territorio Digital: medio digital de actualidad.
+- El Territorio Cadista: medio digital de actualidad.
 - Universidad de Sevilla (US): universidad pública con actividad docente e investigadora en comunicación.
 - LabProCom: iniciativa vinculada a investigación y comunicación.
-- Equipo de investigación de la Facultad de Comunicación: equipos académicos en investigación en comunicación.
+- Secretariado de Divulgación Cultural y Científica de la Universidad de Sevilla: respaldo académico y divulgación.
 
 VALOR DE RUMBO FUTURO: «Ofrecemos una formación práctica y flexible geográficamente que conecta a los periodistas emergentes con el mundo laboral a través de los investigadores, a un precio competitivo.»
 

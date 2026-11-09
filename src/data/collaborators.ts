@@ -17,7 +17,7 @@ export const MEDIA_PARTNERS: CollaboratorItem[] = [
   },
   {
     id: 'diario-territorio-digital',
-    name: 'Diario Territorio Digital',
+    name: 'El Territorio Cadista',
     description:
       'Medio digital dedicado a la información y a la actualidad, con contenidos periodísticos dirigidos a sus lectores a través de plataformas digitales.',
     logo: null,
@@ -43,8 +43,8 @@ export const ACADEMIC_PARTNERS: CollaboratorItem[] = [
     website: null,
   },
   {
-    id: 'equipo-investigacion-fcom',
-    name: 'Equipo de investigación de la Facultad de Comunicación',
+    id: 'secretariado-divulgacion-cultural-cientifica',
+    name: 'Secretariado de Divulgación Cultural y Científica de la Universidad de Sevilla',
     description:
       'Equipos académicos que desarrollan investigación en comunicación y que pueden aportar conocimiento especializado al análisis y la práctica periodística.',
     logo: null,

@@ -36,6 +36,16 @@ export function LegalDialog({ document, onClose }: LegalDialogProps) {
           {document.title}
         </h3>
         <p className="mt-4 leading-relaxed">{document.body}</p>
+        {document.url && (
+          <a
+            href={document.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex font-sans text-sm font-semibold text-ink underline decoration-coral decoration-2 underline-offset-4"
+          >
+            Abrir documento
+          </a>
+        )}
         <div className="mt-8 flex justify-end">
           <Button variant="secondary" onClick={onClose} autoFocus>
             Cerrar

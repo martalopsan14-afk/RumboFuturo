@@ -385,18 +385,32 @@ function ResultModal({ result, onReset }: { result: AgentResponse; onReset: () =
           <div className="flex flex-col gap-3">
             <p className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-coral">Resultado de RumboChat</p>
             <h2 className="font-editorial text-2xl italic leading-snug text-ink sm:text-3xl">
-              Creemos que eres el candidato perfecto para...
+              Tu próxima oportunidad en Rumbo Futuro
             </h2>
           </div>
 
           <div className="rounded-2xl bg-ink/5 p-6">
             <p className="font-sans text-lg font-bold text-ink leading-relaxed whitespace-pre-line">
-              {result.recommendation}
+              {result.recommendation?.replace(/\*/g, "")}
             </p>
           </div>
 
           {result.justification && (
-            <p className="leading-relaxed text-graphite">{result.justification}</p>
+            <p className="leading-relaxed text-graphite">{result.justification.replace(/\*/g, "")}</p>
+          )}
+
+          {result.recommendation && (
+            <div className="rounded-2xl border border-ink/10 bg-coral-soft/40 p-5 leading-relaxed text-graphite">
+              <p>
+                Conoce más sobre <strong>{result.recommendation.replace(/\*/g, "")}</strong> contactando con Rumbo Futuro para valorar tu incorporación a futuras convocatorias.
+              </p>
+              <a
+                href="mailto:rumbofuturo@gmail.com"
+                className="mt-3 inline-flex font-sans font-semibold text-ink underline decoration-coral decoration-2 underline-offset-4 hover:text-coral"
+              >
+                rumbofuturo@gmail.com
+              </a>
+            </div>
           )}
 
           {result.warning && (
