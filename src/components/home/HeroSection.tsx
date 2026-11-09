@@ -1,8 +1,7 @@
 import { Button } from '@/components/ui/Button';
 import { buildHref } from '@/data/navigation';
 
-const HERO_IMAGE_URL =
-  'https://images.pexels.com/photos/6954169/pexels-photo-6954169.jpeg?auto=compress&cs=tinysrgb&h=650&w=940';
+const HERO_IMAGE_URL = '/Logo_normal.jpeg';
 
 export function HeroSection() {
   return (
@@ -31,16 +30,13 @@ export function HeroSection() {
         </div>
 
         <div className="relative flex flex-col gap-5 animate-fade-up [animation-delay:150ms]">
-          <div className="flex min-h-16 items-center justify-center rounded-2xl border border-dashed border-ivory/35 bg-ivory/5 px-6 text-center font-sans text-xs font-semibold uppercase tracking-[0.16em] text-ivory/70">
-            Espacio para el logotipo oficial
-          </div>
           <div aria-hidden="true" className="absolute -right-4 -top-4 h-full w-full rounded-[2rem] border-2 border-coral sm:-right-6 sm:-top-6" />
           <img
             src={HERO_IMAGE_URL}
-            alt="Periodista tomando notas durante una entrevista"
+            alt="Rumbo Futuro"
             width={940}
             height={650}
-            className="relative aspect-[4/5] w-full rounded-[2rem] object-cover shadow-2xl sm:aspect-[5/4]"
+            className="relative aspect-[4/5] w-full rounded-[2rem] bg-ink object-contain shadow-2xl sm:aspect-[5/4]"
           />
         </div>
       </div>

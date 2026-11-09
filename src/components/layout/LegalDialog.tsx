@@ -35,7 +35,19 @@ export function LegalDialog({ document, onClose }: LegalDialogProps) {
         <h3 id="legal-dialog-title" className="font-sans text-xl text-ink">
           {document.title}
         </h3>
-        <p className="mt-4 leading-relaxed">{document.body}</p>
+        <div className="mt-4 max-h-[60vh] overflow-y-auto whitespace-pre-wrap pr-2 text-sm leading-relaxed">
+          {document.body}
+        </div>
+        {document.id === 'personalizar-cookies' && (
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Button variant="primary" onClick={() => window.localStorage.setItem('rumbo-cookie-consent', 'accepted')}>
+              Aceptar todas las cookies
+            </Button>
+            <Button variant="secondary" onClick={() => window.localStorage.setItem('rumbo-cookie-consent', 'rejected')}>
+              Rechazar
+            </Button>
+          </div>
+        )}
         {document.url && (
           <a
             href={document.url}

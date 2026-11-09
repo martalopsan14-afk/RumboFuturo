@@ -1,3 +1,5 @@
+import legalSource from './legal-content.txt?raw';
+
 export interface LegalDocument {
   id: string;
   title: string;
@@ -5,35 +7,35 @@ export interface LegalDocument {
   url: string | null;
 }
 
+function extractSection(title: string, nextTitle?: string): string {
+  const start = legalSource.indexOf(`\n${title}\n`);
+  const end = nextTitle ? legalSource.indexOf(`\n${nextTitle}\n`, start + title.length) : -1;
+  return legalSource.slice(start + title.length + 2, end === -1 ? undefined : end).trim();
+}
+
 export const LEGAL_DOCUMENTS: LegalDocument[] = [
   {
     id: 'aviso-legal',
-    title: 'Aviso legal',
-    body: 'Documento pendiente de incorporación.',
+    title: 'Aviso Legal',
+    body: extractSection('Aviso Legal', 'Política de Privacidad'),
     url: null,
   },
   {
     id: 'politica-privacidad',
-    title: 'Política de privacidad',
-    body: 'Documento pendiente de incorporación.',
+    title: 'Política de Privacidad',
+    body: extractSection('Política de Privacidad', 'Política de Cookies'),
     url: null,
   },
   {
     id: 'politica-cookies',
-    title: 'Política de cookies',
-    body: 'Documento pendiente de incorporación.',
+    title: 'Política de Cookies',
+    body: extractSection('Política de Cookies', 'Personalizar  Cookies'),
     url: null,
   },
   {
-    id: 'terminos-suscripcion',
-    title: 'Términos y condiciones de suscripción',
-    body: 'Documento pendiente de incorporación.',
-    url: null,
-  },
-  {
-    id: 'uso-inteligencia-artificial',
-    title: 'Información sobre el uso de inteligencia artificial',
-    body: 'Documento pendiente de incorporación.',
+    id: 'personalizar-cookies',
+    title: 'Personalizar Cookies',
+    body: extractSection('Personalizar  Cookies'),
     url: null,
   },
 ];
