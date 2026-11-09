@@ -11,7 +11,7 @@ export interface NewsItem {
 }
 
 const NEWS_SOURCE = '/RumboFuturo/Compendio_de_Noticias_de_Rumbo_Futuro.pdf';
-const NEWS_IMAGES = '/RumboFuturo/noticias/';
+const NEWS_IMAGES = 'noticias/';
 
 export const NEWS_ITEMS: NewsItem[] = [
   {
