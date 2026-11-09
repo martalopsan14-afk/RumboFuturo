@@ -89,7 +89,7 @@ export const NEWS_ITEMS: NewsItem[] = [
   },
   {
     id: 'antena-de-oro-2026',
-    category: 'Reconocimientos',
+    category: 'Medios de comunicación',
     title: 'Un acuerdo para impulsar la comunicación de los Premios Antena de Oro',
     excerpt: 'La FARTVE y el grupo Prensa Ibérica firman un acuerdo de colaboración para impulsar la comunicación y promoción de los Premios Antena de Oro 2026.',
     body: `La Federación de Asociaciones de Radio y Televisión de España (FARTVE) y el grupo Prensa Ibérica han firmado un acuerdo de colaboración para impulsar la comunicación y promoción de los Premios Antena de Oro 2026, cuya gala se celebrará el próximo mes de noviembre.
