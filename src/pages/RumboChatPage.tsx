@@ -399,19 +399,24 @@ function ResultModal({ result, onReset }: { result: AgentResponse; onReset: () =
             <p className="leading-relaxed text-graphite">{result.justification.replace(/\*/g, "")}</p>
           )}
 
-          {result.recommendation && (
-            <div className="rounded-2xl border border-ink/10 bg-coral-soft/40 p-5 leading-relaxed text-graphite">
-              <p>
-                Conoce más sobre <strong>{result.recommendation.replace(/\*/g, "")}</strong> contactando con Rumbo Futuro para valorar tu incorporación a futuras convocatorias.
-              </p>
-              <a
-                href="mailto:rumbofuturo@gmail.com"
-                className="mt-3 inline-flex font-sans font-semibold text-ink underline decoration-coral decoration-2 underline-offset-4 hover:text-coral"
-              >
-                rumbofuturo@gmail.com
-              </a>
-            </div>
-          )}
+          <div className="rounded-2xl border border-ink/10 bg-coral-soft/40 p-5 leading-relaxed text-graphite">
+            <p className="font-sans font-semibold text-ink">
+              Gracias por completar el cuestionario de Rumbo Futuro.
+            </p>
+            <p className="mt-3">
+              Esperamos que esta orientación te haya resultado útil. Si quieres ampliar la información, resolver dudas o recibir asesoramiento personalizado, estaremos encantados de ayudarte.
+            </p>
+            <p className="mt-4 font-sans font-semibold text-ink">
+              ¿Quieres contactar con nuestro equipo?
+            </p>
+            <a
+              href="mailto:Rumbofuturoo@gmail.com"
+              className="mt-3 inline-flex items-center gap-2 rounded-full bg-coral px-6 py-3 font-sans text-sm font-semibold text-ink transition duration-200 hover:bg-ink hover:text-ivory"
+            >
+              Contactar por correo electrónico
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
 
           {result.warning && (
             <p className="rounded-xl bg-ink/5 px-4 py-3 text-xs leading-relaxed text-graphite-soft" role="status">
@@ -419,22 +424,6 @@ function ResultModal({ result, onReset }: { result: AgentResponse; onReset: () =
             </p>
           )}
 
-          {result.cta && (
-            <div className="flex flex-wrap items-center gap-4">
-              {result.ctaLink && (
-                <a
-                  href={result.ctaLink}
-                  className="inline-flex items-center gap-2 rounded-full bg-coral px-6 py-3 font-sans text-sm font-semibold text-ink transition duration-200 hover:bg-ink hover:text-ivory"
-                >
-                  {result.cta}
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </a>
-              )}
-              {!result.ctaLink && (
-                <p className="font-sans text-sm font-semibold text-ink">{result.cta}</p>
-              )}
-            </div>
-          )}
         </div>
       )}
 
