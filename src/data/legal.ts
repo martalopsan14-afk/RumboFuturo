@@ -1,3 +1,4 @@
+
 import legalSource from './legal-content.txt?raw';
 
 export interface LegalDocument {
@@ -9,8 +10,13 @@ export interface LegalDocument {
 
 function extractSection(title: string, nextTitle?: string): string {
   const start = legalSource.indexOf(`\n${title}\n`);
-  const end = nextTitle ? legalSource.indexOf(`\n${nextTitle}\n`, start + title.length) : -1;
-  return legalSource.slice(start + title.length + 2, end === -1 ? undefined : end).trim();
+  const end = nextTitle
+    ? legalSource.indexOf(`\n${nextTitle}\n`, start + title.length)
+    : -1;
+
+  return legalSource
+    .slice(start + title.length + 2, end === -1 ? undefined : end)
+    .trim();
 }
 
 export const LEGAL_DOCUMENTS: LegalDocument[] = [
@@ -48,6 +54,16 @@ export interface SocialProfile {
 }
 
 export const SOCIAL_PROFILES: SocialProfile[] = [
-  { id: 'instagram', label: 'Instagram', handle: '@RumboFuturo_', url: null },
-  { id: 'tiktok', label: 'TikTok', handle: '@RumboFuturo_', url: null },
+  {
+    id: 'instagram',
+    label: 'Instagram',
+    handle: '@rumbofuturoo',
+    url: 'https://www.instagram.com/rumbofuturoo?dlrf=MWZ5emxqdm05OTg3Zw==',
+  },
+  {
+    id: 'tiktok',
+    label: 'TikTok',
+    handle: '@rumbofuturooy',
+    url: 'https://www.tiktok.com/@rumbofuturooy',
+  },
 ];
