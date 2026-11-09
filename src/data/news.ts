@@ -10,7 +10,10 @@ export interface NewsItem {
   link?: string | null;
 }
 
-const NEWS_SOURCE = '/RumboFuturo/Compendio_de_Noticias_de_Rumbo_Futuro.pdf';
+// Enlace al nuevo compendio que has subido a GitHub.
+const NEWS_SOURCE =
+  'https://github.com/martalopsan14-afk/RumboFuturo/blob/main/src/data/Compendio%20de%20Noticias%20de%20Rumbo%20Futuro.pdf';
+
 const NEWS_IMAGES = 'noticias/';
 
 export const NEWS_ITEMS: NewsItem[] = [
@@ -85,13 +88,19 @@ export const NEWS_ITEMS: NewsItem[] = [
     link: NEWS_SOURCE,
   },
   {
-    id: 'cinco-jovenes-apm',
-    category: 'Oportunidades profesionales',
-    title: 'Cinco jóvenes periodistas consiguen su primer empleo gracias a la APM',
-    excerpt: 'La Asociación de la Prensa de Madrid facilita la incorporación laboral de cinco recién graduados mediante su programa Primer Empleo.',
-    body: 'Los seleccionados comenzarán su trayectoria profesional en medios de comunicación madrileños tras superar el proceso de selección del programa.',
-    date: '2026-11-09',
-    image: `${NEWS_IMAGES}Noticia%203%20Laura.png`,
+    id: 'antena-de-oro-2026',
+    category: 'Reconocimientos',
+    title: 'Un acuerdo para impulsar la comunicación de los Premios Antena de Oro',
+    excerpt: 'La FARTVE y el grupo Prensa Ibérica firman un acuerdo de colaboración para impulsar la comunicación y promoción de los Premios Antena de Oro 2026.',
+    body: `La Federación de Asociaciones de Radio y Televisión de España (FARTVE) y el grupo Prensa Ibérica han firmado un acuerdo de colaboración para impulsar la comunicación y promoción de los Premios Antena de Oro 2026, cuya gala se celebrará el próximo mes de noviembre.
+
+El convenio contempla el desarrollo de campañas de difusión, acciones comerciales, acuerdos de patrocinio y distintas iniciativas para aumentar la visibilidad de estos prestigiosos galardones del panorama audiovisual español.
+
+La alianza supone un nuevo impulso para FARTVE, presidida por Juan Ignacio Ocaña, y permitirá aprovechar la experiencia y capacidad de difusión de Prensa Ibérica para reforzar el alcance de los premios.
+
+Las Antenas de Oro, que cuentan con 75 años de historia, reconocen anualmente la trayectoria y el trabajo de destacados profesionales de la radio, la televisión y otros ámbitos de la comunicación.`,
+    date: null,
+    image: null,
     link: NEWS_SOURCE,
   },
 ];
