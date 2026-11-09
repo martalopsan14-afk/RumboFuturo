@@ -12,7 +12,7 @@ export const MEDIA_PARTNERS: CollaboratorItem[] = [
     name: 'Diario de Espartinas',
     description:
       'Medio de comunicación centrado en la actualidad y las noticias de interés para la comunidad de Espartinas, con especial atención a la información de proximidad.',
-    logo: null,
+    logo: '/logoscolaboradores/Diario%20de%20Espartinas.jpeg',
     website: null,
   },
   {
@@ -20,7 +20,7 @@ export const MEDIA_PARTNERS: CollaboratorItem[] = [
     name: 'El Territorio Cadista',
     description:
       'Medio digital dedicado a la información y a la actualidad, con contenidos periodísticos dirigidos a sus lectores a través de plataformas digitales.',
-    logo: null,
+    logo: '/logoscolaboradores/El%20Territorio%20Cadista.svg',
     website: null,
   },
 ];
@@ -31,7 +31,7 @@ export const ACADEMIC_PARTNERS: CollaboratorItem[] = [
     name: 'Universidad de Sevilla (US)',
     description:
       'Universidad pública con actividad docente e investigadora en distintas áreas del conocimiento, entre ellas la comunicación y el periodismo.',
-    logo: null,
+    logo: '/logoscolaboradores/logo-universidad-sevilla.png',
     website: null,
   },
   {
@@ -39,7 +39,7 @@ export const ACADEMIC_PARTNERS: CollaboratorItem[] = [
     name: 'LabProCom',
     description:
       'Iniciativa vinculada a la investigación y la comunicación, relevante para el entorno académico y profesional en el que se desarrolla Rumbo Futuro.',
-    logo: null,
+    logo: '/logoscolaboradores/LabProCom.jpeg',
     website: null,
   },
   {
@@ -47,7 +47,7 @@ export const ACADEMIC_PARTNERS: CollaboratorItem[] = [
     name: 'Secretariado de Divulgación Cultural y Científica de la Universidad de Sevilla',
     description:
       'Equipos académicos que desarrollan investigación en comunicación y que pueden aportar conocimiento especializado al análisis y la práctica periodística.',
-    logo: null,
+    logo: '/logoscolaboradores/secretariado-divulgacion.png',
     website: null,
   },
 ];
