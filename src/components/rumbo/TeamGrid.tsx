@@ -11,33 +11,33 @@ export interface TeamMember {
 const LOCAL_TEAM_MEMBERS: TeamMember[] = [
   {
     id: 'laura-gallego',
-    name: 'Laura Gallego',
+    name: 'Laura Gallego Rodríguez',
     photo: '/Laura%20Gallego.jpeg',
   },
   {
     id: 'adrian-marquez',
-    name: 'Adrián Márquez',
+    name: 'Adrián Márquez Domínguez',
     photo: '/Adri%C3%A1n%20M%C3%A1rquez.jpeg',
   },
   {
     id: 'enrique-andres',
-    name: 'Enrique Andrés Jiménez',
+    name: 'Enrique Andrés Jiménez García',
     photo: '/Enrique%20Andr%C3%A9s%20Jim%C3%A9nez.jpeg',
   },
   {
-    id: 'mariela-reyes',
-    name: 'Mariela Reyes',
-    photo: '/Mariela%20Reyes.jpeg',
+    id: 'marta-lopez',
+    name: 'Marta López Sanromán',
+    photo: '/Marta%20L%C3%B3pez.jpeg',
   },
   {
     id: 'laura-prado',
-    name: 'Laura Prado',
+    name: 'Laura Prado Álvarez',
     photo: '/Laura%20Prado.jpeg',
   },
   {
-    id: 'marta-lopez',
-    name: 'Marta López',
-    photo: '/Marta%20L%C3%B3pez.jpeg',
+    id: 'mariela-reyes',
+    name: 'Mariela Reyes Chaves',
+    photo: '/Mariela%20Reyes.jpeg',
   },
 ];
 
@@ -58,9 +58,6 @@ export function TeamGrid() {
                   src={member.photo}
                   alt={member.name}
                   className="h-full w-full object-cover"
-                  onError={(event) => {
-                    event.currentTarget.style.display = 'none';
-                  }}
                 />
               ) : (
                 <div className="flex h-full items-center justify-center">
@@ -70,7 +67,9 @@ export function TeamGrid() {
             </div>
 
             <div className="p-4">
-              <h3 className="font-semibold text-ivory">{member.name}</h3>
+              <h3 className="font-semibold text-ink">
+                {member.name}
+              </h3>
             </div>
           </li>
         ))}
