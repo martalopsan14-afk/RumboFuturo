@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import type { PageId } from '@/data/navigation';
-import { Logo } from '@/components/brand/Logo';
 import { DesktopNav } from '@/components/layout/DesktopNav';
 import { MobileNav } from '@/components/layout/MobileNav';
 
@@ -41,8 +40,13 @@ export function SiteHeader({ activePage }: SiteHeaderProps) {
           onClick={closeMenu}
           className="shrink-0 rounded-lg transition hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-4 focus-visible:ring-offset-ivory"
         >
-          <Logo variant="full" className="hidden sm:inline-flex" />
-          <Logo variant="compact" className="sm:hidden" />
+          <img
+            src="/Logo_mini.jpeg"
+            alt="Rumbo Futuro"
+            width="180"
+            height="64"
+            className="h-12 w-auto max-w-[180px] object-contain sm:h-14"
+          />
         </a>
 
         <DesktopNav activePage={activePage} />

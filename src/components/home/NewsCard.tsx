@@ -25,13 +25,18 @@ export function NewsCard({ item }: { item: NewsItem }) {
             {item.category}
           </span>
           <time dateTime={item.date} className="text-xs text-graphite-soft">
-            {formatLongDate(item.date)}
+            {item.date ? formatLongDate(item.date) : 'Fecha no indicada'}
           </time>
         </div>
         <h3 className="font-sans text-lg leading-snug">{item.title}</h3>
         <p className="leading-relaxed text-graphite">{item.excerpt}</p>
-        <div className="mt-auto pt-2">
+        <div className="mt-auto flex flex-col gap-3 pt-2">
           <ExpandableText text={item.body} />
+          {item.link && (
+            <a href={item.link} target="_blank" rel="noopener noreferrer" className="font-sans text-sm font-semibold text-ink underline decoration-coral decoration-2 underline-offset-4">
+              Ver documento fuente
+            </a>
+          )}
         </div>
       </div>
     </article>

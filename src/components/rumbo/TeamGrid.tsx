@@ -17,8 +17,7 @@ function TeamMemberCard({ member }: { member: TeamMember }) {
       </div>
       <div className="flex flex-1 flex-col gap-2 p-6">
         <h3 className="font-sans text-lg">{member.name}</h3>
-        <p className="font-sans text-sm font-semibold text-ink/70">{member.role}</p>
-        <p className="mt-2 text-sm leading-relaxed text-graphite">{member.bio}</p>
+
       </div>
     </article>
   );
@@ -28,6 +27,9 @@ export function TeamGrid() {
   return (
     <div className="flex flex-col gap-10">
       <SectionHeader title="Nuestro equipo" />
+      <div className="flex min-h-56 items-center justify-center rounded-[2rem] border border-dashed border-ivory/30 bg-ivory/5 px-6 text-center font-sans text-xs font-semibold uppercase tracking-[0.16em] text-ivory/70">
+        Fotografía conjunta del equipo pendiente de incorporar
+      </div>
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {TEAM_MEMBERS.map((member) => (
           <li key={member.id}>
