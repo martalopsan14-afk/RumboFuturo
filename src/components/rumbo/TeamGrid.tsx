@@ -1,6 +1,44 @@
 import { Camera } from 'lucide-react';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { TEAM_MEMBERS, type TeamMember } from '@/data/team';
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  photo?: string;
+}
+
+const LOCAL_TEAM_MEMBERS: TeamMember[] = [
+  {
+    id: 'laura-gallego',
+    name: 'Laura Gallego',
+    photo: '/assets/team/Laura Gallego.jpeg',
+  },
+  {
+    id: 'adrian-marquez',
+    name: 'Adrián Márquez',
+    photo: '/assets/team/Adrián Márquez.jpeg',
+  },
+  {
+    id: 'enrique-andres',
+    name: 'Enrique Andrés Jiménez',
+    photo: '/assets/team/Enrique Andrés Jiménez.jpeg',
+  },
+  {
+    id: 'mariela-reyes',
+    name: 'Mariela Reyes',
+    photo: '/assets/team/Mariela Reyes.jpeg',
+  },
+  {
+    id: 'laura-prado',
+    name: 'Laura Prado',
+    photo: '/assets/team/Laura Prado.jpeg',
+  },
+  {
+    id: 'marta-lopez',
+    name: 'Marta López',
+    photo: '/assets/team/Marta López.jpeg',
+  },
+];
 
 function TeamMemberCard({ member }: { member: TeamMember }) {
   return (
@@ -17,7 +55,6 @@ function TeamMemberCard({ member }: { member: TeamMember }) {
       </div>
       <div className="flex flex-1 flex-col gap-2 p-6">
         <h3 className="font-sans text-lg">{member.name}</h3>
-
       </div>
     </article>
   );
@@ -31,7 +68,7 @@ export function TeamGrid() {
         Fotografía conjunta del equipo pendiente de incorporar
       </div>
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {TEAM_MEMBERS.map((member) => (
+        {LOCAL_TEAM_MEMBERS.map((member) => (
           <li key={member.id}>
             <TeamMemberCard member={member} />
           </li>
