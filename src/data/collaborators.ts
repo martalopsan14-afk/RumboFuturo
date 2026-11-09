@@ -39,7 +39,7 @@ export const ACADEMIC_PARTNERS: CollaboratorItem[] = [
     name: 'LabProCom',
     description:
       'Iniciativa vinculada a la investigación y la comunicación, relevante para el entorno académico y profesional en el que se desarrolla Rumbo Futuro.',
-    logo: '/logoscolaboradores/LabProCom.jpeg',
+    logo: '/logoscolaboradores/labprocom.png',
     website: null,
   },
   {
