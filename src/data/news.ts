@@ -12,7 +12,7 @@ export interface NewsItem {
 
 // Enlace al nuevo compendio que has subido a GitHub.
 const NEWS_SOURCE =
-  'https://github.com/martalopsan14-afk/RumboFuturo/blob/main/src/data/Compendio%20de%20Noticias%20de%20Rumbo%20Futuro.pdf';
+  '/Compendio_de_Noticias_de_Rumbo_Futuro.pdf';
 
 const NEWS_IMAGES = 'noticias/';
 
