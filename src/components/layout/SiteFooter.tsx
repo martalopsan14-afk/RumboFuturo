@@ -1,6 +1,6 @@
+
 import { useCallback, useState } from 'react';
 import { Instagram } from 'lucide-react';
-import { Logo } from '@/components/brand/Logo';
 import { LegalDialog } from '@/components/layout/LegalDialog';
 import { LEGAL_DOCUMENTS, SOCIAL_PROFILES, type LegalDocument } from '@/data/legal';
 import { NAV_ITEMS, buildHref } from '@/data/navigation';
@@ -26,12 +26,28 @@ export function SiteFooter() {
   return (
     <footer className="bg-ink text-ivory">
       <div className="mx-auto grid w-full max-w-6xl gap-12 px-5 py-16 sm:px-8 md:grid-cols-3">
-        <div className="flex flex-col items-start gap-6">
-          <Logo variant="full" tone="dark" />
+
+        {/* LOGO Y CORREO */}
+        <div className="flex flex-col items-start gap-3">
+          <img
+            src="/Logo_mini.jpeg"
+            alt="Rumbo Futuro"
+            className="h-auto w-36 object-contain"
+          />
+
+          <a
+            href="mailto:Rumbofuturoo@gmail.com"
+            className="font-sans text-sm text-ivory/90 underline-offset-4 transition hover:text-coral hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral"
+          >
+            Rumbofuturoo@gmail.com
+          </a>
         </div>
 
+        {/* NAVEGACIÓN */}
         <nav aria-label="Navegación del pie">
-          <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-ivory/70">Navegación</h2>
+          <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-ivory/70">
+            Navegación
+          </h2>
           <ul className="mt-4 flex flex-col gap-3">
             {NAV_ITEMS.map((item) => (
               <li key={item.page}>
@@ -46,9 +62,12 @@ export function SiteFooter() {
           </ul>
         </nav>
 
+        {/* REDES SOCIALES E INFORMACIÓN LEGAL */}
         <div className="flex flex-col gap-10">
           <div>
-            <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-ivory/70">Redes sociales</h2>
+            <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-ivory/70">
+              Redes sociales
+            </h2>
             <ul className="mt-4 flex flex-col gap-3">
               {SOCIAL_PROFILES.map((profile) => {
                 const Icon = SOCIAL_ICONS[profile.id];
@@ -56,10 +75,12 @@ export function SiteFooter() {
                   <>
                     <Icon />
                     <span className="font-sans text-sm">
-                      {profile.label} <span className="text-ivory/75">{profile.handle}</span>
+                      {profile.label}{' '}
+                      <span className="text-ivory/75">{profile.handle}</span>
                     </span>
                   </>
                 );
+
                 return (
                   <li key={profile.id}>
                     {profile.url ? (
@@ -72,7 +93,7 @@ export function SiteFooter() {
                         {content}
                       </a>
                     ) : (
-                      <span className="inline-flex items-center gap-3 text-ivory/80" aria-label={`${profile.label}, enlace pendiente de configurar`}>
+                      <span className="inline-flex items-center gap-3 text-ivory/80">
                         {content}
                       </span>
                     )}
@@ -83,7 +104,9 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-ivory/70">Información legal</h2>
+            <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-ivory/70">
+              Información legal
+            </h2>
             <ul className="mt-4 flex flex-col gap-2">
               {LEGAL_DOCUMENTS.map((document) => (
                 <li key={document.id}>
