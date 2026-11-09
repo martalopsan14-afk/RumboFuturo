@@ -32,7 +32,7 @@ export function SiteFooter() {
           <img
             src="/Logo_mini.jpeg"
             alt="Rumbo Futuro"
-            className="h-auto w-36 object-contain"
+            className="h-auto w-36 object-contain border-2 border-white rounded-lg p-2"
           />
 
           <a
