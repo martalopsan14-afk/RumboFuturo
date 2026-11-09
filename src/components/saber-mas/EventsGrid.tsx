@@ -1,3 +1,4 @@
+
 import { EVENTS, type EventItem } from '@/data/events';
 import { ExpandableText } from '@/components/ui/ExpandableText';
 import { StatusBadge } from '@/components/ui/StatusBadge';
@@ -5,6 +6,10 @@ import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Section } from '@/components/ui/Section';
 
 function EventCard({ event }: { event: EventItem }) {
+  const showFullImage =
+    event.id === 'networking-labprocom' ||
+    event.id === 'asociacion-prensa';
+
   return (
     <article
       id={event.id}
@@ -16,7 +21,11 @@ function EventCard({ event }: { event: EventItem }) {
             src={event.image}
             alt={event.title}
             loading="lazy"
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+            className={
+              showFullImage
+                ? 'h-full w-full object-contain object-center'
+                : 'h-full w-full object-cover transition duration-500 group-hover:scale-105'
+            }
           />
         ) : (
           'Fotografía del evento pendiente de incorporar'
