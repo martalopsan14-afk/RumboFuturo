@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/Button';
 import { buildHref } from '@/data/navigation';
 
@@ -30,14 +31,15 @@ export function HeroSection() {
         </div>
 
         <div className="relative flex flex-col gap-5 animate-fade-up [animation-delay:150ms]">
-          <div aria-hidden="true" className="absolute -right-4 -top-4 h-full w-full rounded-[2rem] border-2 border-coral sm:-right-6 sm:-top-6" />
-          <img
-            src={HERO_IMAGE_URL}
-            alt="Rumbo Futuro"
-            width={940}
-            height={650}
-            className="relative aspect-[4/5] w-full rounded-[2rem] bg-ink object-contain shadow-2xl sm:aspect-[5/4]"
-          />
+          <div className="rounded-[2rem] border-2 border-coral p-2 shadow-xl">
+            <img
+              src={HERO_IMAGE_URL}
+              alt="Rumbo Futuro"
+              width={940}
+              height={650}
+              className="relative aspect-[4/5] w-full rounded-[1.5rem] bg-ink object-contain shadow-2xl sm:aspect-[5/4]"
+            />
+          </div>
         </div>
       </div>
     </section>
