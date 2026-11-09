@@ -29,7 +29,7 @@ export const EVENTS: EventItem[] = [
     date: null,
     place: null,
     status: 'en_preparacion',
-    image: null,
+    image: '/sabermaseventos/Facultad%20de%20comunicación.jpeg',
   },
   {
     id: 'networking-labprocom',
@@ -41,7 +41,7 @@ export const EVENTS: EventItem[] = [
     date: null,
     place: null,
     status: 'proximamente',
-    image: null,
+    image: '/sabermaseventos/labprocom.png',
   },
   {
     id: 'consejo-periodistas',
@@ -53,7 +53,7 @@ export const EVENTS: EventItem[] = [
     date: null,
     place: null,
     status: 'en_preparacion',
-    image: null,
+    image: '/sabermaseventos/Consejo%20de%20periodistas.jpeg',
   },
   {
     id: 'asociacion-prensa',
@@ -65,6 +65,6 @@ export const EVENTS: EventItem[] = [
     date: null,
     place: null,
     status: 'en_preparacion',
-    image: null,
+    image: '/sabermaseventos/Asociacion%20de%20prensa%20Sevilla.jpeg',
   },
 ];
