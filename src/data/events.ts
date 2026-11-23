@@ -20,6 +20,18 @@ export const EVENT_STATUS_LABELS: Record<EventStatus, string> = {
 
 export const EVENTS: EventItem[] = [
   {
+    id: 'sinercom-viii',
+    title: 'VIII edición Sinercom y Networking',
+    description:
+      'Un encuentro organizado por LabProCom que conecta a futuros profesionales con los impulsores de 52 productos y servicios creativos e innovadores. Una sesión de networking dinámico para compartir ideas, fomentar la colaboración, establecer contactos estratégicos y abrir nuevas oportunidades para que los proyectos universitarios lleguen al mundo profesional.',
+    details:
+      'La VIII edición de Sinercom reúne 52 propuestas creativas e innovadoras desarrolladas por futuros profesionales de la Facultad de Comunicación. El encuentro busca que sus impulsores compartan experiencias, den visibilidad a sus proyectos y creen sinergias con otros agentes del ámbito profesional. La actividad forma parte del trabajo de LabProCom para conectar la universidad con el tejido social y profesional.',
+    date: '24 de noviembre de 2026 · 12:00 h',
+    place: 'Facultad de Comunicación (FCom), Universidad de Sevilla',
+    status: 'proximamente',
+    image: '/sabermaseventos/labprocom.png',
+  },
+  {
     id: 'charlas-fcom',
     title: 'Charlas promocionales en la FCom',
     description:
