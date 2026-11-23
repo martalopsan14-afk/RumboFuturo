@@ -49,6 +49,37 @@ function EventCard({ event }: { event: EventItem }) {
         </dl>
         <div className="mt-auto">
           <ExpandableText text={event.details} collapsedLabel="Saber más" expandedLabel="Ver menos" />
+          {event.id === 'sinercom-viii' && (
+            <div className="flex flex-col items-start gap-2 text-sm">
+              <a
+                href="https://www.instagram.com/p/DgFC29Mxj0a/?lqvp=MWthb3p5eHBnNjF1Mg=="
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold text-ink underline decoration-coral decoration-2 underline-offset-4 hover:text-ink-soft"
+              >
+                Conoce más sobre Sinercom
+              </a>
+              <a
+                href="https://www.instagram.com/p/DgAPcIXkePG/?knvt=MWxxM3A0M3Vybm14cg=="
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold text-ink underline decoration-coral decoration-2 underline-offset-4 hover:text-ink-soft"
+              >
+                Descubre más sobre el networking
+              </a>
+              <p className="pt-2 text-graphite">
+                ¿Quieres conocer más? Visita{' '}
+                <a
+                  href="https://www.instagram.com/labprocom?avpt=MW51cnRxanJ0ZW50dA=="
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-ink underline decoration-coral decoration-2 underline-offset-4 hover:text-ink-soft"
+                >
+                  LabProCom
+                </a>.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </article>
