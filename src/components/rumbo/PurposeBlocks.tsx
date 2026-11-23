@@ -25,7 +25,7 @@ export function PurposeBlocks() {
             Periodismo.
           </p>
           <p className="leading-relaxed">
-            Queremos facilitar su transición desde la formación académica hacia el mundo profesional, creando
+            Facilitamos su transición desde la formación académica hacia el mundo profesional y creamos
             oportunidades para aprender de investigadores y expertos, adquirir experiencia práctica y demostrar sus
             capacidades. Nuestro propósito es contribuir a que el talento periodístico emergente encuentre oportunidades
             para crecer y desarrollar su carrera.
@@ -40,7 +40,7 @@ export function PurposeBlocks() {
           </p>
           <p className="leading-relaxed">
             Además, el coste de determinados cursos y las barreras geográficas pueden limitar el acceso a oportunidades
-            formativas. Rumbo Futuro pretende responder a estas necesidades mediante una formación accesible, flexible y
+            formativas. Rumbo Futuro responde a estas necesidades mediante una formación accesible, flexible y
             conectada con la realidad profesional.
           </p>
         </article>
@@ -60,7 +60,7 @@ export function PurposeBlocks() {
           </div>
           <p className="max-w-3xl text-lg leading-relaxed text-ivory/85">
             Nuestra propuesta combina aprendizaje práctico, flexibilidad geográfica y conexión con el entorno profesional.
-            Queremos que los jóvenes periodistas puedan desarrollar sus competencias, aprender junto a expertos y acercarse
+            Facilitamos que los jóvenes periodistas desarrollen sus competencias, aprendan junto a expertos y se acerquen
             al mundo laboral sin que la distancia o el coste de la formación se conviertan en barreras innecesarias.
           </p>
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
