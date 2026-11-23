@@ -47,7 +47,7 @@ export const ACADEMIC_PARTNERS: CollaboratorItem[] = [
     name: 'Secretariado de Divulgación Cultural y Científica de la Universidad de Sevilla',
     description:
       'Equipos académicos que desarrollan investigación en comunicación y que pueden aportar conocimiento especializado al análisis y la práctica periodística.',
-    logo: '/logoscolaboradores/secretariado-divulgacion.png',
+    logo: '/DivulgaUS.jpeg',
     website: null,
   },
 ];
