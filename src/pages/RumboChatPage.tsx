@@ -112,7 +112,7 @@ export function RumboChatPage() {
       <PageHeader
         eyebrow="RumboChat"
         title="Encuentra tu próximo rumbo profesional"
-        description="¿No sabes qué especialidad periodística encaja contigo, qué formación elegir o con qué profesionales podrías colaborar? RumboChat te ayuda a identificar la opción que mejor se adapta a tus intereses, tu perfil y tu disponibilidad."
+        description="¿No sabes qué especialidad periodística encaja contigo, qué formación elegir o con qué profesionales puedes colaborar? RumboChat te ayuda a identificar la opción que mejor se adapta a tus intereses, tu perfil y tu disponibilidad."
       />
 
       <Section>
