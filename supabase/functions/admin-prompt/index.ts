@@ -13,19 +13,9 @@ function makeResponse(body: unknown, status = 200) {
   });
 }
 
-const JWT_SECRET = Deno.env.get("RUMBO_JWT_SECRET") ?? "rumbo-fallback-secret-change-me";
-
-async function verifyToken(token: string): Promise<boolean> {
-  try {
-    const parts = token.split(".");
-    if (parts.length !== 3) return false;
-    const payload = JSON.parse(atob(parts[1]));
-    if (payload.exp && Date.now() >= payload.exp * 1000) return false;
-    return payload.role === "rumbo-admin" && payload.username === "rumbofuturoo";
-  } catch {
-    return false;
-  }
-}
+const JWT_SECRET = Deno.env.get("RUMBO_JWT_SECRET");
+function decodeBase64Url(v:string):Uint8Array{const b=v.replace(/-/g,"+").replace(/_/g,"/");const x=atob(b+"=".repeat((4-b.length%4)%4));return Uint8Array.from(x,c=>c.charCodeAt(0));}
+async function verifyToken(token:string):Promise<boolean>{try{if(!JWT_SECRET)return false;const p=token.split(".");if(p.length!==3)return false;const h=JSON.parse(new TextDecoder().decode(decodeBase64Url(p[0])));const d=JSON.parse(new TextDecoder().decode(decodeBase64Url(p[1])));if(h.alg!=="HS256"||h.typ!=="JWT"||d.role!=="rumbo-admin"||d.username!=="rumbofuturoo"||typeof d.exp!=="number"||Date.now()>=d.exp*1000)return false;const k=await crypto.subtle.importKey("raw",new TextEncoder().encode(JWT_SECRET),{name:"HMAC",hash:"SHA-256"},false,["verify"]);return await crypto.subtle.verify("HMAC",k,decodeBase64Url(p[2]),new TextEncoder().encode(p[0]+"."+p[1]));}catch{return false;}}
 
 function getAdminToken(authHeader: string | null): string | null {
   if (!authHeader) return null;

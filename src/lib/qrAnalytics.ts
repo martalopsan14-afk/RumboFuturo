@@ -1,0 +1,57 @@
+import { supabase } from '@/lib/supabase';
+
+type QrEventType = 'page_view' | 'registration';
+const VISITOR_KEY = 'rumbo_qr_visitor';
+const SESSION_KEY = 'rumbo_qr_session';
+
+function getId(key: string): string {
+  let value = sessionStorage.getItem(key);
+  if (!value) {
+    value = crypto.randomUUID();
+    sessionStorage.setItem(key, value);
+  }
+  return value;
+}
+
+function getVisitorId(): string {
+  let value = localStorage.getItem(VISITOR_KEY);
+  if (!value) {
+    value = crypto.randomUUID();
+    localStorage.setItem(VISITOR_KEY, value);
+  }
+  return value;
+}
+
+export async function trackQrEvent(eventType: QrEventType): Promise<void> {
+  try {
+    if (localStorage.getItem('rumbo_qr_analytics_consent') !== 'accepted') return;
+    const params = new URLSearchParams(window.location.search);
+    const source = params.get('utm_source') || params.get('source') || 'qr';
+    await supabase.from('qr_events').insert({
+      visitor_id: getVisitorId(),
+      session_id: getId(SESSION_KEY),
+      event_type: eventType,
+      source: source.slice(0, 80),
+    });
+  } catch {
+    // Analytics failures must never block a registration or page render.
+  }
+}
+
+export interface QrAnalytics {
+  totalVisits: number;
+  uniqueVisitors: number;
+  uniqueSessions: number;
+  registrations: number;
+  conversionRate: number;
+  daily: Array<{ day: string; visits: number; registrations: number }>;
+}
+
+export async function getQrAnalytics(token: string): Promise<QrAnalytics> {
+  const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-analytics`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.error || 'No se han podido cargar las analíticas');
+  return data as QrAnalytics;
+}

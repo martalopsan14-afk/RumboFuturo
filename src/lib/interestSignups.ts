@@ -5,7 +5,8 @@ export type InterestType =
   | 'online_course'
   | 'in_person_course'
   | 'subscription_news'
-  | 'event_news';
+  | 'event_news'
+  | 'qr_landing';
 
 export type SaveInterestResult = 'saved' | 'duplicate' | 'error';
 

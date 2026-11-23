@@ -9,6 +9,7 @@ import { ColaboradoresPage } from '@/pages/ColaboradoresPage';
 import { SaberMasPage } from '@/pages/SaberMasPage';
 import { RumboChatPage } from '@/pages/RumboChatPage';
 import { AdminPage } from '@/pages/AdminPage';
+import { QrLandingPage } from '@/pages/QrLandingPage';
 import { useHashRoute } from '@/hooks/useHashRoute';
 import type { PageId } from '@/data/navigation';
 

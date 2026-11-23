@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type ChangeEvent, type FormEvent, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, type ChangeEvent, type FormEvent, type ReactNode, type ComponentType } from 'react';
 import {
   Lock,
   LogOut,
@@ -15,6 +15,7 @@ import {
   Settings,
   FolderOpen,
   FlaskConical,
+  BarChart3,
 } from 'lucide-react';
 import {
   adminLogin,
@@ -28,11 +29,12 @@ import {
   type RagDocument,
 } from '@/lib/adminApi';
 import { getAgentRecommendation, type QuestionnaireAnswers, type AgentResponse } from '@/lib/rumbochat';
+import { getQrAnalytics, type QrAnalytics } from '@/lib/qrAnalytics';
 
 const TOKEN_KEY = 'rumbo_admin_token';
 
 type AdminView = 'login' | 'changePassword' | 'dashboard';
-type DashboardTab = 'prompt' | 'documents' | 'testing';
+type DashboardTab = 'prompt' | 'documents' | 'testing' | 'analytics';
 
 export function AdminPage() {
   const [view, setView] = useState<AdminView>('login');
@@ -107,11 +109,13 @@ export function AdminPage() {
           <TabButton active={activeTab === 'testing'} onClick={() => setActiveTab('testing')} icon={FlaskConical}>
             Pruebas del agente
           </TabButton>
+          <TabButton active={activeTab === 'analytics'} onClick={() => setActiveTab('analytics')} icon={BarChart3}>Analítica QR</TabButton>
         </div>
 
         {activeTab === 'prompt' && <PromptEditorView token={token!} />}
         {activeTab === 'documents' && <DocumentsView token={token!} />}
         {activeTab === 'testing' && <TestingView token={token!} />}
+        {activeTab === 'analytics' && <AnalyticsView token={token!} />}
       </div>
     </div>
   );
@@ -298,7 +302,7 @@ function ChangePasswordView({ token, onDone }: { token: string; onDone: () => vo
 // ============================================================
 // Tab Button
 // ============================================================
-function TabButton({ active, onClick, icon, children }: { active: boolean; onClick: () => void; icon: ReactNode; children: ReactNode }) {
+function TabButton({ active, onClick, icon: Icon, children }: { active: boolean; onClick: () => void; icon: ComponentType<{ className?: string }>; children: ReactNode }) {
   return (
     <button
       type="button"
@@ -307,7 +311,7 @@ function TabButton({ active, onClick, icon, children }: { active: boolean; onCli
         active ? 'border-coral text-ink' : 'border-transparent text-ink/50 hover:text-ink'
       }`}
     >
-      {icon}
+      <Icon className='h-4 w-4' aria-hidden='true' />
       {children}
     </button>
   );
@@ -739,4 +743,17 @@ function TestingView({ token: _token }: { token: string }) {
       )}
     </div>
   );
+}
+
+function AnalyticsView({ token }: { token: string }) {
+ const [data,setData]=useState<QrAnalytics|null>(null); const [loading,setLoading]=useState(true); const [error,setError]=useState('');
+ const load=useCallback(async()=>{setLoading(true);setError('');try{setData(await getQrAnalytics(token));}catch(e){setError(e instanceof Error?e.message:'Error al cargar analíticas');}finally{setLoading(false);}},[token]);
+ useEffect(()=>{void load();},[load]); const max=Math.max(1,...(data?.daily.map(d=>d.visits)??[0]));
+ return <section className='flex flex-col gap-6'>
+  <div className='flex items-center justify-between gap-3'><div><h2 className='font-sans text-xl font-bold text-ink'>Rendimiento de la landing QR</h2><p className='text-sm text-graphite'>Datos de Supabase; las visitas se miden solo con consentimiento.</p></div><button onClick={()=>void load()} className='rounded-full border px-4 py-2 text-sm' disabled={loading}>Actualizar</button></div>
+  {error&&<p role='alert' className='rounded-xl bg-coral/10 p-4'>{error}</p>}{loading&&!data?<p>Cargando datos…</p>:data&&<>
+  <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-4'>{[['Visitas',data.totalVisits],['Visitantes únicos',data.uniqueVisitors],['Sesiones únicas',data.uniqueSessions],['Inscripciones',data.registrations]].map(([k,v])=><div key={String(k)} className='rounded-2xl border border-ink/10 bg-white p-5'><p className='text-sm text-graphite'>{k}</p><p className='mt-2 text-3xl font-extrabold text-ink'>{Number(v).toLocaleString('es-ES')}</p></div>)}</div>
+  <div className='rounded-2xl border bg-white p-6'><p className='text-sm text-graphite'>Conversión de sesiones medidas</p><p className='text-3xl font-extrabold text-coral'>{data.conversionRate.toLocaleString('es-ES')}%</p></div>
+  <div className='rounded-2xl border bg-white p-6'><h3 className='mb-4 font-bold text-ink'>Visitas diarias · últimos 30 días</h3><div className='flex h-44 items-end gap-1 overflow-x-auto'>{data.daily.map(d=><div key={d.day} title={d.day+': '+d.visits} className='min-w-[7px] flex-1 rounded-t bg-coral' style={{height:Math.max(d.visits?3:0,d.visits/max*160)+'px'}} />)}</div></div>
+  </>}</section>;
 }
