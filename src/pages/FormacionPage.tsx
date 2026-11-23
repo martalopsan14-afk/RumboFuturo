@@ -10,7 +10,7 @@ export function FormacionPage() {
       <PageHeader
         eyebrow="Rumbo Futuro"
         title="Formación Dual"
-        description="Dos modalidades formativas, online y presencial, y un modelo de suscripción que se anunciará próximamente."
+        description="Dos modalidades formativas, online y presencial, y un modelo de suscripción que estamos preparando."
       />
       <Section id="modalidad-online">
         <ModalityContent data={ONLINE_MODALITY} />
