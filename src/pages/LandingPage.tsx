@@ -30,7 +30,8 @@ export function LandingPage() {
     event.preventDefault();
     if (!privacyAccepted) return;
     setStatus('sending');
-    const result = await saveInterest(email, 'subscription_news', getSignupSource(), new Date().toISOString());
+    const source = getSignupSource();
+    const result = await saveInterest(email, source === 'qr' ? 'qr_landing' : 'subscription_news', source, new Date().toISOString());
     if (result === 'saved') {
       if (analyticsConsent === 'accepted') void trackQrEvent('registration', getSignupSource());
       setStatus('success');
@@ -60,9 +61,15 @@ export function LandingPage() {
         <div className="mx-auto max-w-5xl text-center">
           <p className="font-editorial text-2xl italic text-coral sm:text-3xl">Rumbo Futuro</p>
           <h1 className="mx-auto mt-4 max-w-4xl font-sans text-4xl font-extrabold leading-tight text-ivory sm:text-6xl">
-            Tu talento, tu puerta al mundo
+            Tu talento, Tu puerta al mundo
           </h1>
           <div className="mx-auto mt-8 h-1 w-20 rounded-full bg-coral" />
+          <p className="mx-auto mt-7 max-w-3xl text-lg leading-relaxed text-ivory/85 sm:text-xl">
+            Una plataforma que conecta el talento periodístico emergente con investigadores y profesionales de la comunicación para convertir la formación en experiencia y oportunidades reales.
+          </p>
+          <a href="#registro" className="mt-8 inline-flex items-center gap-3 rounded-full bg-coral px-7 py-4 font-sans text-sm font-bold text-ink transition hover:bg-ivory">
+            Quiero dar el siguiente paso <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
       </section>
 
@@ -100,10 +107,10 @@ export function LandingPage() {
           <div className="mx-auto max-w-4xl text-center">
             <p className="font-editorial text-2xl italic text-coral">Tu siguiente paso empieza aquí</p>
             <h2 className="mt-3 font-sans text-3xl font-extrabold leading-tight text-ink sm:text-5xl">
-              ¿Te imaginas dar el salto al mundo profesional con tu propio portfolio y una red de contactos?
+              ¿Te gustaría contar con tu propio portfolio, ampliar tu red de contactos y dar el salto al mundo laboral?
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-graphite">
-              En Rumbo Futuro queremos ayudarte a convertir lo que sabes en experiencia, conectar con expertos en comunicación y acercarte a nuevas oportunidades profesionales.
+              Conecta con expertos en comunicación, participa en experiencias prácticas y crea oportunidades profesionales. Todo de manera flexible y a un precio competitivo, para que ni la distancia ni el coste frenen tu talento.
             </p>
           </div>
 
@@ -146,7 +153,7 @@ export function LandingPage() {
 
           <div className="rounded-3xl bg-ivory p-7 text-graphite shadow-xl sm:p-9">
             <h3 className="font-sans text-2xl font-extrabold text-ink">Estoy interesado/a</h3>
-            <p className="mt-2 text-sm leading-relaxed text-graphite-soft">Regístrate para recibir información de Rumbo Futuro.</p>
+            <p className="mt-2 text-sm leading-relaxed text-graphite-soft">Déjanos tu correo y te enviaremos información sobre el proyecto, las propuestas formativas y las próximas oportunidades.</p>
             <form onSubmit={submit} className="mt-6 flex flex-col gap-4">
               <label htmlFor="landing-email" className="font-sans text-sm font-semibold text-ink">Correo electrónico</label>
               <input
