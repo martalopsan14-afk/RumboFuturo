@@ -49,7 +49,7 @@ function EventCard({ event }: { event: EventItem }) {
         </dl>
         <div className="mt-auto">
           <ExpandableText text={event.details} collapsedLabel="Saber más" expandedLabel="Ver menos" />
-          {event.id === 'sinercom-viii' && (
+          {event.id === 'networking-labprocom' && (
             <div className="flex flex-col items-start gap-2 text-sm">
               <a
                 href="https://www.instagram.com/p/DgFC29Mxj0a/?lqvp=MWthb3p5eHBnNjF1Mg=="
