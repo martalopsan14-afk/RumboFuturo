@@ -25,9 +25,10 @@ function getVisitorId(): string {
 export async function trackQrEvent(eventType: QrEventType, sourceOverride?: string): Promise<void> {
   try {
     if (localStorage.getItem('rumbo_qr_analytics_consent') !== 'accepted') return;
-    if (eventType === 'page_view' && sessionStorage.getItem('rumbo_qr_page_viewed') === '1') return;
     const params = new URLSearchParams(window.location.search);
     const source = (sourceOverride || params.get('utm_source') || params.get('source') || 'direct').toLowerCase();
+    const pageViewKey = `rumbo_qr_page_viewed:${source}`;
+    if (eventType === 'page_view' && sessionStorage.getItem(pageViewKey) === '1') return;
     const campaign = source === 'qr' ? 'rumbo_futuro' : null;
     const { error } = await supabase.from('qr_events').insert({
       visitor_id: getVisitorId(),
@@ -36,7 +37,7 @@ export async function trackQrEvent(eventType: QrEventType, sourceOverride?: stri
       source: source.slice(0, 80),
       campaign_id: campaign,
     });
-    if (!error && eventType === 'page_view') sessionStorage.setItem('rumbo_qr_page_viewed', '1');
+    if (!error && eventType === 'page_view') sessionStorage.setItem(pageViewKey, '1');
   } catch {
     // Analytics failures must never block a registration or page render.
   }
