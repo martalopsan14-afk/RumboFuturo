@@ -748,11 +748,11 @@ function TestingView({ token: _token }: { token: string }) {
 }
 
 function AnalyticsView({ token }: { token: string }) {
- const [data,setData]=useState<QrAnalytics|null>(null); const [loading,setLoading]=useState(true); const [error,setError]=useState('');
- const load=useCallback(async()=>{setLoading(true);setError('');try{setData(await getQrAnalytics(token));}catch(e){setError(e instanceof Error?e.message:'Error al cargar analíticas');}finally{setLoading(false);}},[token]);
+ const [data,setData]=useState<QrAnalytics|null>(null); const [loading,setLoading]=useState(true); const [error,setError]=useState(''); const [range,setRange]=useState<'7d'|'30d'|'90d'|'all'>('30d');
+ const load=useCallback(async()=>{setLoading(true);setError('');try{setData(await getQrAnalytics(token,range));}catch(e){setError(e instanceof Error?e.message:'Error al cargar analíticas');}finally{setLoading(false);}},[token,range]);
  useEffect(()=>{void load();},[load]); const max=Math.max(1,...(data?.daily.map(d=>d.visits)??[0]));
  return <section className='flex flex-col gap-6'>
-  <div className='flex items-center justify-between gap-3'><div><h2 className='font-sans text-xl font-bold text-ink'>Rendimiento de la landing QR</h2><p className='text-sm text-graphite'>Datos de Supabase; las visitas se miden solo con consentimiento.</p></div><button onClick={()=>void load()} className='rounded-full border px-4 py-2 text-sm' disabled={loading}>Actualizar</button></div>
+  <div className='flex flex-wrap items-center justify-between gap-3'><div><h2 className='font-sans text-xl font-bold text-ink'>Rendimiento de la landing QR</h2><p className='text-sm text-graphite'>Datos de Supabase; las visitas se miden solo con consentimiento.</p></div><div className='flex flex-wrap gap-2'><select aria-label='Periodo de estadísticas' value={range} onChange={e=>setRange(e.target.value as '7d'|'30d'|'90d'|'all')} className='rounded-full border border-ink/20 bg-white px-4 py-2 text-sm'><option value='7d'>Últimos 7 días</option><option value='30d'>Últimos 30 días</option><option value='90d'>Últimos 90 días</option><option value='all'>Todo el periodo</option></select><button onClick={()=>void load()} className='rounded-full border px-4 py-2 text-sm' disabled={loading}>Actualizar</button></div></div>
   {error&&<p role='alert' className='rounded-xl bg-coral/10 p-4'>{error}</p>}{loading&&!data?<p>Cargando datos…</p>:data&&<>
   <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>{[['Visitas a la landing',data.totalVisits],['Llegadas desde QR',data.qrVisits],['Visitantes únicos',data.uniqueVisitors],['Sesiones únicas',data.uniqueSessions],['Registros QR',data.registrations],['Participantes',data.participantCount]].map(([k,v])=><div key={String(k)} className='rounded-2xl border border-ink/10 bg-white p-5'><p className='text-sm text-graphite'>{k}</p><p className='mt-2 text-3xl font-extrabold text-ink'>{Number(v).toLocaleString('es-ES')}</p></div>)}</div>
   <div className='rounded-2xl border bg-white p-6'><p className='text-sm text-graphite'>Conversión de sesiones medidas</p><p className='text-3xl font-extrabold text-coral'>{data.conversionRate.toLocaleString('es-ES')}%</p></div>
@@ -768,7 +768,7 @@ function ParticipantsView({ token }: { token: string }) {
   const [error, setError] = useState('');
   const load = useCallback(async () => {
     setLoading(true); setError('');
-    try { const result = await getQrAnalytics(token); setRows(result.participants ?? []); }
+    try { const result = await getQrAnalytics(token, 'all'); setRows(result.participants ?? []); }
     catch (err) { setError(err instanceof Error ? err.message : 'No se pudieron cargar los participantes'); }
     finally { setLoading(false); }
   }, [token]);
