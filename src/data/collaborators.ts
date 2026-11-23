@@ -23,6 +23,14 @@ export const MEDIA_PARTNERS: CollaboratorItem[] = [
     logo: '/logoscolaboradores/El%20Territorio%20Cadista.svg',
     website: null,
   },
+  {
+    id: 'oficina-acelera-pyme-cetemet',
+    name: 'Oficina Acelera Pyme (OAP) de CETEMET Sevilla',
+    description:
+      'Iniciativa de CETEMET en Sevilla que acerca asesoramiento y recursos para impulsar la transformación digital y la innovación en pequeñas y medianas empresas.',
+    logo: '/logoscolaboradores/oficina-acelera-pyme-oap-cetemet.png',
+    website: null,
+  },
 ];
 
 export const ACADEMIC_PARTNERS: CollaboratorItem[] = [
