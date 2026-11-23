@@ -13,10 +13,17 @@ export type SaveInterestResult = 'saved' | 'duplicate' | 'error';
 
 const UNIQUE_VIOLATION_CODE = '23505';
 
+function getSignupSourceFromUrl(): 'qr' | 'website' {
+  if (typeof window === 'undefined') return 'website';
+  const params = new URLSearchParams(window.location.search);
+  const source = (params.get('utm_source') || params.get('source') || '').toLowerCase();
+  return source === 'qr' ? 'qr' : 'website';
+}
+
 export async function saveInterest(
   email: string,
   interestType: InterestType,
-  source = 'website',
+  source = getSignupSourceFromUrl(),
   privacyAcceptedAt: string | null = null
 ): Promise<SaveInterestResult> {
   const { error } = await supabase
