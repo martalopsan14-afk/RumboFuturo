@@ -52,7 +52,8 @@ Deno.serve(async req => {
     const pageViews = allPageViews.filter((event: any) => !cutoff || new Date(event.created_at) >= cutoff);
     const qrViews = pageViews.filter((event: any) => (event.source ?? "").toLowerCase() === "qr");
     const qrSessions = new Set(qrViews.map((event: any) => event.session_id).filter(Boolean));
-    const allRegistrations = (signups ?? []).filter((signup: any) => signup.interest_type === "qr_landing");
+    const allSignups = signups ?? [];
+    const allRegistrations = allSignups.filter((signup: any) => signup.interest_type === "qr_landing");
     const registrations = allRegistrations.filter((signup: any) => !cutoff || new Date(signup.created_at) >= cutoff);
     const daily = new Map<string, { day: string; visits: number; registrations: number }>();
     const chartDays = days ?? 30;
@@ -70,9 +71,10 @@ Deno.serve(async req => {
       const row = daily.get(new Date(signup.created_at).toISOString().slice(0, 10));
       if (row) row.registrations++;
     }
-    const participants = registrations.map((signup: any) => ({
+    const participants = allSignups.map((signup: any) => ({
       id: signup.id, email: signup.email, created_at: signup.created_at,
-      source: signup.source === "qr" ? "QR" : (signup.source ?? "Web"), status: "Registrado",
+      source: signup.source === "qr" ? "QR" : (signup.source ?? "Web"),
+      interestType: signup.interest_type, status: "Registrado",
     }));
     return response({
       totalVisits: pageViews.length,
@@ -82,7 +84,8 @@ Deno.serve(async req => {
       qrUniqueVisitors: new Set(qrViews.map((event: any) => event.visitor_id).filter(Boolean)).size,
       qrUniqueSessions: qrSessions.size,
       registrations: registrations.length,
-      participantCount: registrations.length,
+      participantCount: participants.length,
+      totalSignups: participants.length,
       conversionRate: qrSessions.size ? Number(((registrations.length / qrSessions.size) * 100).toFixed(2)) : 0,
       daily: [...daily.values()], participants,
       note: "Las visitas se registran únicamente con consentimiento de analítica. Las llegadas QR se identifican con utm_source=qr.",
