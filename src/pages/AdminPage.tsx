@@ -114,7 +114,7 @@ export function AdminPage() {
         </div>
 
         {activeTab === 'participants' && <ParticipantsView token={token!} />}
-        {activeTab === 'prompt' && <PromptEditorView token={token!} />
+        {activeTab === 'prompt' && <PromptEditorView token={token!} />}
         {activeTab === 'documents' && <DocumentsView token={token!} />}
         {activeTab === 'testing' && <TestingView token={token!} />}
         {activeTab === 'analytics' && <AnalyticsView token={token!} />}
