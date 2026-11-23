@@ -49,7 +49,7 @@ export function LandingPage() {
               Conectamos el talento periodístico con nuevas oportunidades.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ivory/85">
-              Rumbo Futuro une a jóvenes periodistas con investigadores y profesionales de la comunicación mediante formación práctica, colaboración y experiencias que les acercan al mundo laboral.
+              Rumbo Futuro es un punto de encuentro para el talento periodístico que empieza. Acercamos a jóvenes periodistas a profesionales e investigadores para aprender desde dentro, poner ideas en práctica y descubrir caminos posibles en el mundo de la comunicación.
             </p>
             <a href="#registro" className="mt-8 inline-flex items-center gap-3 rounded-full bg-coral px-7 py-4 font-sans text-sm font-bold text-ink transition hover:bg-ivory">
               Quiero recibir información <ArrowRight className="h-4 w-4" />
@@ -62,18 +62,60 @@ export function LandingPage() {
             <div className="mt-7 space-y-5">
               <div className="flex gap-4">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-coral/15 text-coral"><GraduationCap className="h-5 w-5" /></span>
-                <div><h3 className="font-sans font-bold text-ivory">Formación práctica</h3><p className="mt-1 text-sm leading-relaxed text-ivory/75">Aprendizaje conectado con los retos reales del periodismo.</p></div>
+                <div><h3 className="font-sans font-bold text-ivory">Formación práctica</h3><p className="mt-1 text-sm leading-relaxed text-ivory/75">Aprende con experiencias y retos conectados con la realidad del sector.</p></div>
               </div>
               <div className="flex gap-4">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-coral/15 text-coral"><Handshake className="h-5 w-5" /></span>
-                <div><h3 className="font-sans font-bold text-ivory">Colaboración profesional</h3><p className="mt-1 text-sm leading-relaxed text-ivory/75">Encuentros entre jóvenes periodistas, investigadores y expertos.</p></div>
+                <div><h3 className="font-sans font-bold text-ivory">Colaboración profesional</h3><p className="mt-1 text-sm leading-relaxed text-ivory/75">Conecta con profesionales, investigadores y otros talentos con inquietudes similares.</p></div>
               </div>
               <div className="flex gap-4">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-coral/15 text-coral"><Compass className="h-5 w-5" /></span>
-                <div><h3 className="font-sans font-bold text-ivory">Nuevas oportunidades</h3><p className="mt-1 text-sm leading-relaxed text-ivory/75">Experiencias para acercarte al entorno laboral y ampliar tu red.</p></div>
+                <div><h3 className="font-sans font-bold text-ivory">Nuevas oportunidades</h3><p className="mt-1 text-sm leading-relaxed text-ivory/75">Explora nuevas posibilidades y empieza a construir tu recorrido profesional.</p></div>
               </div>
             </div>
           </aside>
+        </div>
+      </section>
+
+      <section className="bg-white px-5 py-16 sm:px-8 sm:py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="max-w-3xl">
+            <p className="font-editorial text-2xl italic text-coral">No se trata solo de encontrar una oportunidad.</p>
+            <h2 className="mt-3 font-sans text-3xl font-extrabold leading-tight text-ink sm:text-5xl">
+              Se trata de prepararte para crearla.
+            </h2>
+            <p className="mt-6 text-lg leading-relaxed text-graphite-soft">
+              Empezar en el periodismo no siempre es fácil. Por eso nace Rumbo Futuro: para acercar a quienes tienen ganas de contar historias a las personas, las herramientas y las experiencias que pueden impulsar su camino profesional.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            <article className="rounded-3xl bg-ivory p-7">
+              <span className="font-editorial text-3xl italic text-coral">01</span>
+              <h3 className="mt-4 font-sans text-xl font-bold text-ink">Aprende desde dentro</h3>
+              <p className="mt-3 leading-relaxed text-graphite-soft">Conoce de cerca cómo trabajan periodistas e investigadores, comparte preguntas y descubre nuevas formas de hacer comunicación.</p>
+            </article>
+            <article className="rounded-3xl bg-ivory p-7">
+              <span className="font-editorial text-3xl italic text-coral">02</span>
+              <h3 className="mt-4 font-sans text-xl font-bold text-ink">Haz, prueba y crea</h3>
+              <p className="mt-3 leading-relaxed text-graphite-soft">Da espacio a tus ideas, participa en experiencias prácticas y transforma lo que sabes en proyectos que puedas contar.</p>
+            </article>
+            <article className="rounded-3xl bg-ivory p-7">
+              <span className="font-editorial text-3xl italic text-coral">03</span>
+              <h3 className="mt-4 font-sans text-xl font-bold text-ink">Conecta con tu futuro</h3>
+              <p className="mt-3 leading-relaxed text-graphite-soft">Forma parte de una red que pone en contacto talento emergente y profesionales, y abre nuevas conversaciones y posibilidades.</p>
+            </article>
+          </div>
+
+          <div className="mt-12 rounded-[2rem] bg-ink px-7 py-9 text-center sm:px-12 sm:py-14">
+            <p className="font-editorial text-2xl italic text-coral">Nuestra esencia</p>
+            <p className="mx-auto mt-4 max-w-4xl font-sans text-2xl font-bold leading-snug text-ivory sm:text-3xl">
+              Creemos en un periodismo con futuro, y en el talento que necesita oportunidades para hacerlo realidad.
+            </p>
+            <p className="mx-auto mt-5 max-w-2xl leading-relaxed text-ivory/75">
+              Queremos acortar la distancia entre la formación y el mundo profesional, creando un espacio donde aprender, colaborar y crecer acompañado.
+            </p>
+          </div>
         </div>
       </section>
 
