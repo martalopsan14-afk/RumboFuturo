@@ -145,9 +145,13 @@ export function QrLandingPage() {
           <p className="font-editorial text-xl italic text-coral">¿Quieres conocer el proyecto en profundidad?</p>
           <h2 className="font-sans text-2xl font-extrabold text-ink sm:text-3xl">Descubre todo lo que ofrece Rumbo Futuro.</h2>
           <p className="max-w-2xl leading-relaxed text-graphite">En nuestra web encontrarás más información sobre el proyecto, las áreas de trabajo, la formación y las personas que lo hacen posible.</p>
-          <a href="https://rumbo-futuro-corpora-8ae8.bolt.host" className="mt-2 inline-flex items-center gap-3 rounded-full bg-ink px-7 py-4 font-sans text-sm font-bold text-ivory transition hover:bg-coral hover:text-ink">
+          <a href="https://rumbo-futuro-corpora-8ae8.bolt.host" target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-3 rounded-full bg-ink px-7 py-4 font-sans text-sm font-bold text-ivory transition hover:bg-coral hover:text-ink">
             Visitar la web de Rumbo Futuro <ArrowUpRight className="h-4 w-4" />
           </a>
+        <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm font-semibold text-ink">
+            <a href="https://www.instagram.com/rumbofuturoo?dlrf=MWZ5emxqdm05OTg3Zw==" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-coral">Instagram · @rumbofuturoo</a>
+            <a href="https://www.tiktok.com/@rumbofuturoo" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-coral">TikTok · @rumbofuturoo</a>
+          </div>
         </div>
       </section>
 
