@@ -54,7 +54,7 @@ export function QrLandingPage() {
         <div className="mx-auto max-w-5xl text-center">
           <p className="font-editorial text-2xl italic text-coral sm:text-3xl">Rumbo Futuro</p>
           <h1 className="mx-auto mt-4 max-w-4xl font-sans text-4xl font-extrabold leading-tight text-ivory sm:text-6xl">
-            Tu talento, tu puerta al mundo
+            Tu talento, Tu puerta al mundo
           </h1>
           <div className="mx-auto mt-8 h-1 w-20 rounded-full bg-coral" />
           <p className="mx-auto mt-7 max-w-3xl text-lg leading-relaxed text-ivory/85 sm:text-xl">
