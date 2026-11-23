@@ -1,9 +1,55 @@
 
+import { useState, type FormEvent } from 'react';
 import { EVENTS, type EventItem } from '@/data/events';
+import { saveInterest } from '@/lib/interestSignups';
 import { ExpandableText } from '@/components/ui/ExpandableText';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Section } from '@/components/ui/Section';
+
+
+function EventSignupForm() {
+  const [email, setEmail] = useState('');
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'duplicate' | 'error'>('idle');
+
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!privacyAccepted) return;
+    setStatus('sending');
+    const params = new URLSearchParams(window.location.search);
+    const sourceParam = params.get('utm_source') || params.get('source');
+    const source = sourceParam === 'qr' ? 'qr' : 'website';
+    const result = await saveInterest(email, 'event_sinercom', source, new Date().toISOString());
+    if (result === 'saved') {
+      setStatus('success');
+      setEmail('');
+    } else {
+      setStatus(result === 'duplicate' ? 'duplicate' : 'error');
+    }
+  };
+
+  return (
+    <div className="mt-5 rounded-2xl border border-ink/10 bg-white p-5">
+      <h4 className="font-sans text-base font-bold text-ink">Inscripción abierta</h4>
+      <p className="mt-1 text-sm leading-relaxed text-graphite">Déjanos tu correo para registrar tu interés en asistir a la VIII edición Sinercom y Networking, organizada por LABPROCOM.</p>
+      <form onSubmit={submit} className="mt-4 flex flex-col gap-3">
+        <label htmlFor="sinercom-email" className="font-sans text-sm font-semibold text-ink">Correo electrónico</label>
+        <input id="sinercom-email" type="email" required autoComplete="email" value={email} onChange={e => { setEmail(e.target.value); setStatus('idle'); }} placeholder="tu@correo.com" className="w-full rounded-xl border border-ink/20 bg-white px-4 py-3 text-sm text-graphite focus:border-ink focus:outline-none focus:ring-2 focus:ring-coral" />
+        <label className="flex items-start gap-2 text-xs leading-relaxed text-graphite">
+          <input type="checkbox" required checked={privacyAccepted} onChange={e => setPrivacyAccepted(e.target.checked)} className="mt-0.5 h-4 w-4 accent-[#E8674A]" />
+          <span>Consiento que Rumbo Futuro trate mi correo para gestionar esta inscripción y contactar conmigo sobre el evento. He leído y acepto la política de privacidad.</span>
+        </label>
+        <button type="submit" disabled={status === 'sending' || !privacyAccepted} className="inline-flex w-fit items-center justify-center rounded-full bg-coral px-6 py-3 font-sans text-sm font-semibold text-ink transition hover:bg-ink hover:text-ivory disabled:cursor-not-allowed disabled:opacity-60">
+          {status === 'sending' ? 'Enviando…' : 'Inscribirme al evento'}
+        </button>
+        {status === 'success' && <p role="status" className="text-sm font-semibold text-ink">¡Gracias! Tu inscripción ha quedado registrada.</p>}
+        {status === 'duplicate' && <p role="status" className="text-sm text-graphite">Este correo ya está inscrito en el evento.</p>}
+        {status === 'error' && <p role="alert" className="text-sm text-coral">No se ha podido guardar la inscripción. Inténtalo de nuevo.</p>}
+      </form>
+    </div>
+  );
+}
 
 function EventCard({ event }: { event: EventItem }) {
   const showFullImage =
@@ -50,7 +96,8 @@ function EventCard({ event }: { event: EventItem }) {
         <div className="mt-auto">
           <ExpandableText text={event.details} collapsedLabel="Saber más" expandedLabel="Ver menos" />
           {event.id === 'networking-labprocom' && (
-            <div className="flex flex-col items-start gap-2 text-sm">
+            <div className="mt-4 flex flex-col items-start gap-2 text-sm">
+              <EventSignupForm />
               <a
                 href="https://www.instagram.com/p/DgFC29Mxj0a/?lqvp=MWthb3p5eHBnNjF1Mg=="
                 target="_blank"
