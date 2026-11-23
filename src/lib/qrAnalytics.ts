@@ -48,7 +48,8 @@ export interface QrAnalytics {
   qrUniqueVisitors: number;
   qrUniqueSessions: number;
   participantCount: number;
-  participants: Array<{ id: string; email: string; created_at: string; source: string; status: string }>;
+  participants: Array<{ id: string; email: string; created_at: string; source: string; status: string; interestType: string }>;
+  totalSignups: number;
   uniqueVisitors: number;
   uniqueSessions: number;
   registrations: number;
