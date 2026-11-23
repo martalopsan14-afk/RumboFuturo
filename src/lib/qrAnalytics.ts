@@ -58,10 +58,30 @@ export interface QrAnalytics {
 }
 
 export async function getQrAnalytics(token: string, range: '7d' | '30d' | '90d' | 'all' = '30d'): Promise<QrAnalytics> {
-  const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-analytics?range=${range}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  const data = await response.json();
-  if (!response.ok) throw new Error(data.error || 'No se han podido cargar las analíticas');
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+  const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !anonKey) {
+    throw new Error('Falta la configuración pública de Supabase en esta versión de la aplicación.');
+  }
+
+  let response: Response;
+  try {
+    response = await fetch(`${supabaseUrl}/functions/v1/admin-analytics?range=${range}`, {
+      method: 'GET',
+      headers: {
+        apikey: anonKey,
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+      },
+    });
+  } catch {
+    throw new Error('No se pudo conectar con Supabase para cargar las estadísticas. Comprueba la conexión e inténtalo de nuevo.');
+  }
+
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(data.error || `Error al cargar las analíticas (HTTP ${response.status})`);
+  }
   return data as QrAnalytics;
 }
