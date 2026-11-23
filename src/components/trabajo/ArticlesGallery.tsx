@@ -52,7 +52,7 @@ export function ArticlesGallery() {
       <div className="flex flex-col items-start gap-6">
         <SectionHeader
           title="El talento se demuestra contando historias"
-          description="En Rumbo Futuro creemos que aprender periodismo también significa ponerlo en práctica. Por eso queremos impulsar artículos elaborados por periodistas emergentes con el acompañamiento de investigadores, expertos y profesionales de la comunicación."
+          description="En Rumbo Futuro creemos que aprender periodismo también significa ponerlo en práctica. Por eso impulsamos artículos elaborados por periodistas emergentes con el acompañamiento de investigadores, expertos y profesionales de la comunicación."
         />
         <div className="flex flex-wrap items-center gap-3">
           <DemoTag />
