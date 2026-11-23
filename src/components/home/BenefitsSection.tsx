@@ -1,11 +1,13 @@
 import { BookOpen, Handshake, PenLine, type LucideIcon } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { SectionHeader } from '@/components/ui/SectionHeader';
+import { buildHref } from '@/data/navigation';
 
 interface Benefit {
   title: string;
   description: string;
   icon: LucideIcon;
+  href: string;
 }
 
 const BENEFITS: Benefit[] = [
@@ -13,16 +15,19 @@ const BENEFITS: Benefit[] = [
     title: 'Aprende',
     description: 'Desarrolla competencias periodísticas mediante formación práctica.',
     icon: BookOpen,
+    href: buildHref('formacion-dual'),
   },
   {
     title: 'Conecta',
     description: 'Acércate a investigadores, expertos y profesionales de la comunicación.',
     icon: Handshake,
+    href: buildHref('saber-mas', 'eventos'),
   },
   {
     title: 'Proyecta tu talento',
     description: 'Desarrolla trabajos para demostrar tus competencias y construir tu portfolio profesional.',
     icon: PenLine,
+    href: buildHref('nuestro-trabajo'),
   },
 ];
 
@@ -36,18 +41,21 @@ export function BenefitsSection() {
           description="Muchos jóvenes periodistas terminan su formación sin disponer de experiencia suficiente, contactos profesionales u oportunidades para demostrar sus capacidades. Rumbo Futuro existe para cerrar esa distancia."
         />
         <ul className="grid gap-5 self-center">
-          {BENEFITS.map(({ title, description, icon: Icon }) => (
-            <li
-              key={title}
-              className="group flex gap-5 rounded-3xl border border-ink/10 bg-ivory p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-coral/60 hover:shadow-lg"
-            >
-              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-coral-soft transition group-hover:bg-coral">
-                <Icon aria-hidden="true" className="h-7 w-7 text-ink" strokeWidth={1.75} />
-              </span>
-              <div className="flex flex-col gap-2">
-                <h3 className="font-sans text-lg">{title}</h3>
-                <p className="leading-relaxed text-graphite">{description}</p>
-              </div>
+          {BENEFITS.map(({ title, description, icon: Icon, href }) => (
+            <li key={title}>
+              <a
+                href={href}
+                className="group flex h-full gap-5 rounded-3xl border border-ink/10 bg-ivory p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-coral/60 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2"
+                aria-label={`${title}: ${description}`}
+              >
+                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-coral-soft transition group-hover:bg-coral">
+                  <Icon aria-hidden="true" className="h-7 w-7 text-ink" strokeWidth={1.75} />
+                </span>
+                <span className="flex flex-col gap-2">
+                  <span className="font-sans text-lg font-semibold text-ink">{title}</span>
+                  <span className="leading-relaxed text-graphite">{description}</span>
+                </span>
+              </a>
             </li>
           ))}
         </ul>
