@@ -7,6 +7,7 @@ const CONSENT_KEY = 'rumbo_qr_analytics_consent';
 
 export function QrLandingPage() {
   const [email, setEmail] = useState('');
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [consent, setConsent] = useState<'accepted' | 'rejected' | null>(() => {
     try {
       const value = localStorage.getItem(CONSENT_KEY);
@@ -27,7 +28,8 @@ export function QrLandingPage() {
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatus('sending');
-    const result = await saveInterest(email, 'qr_landing');
+    if (!privacyAccepted) { setStatus('error'); return; }
+    const result = await saveInterest(email, 'qr_landing', 'qr', new Date().toISOString());
     if (result === 'saved') {
       if (consent === 'accepted') void trackQrEvent('registration');
       setStatus('success');
@@ -100,6 +102,7 @@ export function QrLandingPage() {
             <form onSubmit={submit} className="flex flex-col gap-4">
               <label htmlFor="qr-email" className="font-sans text-sm font-semibold text-ink">Correo electrónico</label>
               <input id="qr-email" type="email" required autoComplete="email" value={email} onChange={e => { setEmail(e.target.value); setStatus('idle'); }} placeholder="tu@correo.com" className="w-full rounded-full border border-ink/20 bg-white px-5 py-3 text-base text-graphite placeholder:text-graphite-soft/70 focus:border-ink focus:outline-none focus:ring-2 focus:ring-coral" />
+              <label className="flex items-start gap-3 text-sm leading-relaxed text-graphite"><input type="checkbox" required checked={privacyAccepted} onChange={e => setPrivacyAccepted(e.target.checked)} className="mt-1 h-4 w-4 accent-[#E8674A]" /><span>He leído la información de privacidad y consiento que Rumbo Futuro utilice mi correo para enviarme información sobre el proyecto y sus oportunidades.</span></label>
               <button type="submit" disabled={status === 'sending'} className="inline-flex items-center justify-center gap-2 rounded-full bg-coral px-6 py-4 font-sans text-sm font-bold text-ink transition hover:bg-ink hover:text-ivory disabled:opacity-60">{status === 'sending' ? 'Enviando…' : 'Enviar mi solicitud'} <ArrowRight className="h-4 w-4" /></button>
               <p role="status" aria-live="polite" className="min-h-6 text-sm font-semibold text-ink">{status === 'success' ? <><CheckCircle2 className="mr-2 inline h-4 w-4 text-coral" />¡Gracias! Hemos recibido tu solicitud.</> : status === 'duplicate' ? 'Este correo ya está registrado.' : status === 'error' ? 'No hemos podido guardar la solicitud. Inténtalo de nuevo.' : ''}</p>
             </form>
