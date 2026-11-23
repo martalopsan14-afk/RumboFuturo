@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent } from 'react';
-import { ArrowRight, Instagram } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { saveInterest } from '@/lib/interestSignups';
 import { trackQrEvent } from '@/lib/qrAnalytics';
 
@@ -201,16 +201,26 @@ export function LandingPage() {
         </div>
       )}
 
-      <footer className="bg-ivory px-5 py-10 text-center sm:px-8">
-        <p className="font-editorial text-xl italic text-coral">Sigue nuestro rumbo</p>
-        <p className="mt-2 font-sans text-xl font-extrabold text-ink">Visita nuestra web y redes sociales</p>
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-4 text-sm font-semibold">
-          <a href="#/inicio" className="text-ink underline decoration-coral decoration-2 underline-offset-4 hover:text-coral">Visita nuestra web</a>
-          <a href="https://www.instagram.com/rumbofuturoo?dlrf=MWZ5emxqdm05OTg3Zw==" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-ink hover:text-coral"><Instagram className="h-4 w-4" /> Instagram</a>
-          <a href="https://www.tiktok.com/@rumbofuturoo" target="_blank" rel="noopener noreferrer" className="text-ink hover:text-coral">TikTok</a>
-          <a href="mailto:Rumbofuturoo@gmail.com" className="text-ink hover:text-coral">Rumbofuturoo@gmail.com</a>
+      <footer className="bg-ivory px-5 py-12 text-center sm:px-8 sm:py-16">
+        <div className="mx-auto max-w-3xl">
+          <p className="font-editorial text-xl italic text-coral">Sigue nuestro rumbo</p>
+          <h2 className="mt-2 font-sans text-2xl font-extrabold text-ink sm:text-3xl">¿Quieres conocer Rumbo Futuro más a fondo?</h2>
+          <p className="mt-3 text-base leading-relaxed text-graphite-soft">
+            Entra en nuestra web y descubre mejor el proyecto, lo que hacemos y cómo puedes formar parte.
+          </p>
+          <a href="#/inicio" className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-coral px-7 py-3 font-sans text-sm font-bold text-ink transition hover:bg-ink hover:text-ivory">
+            Visita nuestra web <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
-        <p className="mt-8 text-xs text-graphite-soft">© {new Date().getFullYear()} Rumbo Futuro</p>
+        <div className="mt-10 border-t border-ink/10 pt-7">
+          <p className="font-sans text-sm font-bold text-ink">También estamos en redes</p>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm font-semibold text-ink">
+            <span>Instagram: @rumbofuturoo</span>
+            <span>TikTok: @rumbofuturoo</span>
+            <a href="mailto:Rumbofuturoo@gmail.com" className="hover:text-coral">Rumbofuturoo@gmail.com</a>
+          </div>
+          <p className="mt-8 text-xs text-graphite-soft">© {new Date().getFullYear()} Rumbo Futuro</p>
+        </div>
       </footer>
     </main>
   );
