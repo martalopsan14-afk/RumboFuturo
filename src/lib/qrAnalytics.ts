@@ -22,12 +22,12 @@ function getVisitorId(): string {
   return value;
 }
 
-export async function trackQrEvent(eventType: QrEventType): Promise<void> {
+export async function trackQrEvent(eventType: QrEventType, sourceOverride?: string): Promise<void> {
   try {
     if (localStorage.getItem('rumbo_qr_analytics_consent') !== 'accepted') return;
     if (eventType === 'page_view' && sessionStorage.getItem('rumbo_qr_page_viewed') === '1') return;
     const params = new URLSearchParams(window.location.search);
-    const source = params.get('utm_source') || params.get('source') || 'direct';
+    const source = (sourceOverride || params.get('utm_source') || params.get('source') || 'direct').toLowerCase();
     const campaign = source === 'qr' ? 'rumbo_futuro' : null;
     const { error } = await supabase.from('qr_events').insert({
       visitor_id: getVisitorId(),
@@ -53,6 +53,10 @@ export interface QrAnalytics {
   uniqueVisitors: number;
   uniqueSessions: number;
   registrations: number;
+  qrRegistrations: number;
+  websiteRegistrations: number;
+  landingPageRegistrations: number;
+  totalRegistrations: number;
   conversionRate: number;
   daily: Array<{ day: string; visits: number; registrations: number }>;
 }
