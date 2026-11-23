@@ -4,6 +4,7 @@ import { SectionHeader } from '@/components/ui/SectionHeader';
 export interface TeamMember {
   id: string;
   name: string;
+  role: string;
   photo?: string;
 }
 
@@ -11,31 +12,37 @@ const LOCAL_TEAM_MEMBERS: TeamMember[] = [
   {
     id: 'laura-gallego',
     name: 'Laura Gallego Rodríguez',
+    role: 'Web Content Manager',
     photo: '/Laura%20Gallego.jpeg',
   },
   {
     id: 'adrian-marquez',
     name: 'Adrián Márquez Domínguez',
+    role: 'Community Manager',
     photo: '/Adri%C3%A1n%20M%C3%A1rquez.jpeg',
   },
   {
     id: 'enrique-andres',
     name: 'Enrique Andrés Jiménez García',
+    role: 'Director de Comunicaciones y Coordinación',
     photo: '/Enrique%20Andr%C3%A9s%20Jim%C3%A9nez.jpeg',
   },
   {
     id: 'marta-lopez',
     name: 'Marta López Sanromán',
+    role: 'Web Developer',
     photo: '/Marta%20L%C3%B3pez.jpeg',
   },
   {
     id: 'laura-prado',
     name: 'Laura Prado Álvarez',
+    role: 'Directora Creativa',
     photo: '/Laura%20Prado.jpeg',
   },
   {
     id: 'mariela-reyes',
     name: 'Mariela Reyes Chaves',
+    role: 'Social Media Manager',
     photo: '/Mariela%20Reyes.jpeg',
   },
 ];
@@ -64,6 +71,9 @@ function TeamMemberCard({ member }: { member: TeamMember }) {
         <h4 className="font-semibold text-ink">
           {member.name}
         </h4>
+        <p className="mt-1 text-sm font-medium leading-relaxed text-coral">
+          {member.role}
+        </p>
       </div>
     </li>
   );
