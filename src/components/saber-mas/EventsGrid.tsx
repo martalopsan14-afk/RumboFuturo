@@ -30,20 +30,20 @@ function EventSignupForm() {
   };
 
   return (
-    <div className="mt-5">
-      <button type="button" aria-expanded={isOpen} aria-controls="sinercom-signup-panel" onClick={() => setIsOpen(open => !open)} className="flex w-full items-center justify-between gap-4 rounded-2xl border border-coral/40 bg-white px-5 py-4 text-left shadow-sm transition hover:border-coral hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral">
+    <div className="mt-5 w-full">
+      <button type="button" aria-expanded={isOpen} aria-controls="sinercom-signup-panel" onClick={() => setIsOpen(open => !open)} className="flex w-full items-center justify-between gap-4 rounded-2xl border border-coral bg-ink px-5 py-4 text-left shadow-sm transition hover:border-coral hover:bg-ink-soft hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral">
         <span className="flex flex-col gap-1">
-          <span className="font-sans text-base font-semibold text-ink">Inscripción abierta</span>
-          <span className="text-xs text-graphite-soft">{isOpen ? 'Cierra el formulario' : 'Pulsa para reservar tu plaza'}</span>
+          <span className="font-sans text-base font-semibold text-ivory">Inscripción abierta</span>
+          <span className="text-xs text-ivory/75">{isOpen ? 'Cierra el formulario' : 'Pulsa para reservar tu plaza'}</span>
         </span>
-        <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-coral/15 font-sans text-xl font-medium text-ink">{isOpen ? '−' : '+'}</span>
+        <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-coral font-sans text-xl font-medium text-ink">{isOpen ? '−' : '+'}</span>
       </button>
-      {isOpen && <div id="sinercom-signup-panel" className="mt-3 rounded-2xl border border-ink/10 bg-white p-5 shadow-sm">
-      <p className="text-sm leading-relaxed text-graphite">Déjanos tu correo para registrar tu interés en asistir a la VIII edición Sinercom y Networking, organizada por LabProCom.</p>
+      {isOpen && <div id="sinercom-signup-panel" className="mt-3 rounded-2xl border border-coral/50 bg-ivory-deep p-5 shadow-sm">
+      <p className="text-sm leading-relaxed text-ink">Déjanos tu correo para registrar tu interés en asistir a la VIII edición Sinercom y Networking, organizada por LabProCom.</p>
       <form onSubmit={submit} className="mt-4 flex flex-col gap-3">
         <label htmlFor="sinercom-email" className="font-sans text-sm font-semibold text-ink">Correo electrónico</label>
-        <input id="sinercom-email" type="email" required autoComplete="email" value={email} onChange={e => { setEmail(e.target.value); setStatus('idle'); }} placeholder="tu@correo.com" className="w-full rounded-xl border border-ink/20 bg-white px-4 py-3 text-sm text-graphite focus:border-ink focus:outline-none focus:ring-2 focus:ring-coral" />
-        <label className="flex items-start gap-2 text-xs leading-relaxed text-graphite">
+        <input id="sinercom-email" type="email" required autoComplete="email" value={email} onChange={e => { setEmail(e.target.value); setStatus('idle'); }} placeholder="tu@correo.com" className="w-full rounded-xl border border-ink/20 bg-ivory px-4 py-3 text-sm text-ink placeholder:text-graphite-soft focus:border-coral focus:outline-none focus:ring-2 focus:ring-coral" />
+        <label className="flex items-start gap-2 text-xs leading-relaxed text-ink/80">
           <input type="checkbox" required checked={privacyAccepted} onChange={e => setPrivacyAccepted(e.target.checked)} className="mt-0.5 h-4 w-4 accent-[#E8674A]" />
           <span>Consiento que Rumbo Futuro trate mi correo para gestionar esta inscripción y contactar conmigo sobre el evento. He leído y acepto la política de privacidad.</span>
         </label>
@@ -51,8 +51,8 @@ function EventSignupForm() {
           {status === 'sending' ? 'Enviando…' : 'Inscribirme al evento'}
         </button>
         {status === 'success' && <p role="status" className="text-sm font-semibold text-ink">¡Gracias! Tu inscripción ha quedado registrada.</p>}
-        {status === 'duplicate' && <p role="status" className="text-sm text-graphite">Este correo ya está inscrito en el evento.</p>}
-        {status === 'error' && <p role="alert" className="text-sm text-coral">No se ha podido guardar la inscripción. Inténtalo de nuevo.</p>}
+        {status === 'duplicate' && <p role="status" className="text-sm text-ink">Este correo ya está inscrito en el evento.</p>}
+        {status === 'error' && <p role="alert" className="text-sm font-semibold text-coral">No se ha podido guardar la inscripción. Inténtalo de nuevo.</p>}
       </form>
       </div>}
     </div>
