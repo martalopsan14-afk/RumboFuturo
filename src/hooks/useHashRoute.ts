@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
 import { PAGE_IDS, type PageId } from '@/data/navigation';
 
-export type AppRoute = { type: 'page'; page: PageId; anchor: string | null } | { type: 'admin' } | { type: 'qr' };
+export type AppRoute =
+  | { type: 'landing' }
+  | { type: 'page'; page: PageId; anchor: string | null }
+  | { type: 'admin' }
+  | { type: 'qr' };
 
 function parseHash(hash: string): AppRoute {
   const [pageSegment = '', anchor = ''] = hash.replace(/^#\/?/, '').split('/');
 
+  if (!pageSegment) return { type: 'landing' };
   if (pageSegment === 'admin') return { type: 'admin' };
   if (pageSegment === 'qr') return { type: 'qr' };
 
