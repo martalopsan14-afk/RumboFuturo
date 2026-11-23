@@ -55,7 +55,7 @@ Deno.serve(async req => {
     const qrViews = pageViews.filter((event: any) => (event.source ?? "").toLowerCase() === "qr");
     const qrSessions = new Set(qrViews.map((event: any) => event.session_id).filter(Boolean));
     const allSignups = signups ?? [];
-    const allRegistrations = allSignups.filter((signup: any) => signup.interest_type === "qr_landing");
+    const allRegistrations = allSignups.filter((signup: any) => (signup.source ?? "").toLowerCase() === "qr");
     const registrations = allRegistrations.filter((signup: any) => !cutoff || new Date(signup.created_at) >= cutoff);
     const daily = new Map<string, { day: string; visits: number; registrations: number }>();
     const chartDays = days ?? 30;
@@ -90,7 +90,7 @@ Deno.serve(async req => {
       totalSignups: participants.length,
       conversionRate: qrSessions.size ? Number(((registrations.length / qrSessions.size) * 100).toFixed(2)) : 0,
       daily: [...daily.values()], participants,
-      note: "Las visitas se registran únicamente con consentimiento de analítica. Las llegadas QR se identifican con utm_source=qr.",
+      note: "Las visitas y eventos de analítica se registran únicamente con consentimiento. Las inscripciones se guardan siempre con su procedencia (QR o web), con independencia del consentimiento de analítica.",
     });
   } catch (error) {
     console.error("admin-analytics", error);
