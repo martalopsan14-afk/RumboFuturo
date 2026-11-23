@@ -123,7 +123,7 @@ export function QrLandingPage() {
           <div>
             <p className="mb-3 font-editorial text-xl italic text-coral">Empieza hoy</p>
             <h2 className="font-sans text-3xl font-extrabold text-ink sm:text-4xl">Da el primer paso con Rumbo Futuro.</h2>
-            <p className="mt-5 text-lg leading-relaxed">Déjanos tu correo y te podremos informar sobre el proyecto, sus propuestas formativas y próximas oportunidades.</p>
+            <p className="mt-5 text-lg leading-relaxed">Déjanos tu correo para recibir información sobre el proyecto, sus propuestas formativas y próximas oportunidades.</p>
             <div className="mt-7 flex items-start gap-3 text-sm text-graphite"><ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-coral" /><span>Utilizaremos tu correo únicamente para gestionar esta solicitud y las comunicaciones relacionadas. Puedes solicitar la baja cuando quieras.</span></div>
           </div>
           <div className="rounded-[2rem] border border-ink/10 bg-white p-7 shadow-sm sm:p-10">
