@@ -34,12 +34,12 @@ import { getQrAnalytics, type QrAnalytics } from '@/lib/qrAnalytics';
 const TOKEN_KEY = 'rumbo_admin_token';
 
 type AdminView = 'login' | 'changePassword' | 'dashboard';
-type DashboardTab = 'prompt' | 'documents' | 'testing' | 'analytics';
+type DashboardTab = 'analytics' | 'participants' | 'prompt' | 'documents' | 'testing';
 
 export function AdminPage() {
   const [view, setView] = useState<AdminView>('login');
   const [token, setToken] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<DashboardTab>('prompt');
+  const [activeTab, setActiveTab] = useState<DashboardTab>('analytics');
 
   useEffect(() => {
     const stored = sessionStorage.getItem(TOKEN_KEY);
@@ -99,7 +99,9 @@ export function AdminPage() {
       </div>
 
       <div className="mx-auto w-full max-w-5xl px-5 py-10 sm:px-8">
-        <div className="mb-8 flex gap-2 border-b border-ink/10">
+        <div className="mb-8 flex flex-wrap gap-2 border-b border-ink/10">
+          <TabButton active={activeTab === 'analytics'} onClick={() => setActiveTab('analytics')} icon={BarChart3}>Dashboard</TabButton>
+          <TabButton active={activeTab === 'participants'} onClick={() => setActiveTab('participants')} icon={FolderOpen}>Participantes</TabButton>
           <TabButton active={activeTab === 'prompt'} onClick={() => setActiveTab('prompt')} icon={Settings}>
             Instrucciones del agente
           </TabButton>
@@ -109,10 +111,10 @@ export function AdminPage() {
           <TabButton active={activeTab === 'testing'} onClick={() => setActiveTab('testing')} icon={FlaskConical}>
             Pruebas del agente
           </TabButton>
-          <TabButton active={activeTab === 'analytics'} onClick={() => setActiveTab('analytics')} icon={BarChart3}>Analítica QR</TabButton>
         </div>
 
-        {activeTab === 'prompt' && <PromptEditorView token={token!} />}
+        {activeTab === 'participants' && <ParticipantsView token={token!} />}
+        {activeTab === 'prompt' && <PromptEditorView token={token!} />
         {activeTab === 'documents' && <DocumentsView token={token!} />}
         {activeTab === 'testing' && <TestingView token={token!} />}
         {activeTab === 'analytics' && <AnalyticsView token={token!} />}
@@ -752,8 +754,45 @@ function AnalyticsView({ token }: { token: string }) {
  return <section className='flex flex-col gap-6'>
   <div className='flex items-center justify-between gap-3'><div><h2 className='font-sans text-xl font-bold text-ink'>Rendimiento de la landing QR</h2><p className='text-sm text-graphite'>Datos de Supabase; las visitas se miden solo con consentimiento.</p></div><button onClick={()=>void load()} className='rounded-full border px-4 py-2 text-sm' disabled={loading}>Actualizar</button></div>
   {error&&<p role='alert' className='rounded-xl bg-coral/10 p-4'>{error}</p>}{loading&&!data?<p>Cargando datos…</p>:data&&<>
-  <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-4'>{[['Visitas',data.totalVisits],['Visitantes únicos',data.uniqueVisitors],['Sesiones únicas',data.uniqueSessions],['Inscripciones',data.registrations]].map(([k,v])=><div key={String(k)} className='rounded-2xl border border-ink/10 bg-white p-5'><p className='text-sm text-graphite'>{k}</p><p className='mt-2 text-3xl font-extrabold text-ink'>{Number(v).toLocaleString('es-ES')}</p></div>)}</div>
+  <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>{[['Visitas a la landing',data.totalVisits],['Llegadas desde QR',data.qrVisits],['Visitantes únicos',data.uniqueVisitors],['Sesiones únicas',data.uniqueSessions],['Registros QR',data.registrations],['Participantes',data.participantCount]].map(([k,v])=><div key={String(k)} className='rounded-2xl border border-ink/10 bg-white p-5'><p className='text-sm text-graphite'>{k}</p><p className='mt-2 text-3xl font-extrabold text-ink'>{Number(v).toLocaleString('es-ES')}</p></div>)}</div>
   <div className='rounded-2xl border bg-white p-6'><p className='text-sm text-graphite'>Conversión de sesiones medidas</p><p className='text-3xl font-extrabold text-coral'>{data.conversionRate.toLocaleString('es-ES')}%</p></div>
   <div className='rounded-2xl border bg-white p-6'><h3 className='mb-4 font-bold text-ink'>Visitas diarias · últimos 30 días</h3><div className='flex h-44 items-end gap-1 overflow-x-auto'>{data.daily.map(d=><div key={d.day} title={d.day+': '+d.visits} className='min-w-[7px] flex-1 rounded-t bg-coral' style={{height:Math.max(d.visits?3:0,d.visits/max*160)+'px'}} />)}</div></div>
   </>}</section>;
+}
+
+
+function ParticipantsView({ token }: { token: string }) {
+  const [rows, setRows] = useState<QrAnalytics['participants']>([]);
+  const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const load = useCallback(async () => {
+    setLoading(true); setError('');
+    try { const result = await getQrAnalytics(token); setRows(result.participants ?? []); }
+    catch (err) { setError(err instanceof Error ? err.message : 'No se pudieron cargar los participantes'); }
+    finally { setLoading(false); }
+  }, [token]);
+  useEffect(() => { void load(); }, [load]);
+  const filtered = rows.filter(row => row.email.toLowerCase().includes(search.toLowerCase()));
+  const exportCsv = () => {
+    const quote = (value: string) => '"' + value.replace(/"/g, '""') + '"';
+    const csv = ['Correo electrónico,Fecha de registro,Procedencia,Estado', ...filtered.map(row =>
+      [row.email, new Date(row.created_at).toLocaleString('es-ES'), row.source, row.status].map(quote).join(',')
+    )].join('\r\n');
+    const url = URL.createObjectURL(new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' }));
+    const link = document.createElement('a'); link.href = url; link.download = 'rumbo-futuro-participantes.csv'; link.click(); URL.revokeObjectURL(url);
+  };
+  return <section className="flex flex-col gap-5">
+    <div className="flex flex-wrap items-end justify-between gap-3">
+      <div><h2 className="font-sans text-xl font-bold text-ink">Participantes de la campaña QR</h2><p className="text-sm text-graphite">Registros guardados en Supabase. Los registros anteriores de otras fuentes se conservan.</p></div>
+      <div className="flex gap-2"><button onClick={() => void load()} disabled={loading} className="rounded-full border border-ink/20 px-4 py-2 text-sm font-semibold">Actualizar</button><button onClick={exportCsv} disabled={!filtered.length} className="rounded-full bg-coral px-4 py-2 text-sm font-semibold text-ink disabled:opacity-50">Exportar CSV</button></div>
+    </div>
+    <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-ink/10 bg-white p-4">
+      <label className="flex min-w-0 flex-1 flex-col gap-1 text-xs font-semibold text-graphite">Buscar por correo<input value={search} onChange={e => setSearch(e.target.value)} placeholder="nombre@correo.com" className="w-full rounded-xl border border-ink/15 px-4 py-2 text-sm font-normal text-ink" /></label>
+      <p className="text-sm text-graphite"><strong className="text-ink">{filtered.length}</strong> participantes</p>
+    </div>
+    {error && <p role="alert" className="rounded-xl bg-coral/10 p-4 text-sm">{error}</p>}
+    {loading ? <p className="py-8 text-center text-sm text-graphite">Cargando participantes…</p> : filtered.length === 0 ? <p className="rounded-2xl border border-dashed border-ink/20 py-12 text-center text-sm text-graphite">No hay participantes que mostrar.</p> :
+      <div className="overflow-x-auto rounded-2xl border border-ink/10 bg-white"><table className="w-full min-w-[620px] text-left text-sm"><thead className="bg-ivory text-xs uppercase tracking-wide text-graphite"><tr><th className="px-5 py-4">Correo electrónico</th><th className="px-5 py-4">Fecha de registro</th><th className="px-5 py-4">Procedencia</th><th className="px-5 py-4">Estado</th></tr></thead><tbody>{filtered.map(row => <tr key={row.id} className="border-t border-ink/10"><td className="px-5 py-4 font-semibold text-ink">{row.email}</td><td className="px-5 py-4 text-graphite">{new Date(row.created_at).toLocaleString('es-ES')}</td><td className="px-5 py-4 text-graphite">{row.source}</td><td className="px-5 py-4 text-graphite">{row.status}</td></tr>)}</tbody></table></div>}
+  </section>;
 }
