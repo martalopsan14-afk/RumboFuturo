@@ -14,13 +14,17 @@ const UNIQUE_VIOLATION_CODE = '23505';
 
 export async function saveInterest(
   email: string,
-  interestType: InterestType
+  interestType: InterestType,
+  source = 'website',
+  privacyAcceptedAt: string | null = null
 ): Promise<SaveInterestResult> {
   const { error } = await supabase
     .from('interest_signups')
     .insert({
       email: email.trim().toLowerCase(),
       interest_type: interestType,
+      source,
+      privacy_accepted_at: privacyAcceptedAt,
     });
 
   if (!error) return 'saved';
