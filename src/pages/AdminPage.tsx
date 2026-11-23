@@ -761,6 +761,15 @@ function AnalyticsView({ token }: { token: string }) {
 }
 
 
+const interestLabels: Record<string, string> = {
+  online_course: 'Curso online',
+  in_person_course: 'Curso presencial',
+  subscription_news: 'Novedades',
+  event_news: 'Eventos',
+  qr_landing: 'Información general',
+  event_sinercom: 'VIII edición Sinercom y Networking',
+};
+
 function ParticipantsView({ token }: { token: string }) {
   const [rows, setRows] = useState<QrAnalytics['participants']>([]);
   const [search, setSearch] = useState('');
@@ -793,6 +802,6 @@ function ParticipantsView({ token }: { token: string }) {
     </div>
     {error && <p role="alert" className="rounded-xl bg-coral/10 p-4 text-sm">{error}</p>}
     {loading ? <p className="py-8 text-center text-sm text-graphite">Cargando participantes…</p> : filtered.length === 0 ? <p className="rounded-2xl border border-dashed border-ink/20 py-12 text-center text-sm text-graphite">No hay participantes que mostrar.</p> :
-      <div className="overflow-x-auto rounded-2xl border border-ink/10 bg-white"><table className="w-full min-w-[620px] text-left text-sm"><thead className="bg-ivory text-xs uppercase tracking-wide text-graphite"><tr><th className="px-5 py-4">Correo electrónico</th><th className="px-5 py-4">Fecha de registro</th><th className="px-5 py-4">Interés</th><th className="px-5 py-4">Procedencia</th><th className="px-5 py-4">Estado</th></tr></thead><tbody>{filtered.map(row => <tr key={row.id} className="border-t border-ink/10"><td className="px-5 py-4 font-semibold text-ink">{row.email}</td><td className="px-5 py-4 text-graphite">{new Date(row.created_at).toLocaleString('es-ES')}</td><td className="px-5 py-4 text-graphite">{{ online_course: 'Curso online', in_person_course: 'Curso presencial', subscription_news: 'Novedades', event_news: 'Eventos', qr_landing: 'Información general', event_sinercom: 'VIII edición Sinercom y Networking' }[row.interestType] ?? row.interestType}</td><td className="px-5 py-4 text-graphite">{row.source}</td><td className="px-5 py-4 text-graphite">{row.status}</td></tr>)}</tbody></table></div>}
+      <div className="overflow-x-auto rounded-2xl border border-ink/10 bg-white"><table className="w-full min-w-[760px] text-left text-sm"><thead className="bg-ivory text-xs uppercase tracking-wide text-graphite"><tr><th className="px-5 py-4">Correo electrónico</th><th className="px-5 py-4">Fecha de registro</th><th className="px-5 py-4">Interés</th><th className="px-5 py-4">Procedencia</th><th className="px-5 py-4">Estado</th></tr></thead><tbody>{filtered.map(row => <tr key={row.id} className="border-t border-ink/10"><td className="px-5 py-4 font-semibold text-ink">{row.email}</td><td className="px-5 py-4 text-graphite">{new Date(row.created_at).toLocaleString('es-ES')}</td><td className="px-5 py-4 text-graphite">{interestLabels[row.interestType] ?? row.interestType}</td><td className="px-5 py-4 text-graphite">{row.source}</td><td className="px-5 py-4 text-graphite">{row.status}</td></tr>)}</tbody></table></div>}
   </section>;
 }
