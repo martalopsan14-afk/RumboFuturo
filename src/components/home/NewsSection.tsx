@@ -1,4 +1,3 @@
-import { DemoTag } from '@/components/ui/DemoTag';
 import { Section } from '@/components/ui/Section';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { NEWS_ITEMS } from '@/data/news';
@@ -14,7 +13,6 @@ export function NewsSection() {
             title="El periodismo que viene"
             description="Temas que marcan el presente y el futuro de la profesión para quienes empiezan a escribir su carrera."
           />
-          <DemoTag />
         </div>
         {NEWS_ITEMS.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
