@@ -58,30 +58,34 @@ export interface QrAnalytics {
 }
 
 export async function getQrAnalytics(token: string, range: '7d' | '30d' | '90d' | 'all' = '30d'): Promise<QrAnalytics> {
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-  const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-  if (!supabaseUrl || !anonKey) {
-    throw new Error('Falta la configuración pública de Supabase en esta versión de la aplicación.');
-  }
-
-  let response: Response;
-  try {
-    response = await fetch(`${supabaseUrl}/functions/v1/admin-analytics?range=${range}`, {
+  // Reuse the application's configured Supabase client so the project URL,
+  // public API key and standard request handling stay consistent everywhere.
+  const { data, error } = await supabase.functions.invoke<QrAnalytics>(
+    `admin-analytics?range=${encodeURIComponent(range)}`,
+    {
       method: 'GET',
       headers: {
-        apikey: anonKey,
         Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
       },
-    });
-  } catch {
-    throw new Error('No se pudo conectar con Supabase para cargar las estadísticas. Comprueba la conexión e inténtalo de nuevo.');
+    },
+  );
+
+  if (error) {
+    const context = (error as { context?: unknown }).context;
+    if (context instanceof Response) {
+      const body = await context.clone().json().catch(() => null) as { error?: string } | null;
+      if (body?.error) throw new Error(body.error);
+      throw new Error(`Supabase respondió con HTTP ${context.status}: ${context.statusText || error.message}`);
+    }
+
+    // Keep the underlying SDK message visible: it distinguishes CORS,
+    // DNS/network failures and other fetch-level errors.
+    throw new Error(`No se pudo completar la petición a Supabase: ${error.message}`);
   }
 
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    throw new Error(data.error || `Error al cargar las analíticas (HTTP ${response.status})`);
+  if (!data) {
+    throw new Error('Supabase no devolvió datos de analítica.');
   }
-  return data as QrAnalytics;
+
+  return data;
 }
