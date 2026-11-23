@@ -23,12 +23,12 @@ export const EVENTS: EventItem[] = [
     id: 'networking-labprocom',
     title: 'VIII edición Sinercom y Networking',
     description:
-      'Sinercom se concibe como una sesión de networking dinámico, pensada para fomentar la colaboración, el intercambio de ideas y la visibilidad de los proyectos emergentes.',
+      'Organizado por LABPROCOM, Sinercom es una sesión de networking dinámico para fomentar la colaboración, el intercambio de ideas y la visibilidad de proyectos emergentes.',
     details:
-      'La VIII edición Sinercom y Networking es un encuentro para conectar proyectos, compartir ideas y generar nuevas oportunidades de colaboración. La sesión busca dar visibilidad a iniciativas emergentes y facilitar el contacto entre sus participantes. Puedes ampliar la información en las publicaciones de LabProCom enlazadas a continuación.',
-    date: '24 de noviembre · 12:00 h',
+      'La VIII edición Sinercom y Networking, organizada por LABPROCOM, es un encuentro para conectar proyectos, compartir ideas y generar nuevas oportunidades de colaboración. La sesión busca dar visibilidad a iniciativas emergentes y facilitar el contacto entre sus participantes. La inscripción está abierta: puedes reservar tu plaza desde este formulario. Puedes ampliar la información en las publicaciones de LabProCom enlazadas a continuación.',
+    date: '24 de noviembre de 2026 · 12:00 h',
     place: 'Facultad de Comunicación (FCom), Universidad de Sevilla',
-    status: 'proximamente',
+    status: 'inscripciones_abiertas',
     image: '/sabermaseventos/labprocom.png',
   },
   {
