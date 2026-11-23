@@ -29,7 +29,7 @@ export async function trackQrEvent(eventType: QrEventType): Promise<void> {
     if (eventType === 'page_view') sessionStorage.setItem('rumbo_qr_page_viewed', '1');
     const params = new URLSearchParams(window.location.search);
     const source = params.get('utm_source') || params.get('source') || 'direct';
-    const campaign = params.get('utm_campaign') || (source === 'qr' ? 'rumbo_futuro' : null);
+    const campaign = source === 'qr' ? 'rumbo_futuro' : null;
     await supabase.from('qr_events').insert({
       visitor_id: getVisitorId(),
       session_id: getId(SESSION_KEY),
