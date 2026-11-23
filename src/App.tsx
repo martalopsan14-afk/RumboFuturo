@@ -2,6 +2,7 @@ import { useEffect, type ComponentType } from 'react';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { HomePage } from '@/pages/HomePage';
+import { LandingPage } from '@/pages/LandingPage';
 import { RumboPage } from '@/pages/RumboPage';
 import { TrabajoPage } from '@/pages/TrabajoPage';
 import { FormacionPage } from '@/pages/FormacionPage';
@@ -35,6 +36,7 @@ export default function App() {
     document.getElementById(route.anchor)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, [route]);
 
+  if (route.type === 'landing') return <LandingPage />;
   if (route.type === 'admin') return <AdminPage />;
   if (route.type === 'qr') return <QrLandingPage />;
 
