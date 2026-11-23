@@ -31,7 +31,7 @@ async function verifyAdminToken(token: string): Promise<boolean> {
 Deno.serve(async req => {
   if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders });
   if (req.method !== "GET") return response({ error: "Método no permitido" }, 405);
-  const match = req.headers.get("Authorization")?.match(/^Bearer\\s+(.+)$/i);
+  const match = req.headers.get("Authorization")?.match(/^Bearer\s+(.+)$/i);
   if (!match || !(await verifyAdminToken(match[1]))) return response({ error: "No autorizado" }, 401);
   const url = Deno.env.get("SUPABASE_URL");
   const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
