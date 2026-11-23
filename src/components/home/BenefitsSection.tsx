@@ -21,7 +21,7 @@ const BENEFITS: Benefit[] = [
   },
   {
     title: 'Proyecta tu talento',
-    description: 'Desarrolla trabajos que te ayuden a demostrar tus competencias y construir tu portfolio profesional.',
+    description: 'Desarrolla trabajos para demostrar tus competencias y construir tu portfolio profesional.',
     icon: PenLine,
   },
 ];
@@ -32,7 +32,7 @@ export function BenefitsSection() {
       <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
         <SectionHeader
           eyebrow="Nuestra propuesta de valor"
-          title="El talento está ahí. Nosotros hacemos llegar las oportunidades."
+          title="El talento está ahí. En Rumbo Futuro acercamos las oportunidades."
           description="Muchos jóvenes periodistas terminan su formación sin disponer de experiencia suficiente, contactos profesionales u oportunidades para demostrar sus capacidades. Rumbo Futuro existe para cerrar esa distancia."
         />
         <ul className="grid gap-5 self-center">
