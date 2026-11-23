@@ -1,35 +1,48 @@
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { ArrowRight, Instagram } from 'lucide-react';
 import { saveInterest } from '@/lib/interestSignups';
+import { trackQrEvent } from '@/lib/qrAnalytics';
 
-function getCampaignSource(): string {
+const ANALYTICS_CONSENT_KEY = 'rumbo_qr_analytics_consent';
+
+function getSignupSource(): 'qr' | 'website' {
   const params = new URLSearchParams(window.location.search);
-  const fields = [
-    ['source', params.get('utm_source')],
-    ['medium', params.get('utm_medium')],
-    ['campaign', params.get('utm_campaign')],
-    ['content', params.get('utm_content')],
-  ].filter((entry): entry is [string, string] => Boolean(entry[1]));
-  if (fields.length === 0) return 'landing_page';
-  return `landing_page|${fields.map(([key, value]) => `${key}=${value.slice(0, 60)}`).join('|')}`.slice(0, 250);
+  const source = (params.get('utm_source') || params.get('source') || '').toLowerCase();
+  return source === 'qr' ? 'qr' : 'website';
 }
 
 export function LandingPage() {
   const [email, setEmail] = useState('');
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'duplicate' | 'error'>('idle');
+  const [analyticsConsent, setAnalyticsConsent] = useState<'accepted' | 'rejected' | null>(() => {
+    try {
+      const value = localStorage.getItem(ANALYTICS_CONSENT_KEY);
+      return value === 'accepted' || value === 'rejected' ? value : null;
+    } catch { return null; }
+  });
+
+  useEffect(() => {
+    if (analyticsConsent === 'accepted') void trackQrEvent('page_view');
+  }, [analyticsConsent]);
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!privacyAccepted) return;
     setStatus('sending');
-    const result = await saveInterest(email, 'subscription_news', getCampaignSource(), new Date().toISOString());
+    const result = await saveInterest(email, 'subscription_news', getSignupSource(), new Date().toISOString());
     if (result === 'saved') {
+      if (analyticsConsent === 'accepted') void trackQrEvent('registration');
       setStatus('success');
       setEmail('');
     } else {
       setStatus(result === 'duplicate' ? 'duplicate' : 'error');
     }
+  };
+
+  const chooseAnalyticsConsent = (value: 'accepted' | 'rejected') => {
+    setAnalyticsConsent(value);
+    try { localStorage.setItem(ANALYTICS_CONSENT_KEY, value); } catch { /* storage may be unavailable */ }
   };
 
   return (
@@ -173,6 +186,20 @@ export function LandingPage() {
           </div>
         </div>
       </section>
+
+      {analyticsConsent === null && (
+        <div className="fixed inset-x-0 bottom-0 z-50 border-t border-ink/15 bg-white p-4 shadow-2xl sm:p-5">
+          <div className="mx-auto flex max-w-6xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="max-w-3xl text-sm leading-relaxed text-graphite">
+              Podemos utilizar analítica propia y seudónima para medir las visitas a esta página y las inscripciones. Solo se activa si la aceptas.
+            </p>
+            <div className="flex shrink-0 gap-2">
+              <button type="button" onClick={() => chooseAnalyticsConsent('rejected')} className="rounded-full border border-ink/20 px-4 py-2 font-sans text-xs font-semibold text-ink">Rechazar</button>
+              <button type="button" onClick={() => chooseAnalyticsConsent('accepted')} className="rounded-full bg-coral px-4 py-2 font-sans text-xs font-semibold text-ink">Aceptar analítica</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <footer className="bg-ivory px-5 py-10 text-center sm:px-8">
         <p className="font-editorial text-xl italic text-coral">Sigue nuestro rumbo</p>
