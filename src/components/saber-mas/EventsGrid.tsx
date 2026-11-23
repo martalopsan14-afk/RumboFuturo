@@ -1,4 +1,3 @@
-
 import { useState, type FormEvent } from 'react';
 import { EVENTS, type EventItem } from '@/data/events';
 import { saveInterest } from '@/lib/interestSignups';
@@ -95,7 +94,16 @@ function EventCard({ event }: { event: EventItem }) {
         <dl className="grid grid-cols-2 gap-4 border-y border-ink/10 py-4 text-sm">
           <div>
             <dt className="font-sans text-xs font-semibold uppercase tracking-wider text-graphite-soft">Fecha</dt>
-            <dd>{event.date ?? 'Por confirmar'}</dd>
+            <dd>
+              {event.date?.includes(' · ') ? (
+                <>
+                  {event.date.split(' · ')[0]} ·{' '}
+                  <span className="whitespace-nowrap">{event.date.split(' · ')[1]}</span>
+                </>
+              ) : (
+                event.date ?? 'Por confirmar'
+              )}
+            </dd>
           </div>
           <div>
             <dt className="font-sans text-xs font-semibold uppercase tracking-wider text-graphite-soft">Lugar</dt>
