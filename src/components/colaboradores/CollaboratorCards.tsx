@@ -6,7 +6,7 @@ export function CollaboratorCards({ items }: { items: CollaboratorItem[] }) {
       {items.map((item) => (
         <li
           key={item.id}
-          className="flex h-full flex-col gap-6 rounded-[2rem] border border-ink/10 bg-ivory p-8 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+          className={`flex h-full flex-col gap-6 rounded-[2rem] border border-ink/10 bg-ivory p-8 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg ${items.length % 2 === 1 && item === items[items.length - 1] ? "md:col-span-2 md:mx-auto md:w-[calc(50%-0.75rem)]" : ""}`}
         >
           <div className="flex h-28 items-center justify-center rounded-2xl border border-dashed border-ink/25 bg-ivory-deep/60 px-6">
             {item.logo ? (
