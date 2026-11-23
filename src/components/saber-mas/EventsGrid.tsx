@@ -77,8 +77,8 @@ function EventCard({ event }: { event: EventItem }) {
             loading="lazy"
             className={
               showFullImage
-                ? 'h-full w-full object-contain object-center'
-                : 'h-full w-full object-cover transition duration-500 group-hover:scale-105'
+                ? 'h-[94%] w-[94%] object-contain object-center'
+                : 'h-[94%] w-[94%] object-cover object-center transition duration-500 group-hover:scale-105'
             }
           />
         ) : (
