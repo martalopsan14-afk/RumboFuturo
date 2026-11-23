@@ -61,8 +61,8 @@ export const NAV_ITEMS: NavItem[] = [
         label: 'Eventos',
         anchor: 'eventos',
         children: [
+          { label: 'VIII edición Sinercom y Networking', anchor: 'networking-labprocom' },
           { label: 'Charlas promocionales en la FCom', anchor: 'charlas-fcom' },
-          { label: 'Networking de LabProCom', anchor: 'networking-labprocom' },
           { label: 'Consejo de Periodistas', anchor: 'consejo-periodistas' },
           { label: 'Asociación de Prensa', anchor: 'asociacion-prensa' },
           { label: 'Próximos encuentros', anchor: 'proximos-encuentros' },
