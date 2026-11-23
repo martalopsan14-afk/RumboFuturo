@@ -53,12 +53,12 @@ function TeamMemberCard({ member }: { member: TeamMember }) {
       key={member.id}
       className="overflow-hidden rounded-2xl border border-ivory/20 bg-ivory/5"
     >
-      <div className="aspect-[3/4] overflow-hidden bg-ivory/10">
+      <div className="aspect-[4/5] overflow-hidden bg-ivory/10">
         {member.photo ? (
           <img
             src={member.photo}
             alt={member.name}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover object-[center_35%]"
           />
         ) : (
           <div className="flex h-full items-center justify-center">
