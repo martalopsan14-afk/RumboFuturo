@@ -55,8 +55,9 @@ Deno.serve(async req => {
     const allRegistrations = (signups ?? []).filter((signup: any) => signup.interest_type === "qr_landing");
     const registrations = allRegistrations.filter((signup: any) => !cutoff || new Date(signup.created_at) >= cutoff);
     const daily = new Map<string, { day: string; visits: number; registrations: number }>();
-    const start = new Date(); start.setDate(start.getDate() - 29); start.setHours(0, 0, 0, 0);
-    for (let i = 0; i < 30; i++) {
+    const chartDays = days ?? 30;
+    const start = new Date(); start.setDate(start.getDate() - (chartDays - 1)); start.setHours(0, 0, 0, 0);
+    for (let i = 0; i < chartDays; i++) {
       const date = new Date(start); date.setDate(start.getDate() + i);
       const day = date.toISOString().slice(0, 10);
       daily.set(day, { day, visits: 0, registrations: 0 });
@@ -83,7 +84,7 @@ Deno.serve(async req => {
       registrations: registrations.length,
       participantCount: registrations.length,
       conversionRate: qrSessions.size ? Number(((registrations.length / qrSessions.size) * 100).toFixed(2)) : 0,
-      daily: [...daily.values()].slice(-30), participants,
+      daily: [...daily.values()], participants,
       note: "Las visitas se registran únicamente con consentimiento de analítica. Las llegadas QR se identifican con utm_source=qr.",
     });
   } catch (error) {
