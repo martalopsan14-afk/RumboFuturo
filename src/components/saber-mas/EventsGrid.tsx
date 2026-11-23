@@ -9,6 +9,7 @@ import { Section } from '@/components/ui/Section';
 
 
 function EventSignupForm() {
+  const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'duplicate' | 'error'>('idle');
@@ -30,9 +31,16 @@ function EventSignupForm() {
   };
 
   return (
-    <div className="mt-5 rounded-2xl border border-ink/10 bg-white p-5">
-      <h4 className="font-sans text-base font-bold text-ink">Inscripción abierta</h4>
-      <p className="mt-1 text-sm leading-relaxed text-graphite">Déjanos tu correo para registrar tu interés en asistir a la VIII edición Sinercom y Networking, organizada por LABPROCOM.</p>
+    <div className="mt-5">
+      <button type="button" aria-expanded={isOpen} aria-controls="sinercom-signup-panel" onClick={() => setIsOpen(open => !open)} className="flex w-full items-center justify-between gap-4 rounded-2xl border border-coral/40 bg-white px-5 py-4 text-left shadow-sm transition hover:border-coral hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral">
+        <span className="flex flex-col gap-1">
+          <span className="font-sans text-base font-semibold text-ink">Inscripción abierta</span>
+          <span className="text-xs text-graphite-soft">{isOpen ? 'Cierra el formulario' : 'Pulsa para reservar tu plaza'}</span>
+        </span>
+        <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-coral/15 font-sans text-xl font-medium text-ink">{isOpen ? '−' : '+'}</span>
+      </button>
+      {isOpen && <div id="sinercom-signup-panel" className="mt-3 rounded-2xl border border-ink/10 bg-white p-5 shadow-sm">
+      <p className="text-sm leading-relaxed text-graphite">Déjanos tu correo para registrar tu interés en asistir a la VIII edición Sinercom y Networking, organizada por LabProCom.</p>
       <form onSubmit={submit} className="mt-4 flex flex-col gap-3">
         <label htmlFor="sinercom-email" className="font-sans text-sm font-semibold text-ink">Correo electrónico</label>
         <input id="sinercom-email" type="email" required autoComplete="email" value={email} onChange={e => { setEmail(e.target.value); setStatus('idle'); }} placeholder="tu@correo.com" className="w-full rounded-xl border border-ink/20 bg-white px-4 py-3 text-sm text-graphite focus:border-ink focus:outline-none focus:ring-2 focus:ring-coral" />
@@ -47,6 +55,7 @@ function EventSignupForm() {
         {status === 'duplicate' && <p role="status" className="text-sm text-graphite">Este correo ya está inscrito en el evento.</p>}
         {status === 'error' && <p role="alert" className="text-sm text-coral">No se ha podido guardar la inscripción. Inténtalo de nuevo.</p>}
       </form>
+      </div>}
     </div>
   );
 }
