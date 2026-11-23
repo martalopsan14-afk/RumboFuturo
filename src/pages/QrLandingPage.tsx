@@ -145,13 +145,13 @@ export function QrLandingPage() {
           <p className="font-editorial text-xl italic text-coral">¿Quieres conocer el proyecto en profundidad?</p>
           <h2 className="font-sans text-2xl font-extrabold text-ink sm:text-3xl">Descubre todo lo que ofrece Rumbo Futuro.</h2>
           <p className="max-w-2xl leading-relaxed text-graphite">En nuestra web encontrarás más información sobre el proyecto, las áreas de trabajo, la formación y las personas que lo hacen posible.</p>
-          <a href="#/" className="mt-2 inline-flex items-center gap-3 rounded-full bg-ink px-7 py-4 font-sans text-sm font-bold text-ivory transition hover:bg-coral hover:text-ink">
+          <a href="https://rumbo-futuro-corpora-8ae8.bolt.host" className="mt-2 inline-flex items-center gap-3 rounded-full bg-ink px-7 py-4 font-sans text-sm font-bold text-ivory transition hover:bg-coral hover:text-ink">
             Visitar la web de Rumbo Futuro <ArrowUpRight className="h-4 w-4" />
           </a>
         </div>
       </section>
 
-      <footer className="bg-ink px-5 py-8 text-center text-sm text-ivory/70">© {new Date().getFullYear()} Rumbo Futuro. Tu talento, tu puerta al mundo. <span className="mx-2 text-coral">·</span><a href="#/" className="font-semibold text-ivory underline underline-offset-4 hover:text-coral">Ir a la web principal</a></footer>
+      <footer className="bg-ink px-5 py-8 text-center text-sm text-ivory/70">© {new Date().getFullYear()} Rumbo Futuro. Tu talento, tu puerta al mundo. <span className="mx-2 text-coral">·</span><a href="https://rumbo-futuro-corpora-8ae8.bolt.host" className="font-semibold text-ivory underline underline-offset-4 hover:text-coral">Ir a la web principal</a></footer>
 
       {consent === null && <div className="fixed inset-x-0 bottom-0 z-50 border-t border-ink/15 bg-white p-4 shadow-2xl sm:p-5"><div className="mx-auto flex max-w-6xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"><p className="max-w-3xl text-sm leading-relaxed text-graphite">Podemos utilizar analítica propia y anónima para medir las visitas a esta página y las inscripciones. La medición utiliza identificadores seudónimos y solo se activa si la aceptas.</p><div className="flex shrink-0 gap-2"><button onClick={() => chooseConsent('rejected')} className="rounded-full border border-ink/20 px-4 py-2 font-sans text-xs font-semibold text-ink">Rechazar</button><button onClick={() => chooseConsent('accepted')} className="rounded-full bg-coral px-4 py-2 font-sans text-xs font-semibold text-ink">Aceptar analítica</button></div></div></div>}
     </main>
