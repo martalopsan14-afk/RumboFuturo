@@ -31,8 +31,11 @@ export async function trackQrEvent(eventType: QrEventType): Promise<void> {
     const source = params.get('utm_source') || params.get('source') || 'direct';
     const campaign = source === 'qr' ? 'rumbo_futuro' : null;
     await supabase.from('qr_events').insert({
-      visitor_id: getVisitorId(), session_id: getId(SESSION_KEY),
-      event_type: eventType, source: source.slice(0, 80), campaign_id: campaign,
+      visitor_id: getVisitorId(),
+      session_id: getId(SESSION_KEY),
+      event_type: eventType,
+      source: source.slice(0, 80),
+      campaign_id: campaign,
     });
   } catch {
     // Analytics failures must never block a registration or page render.
@@ -55,19 +58,34 @@ export interface QrAnalytics {
 }
 
 export async function getQrAnalytics(token: string, range: '7d' | '30d' | '90d' | 'all' = '30d'): Promise<QrAnalytics> {
-  const baseUrl = import.meta.env.VITE_SUPABASE_URL;
-  if (!baseUrl) throw new Error('Falta VITE_SUPABASE_URL en la configuración de la aplicación.');
-  let response: Response;
-  try {
-    response = await fetch(`${baseUrl}/functions/v1/admin-auth?action=analytics&range=${encodeURIComponent(range)}`, {
+  // Reuse the application's configured Supabase client so the project URL,
+  // public API key and standard request handling stay consistent everywhere.
+  const { data, error } = await supabase.functions.invoke<QrAnalytics>(
+    `admin-analytics?range=${encodeURIComponent(range)}`,
+    {
       method: 'GET',
-      headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' },
-    });
-  } catch (error) {
-    const detail = error instanceof Error ? error.message : String(error);
-    throw new Error(`No se pudo conectar con el servicio de administración de Supabase: ${detail}`);
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  if (error) {
+    const context = (error as { context?: unknown }).context;
+    if (context instanceof Response) {
+      const body = await context.clone().json().catch(() => null) as { error?: string } | null;
+      if (body?.error) throw new Error(body.error);
+      throw new Error(`Supabase respondió con HTTP ${context.status}: ${context.statusText || error.message}`);
+    }
+
+    // Keep the underlying SDK message visible: it distinguishes CORS,
+    // DNS/network failures and other fetch-level errors.
+    throw new Error(`No se pudo completar la petición a Supabase: ${error.message}`);
   }
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(data.error || `Error al cargar las estadísticas (HTTP ${response.status})`);
-  return data as QrAnalytics;
+
+  if (!data) {
+    throw new Error('Supabase no devolvió datos de analítica.');
+  }
+
+  return data;
 }
