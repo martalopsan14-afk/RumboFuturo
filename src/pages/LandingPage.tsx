@@ -77,6 +77,20 @@ export function LandingPage() {
         </div>
       </section>
 
+      <section aria-label="Identidad de Rumbo Futuro" className="bg-ivory px-5 py-12 sm:px-8 sm:py-16">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-5 text-center">
+          <p className="font-sans text-xs font-bold uppercase tracking-[0.2em] text-coral">Rumbo Futuro</p>
+          <img
+            src="/Logo_normal.jpeg"
+            alt="Logotipo completo de Rumbo Futuro"
+            className="h-auto w-full max-w-[min(560px,90vw)] object-contain"
+          />
+          <p className="max-w-xl text-base leading-relaxed text-graphite-soft">
+            Talento, periodismo y oportunidades para construir el futuro de la comunicación.
+          </p>
+        </div>
+      </section>
+
       <section id="registro" className="bg-ivory-deep px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
