@@ -20,13 +20,13 @@ export const EVENT_STATUS_LABELS: Record<EventStatus, string> = {
 
 export const EVENTS: EventItem[] = [
   {
-    id: 'sinercom-viii',
+    id: 'networking-labprocom',
     title: 'VIII edición Sinercom y Networking',
     description:
-      'Un encuentro organizado por LabProCom que conecta a futuros profesionales con los impulsores de 52 productos y servicios creativos e innovadores. Una sesión de networking dinámico para compartir ideas, fomentar la colaboración, establecer contactos estratégicos y abrir nuevas oportunidades para que los proyectos universitarios lleguen al mundo profesional.',
+      'Sinercom se concibe como una sesión de networking dinámico, pensada para fomentar la colaboración, el intercambio de ideas y la visibilidad de los proyectos emergentes.',
     details:
-      'La VIII edición de Sinercom reúne 52 propuestas creativas e innovadoras desarrolladas por futuros profesionales de la Facultad de Comunicación. El encuentro busca que sus impulsores compartan experiencias, den visibilidad a sus proyectos y creen sinergias con otros agentes del ámbito profesional. La actividad forma parte del trabajo de LabProCom para conectar la universidad con el tejido social y profesional.',
-    date: '24 de noviembre de 2026 · 12:00 h',
+      'La VIII edición Sinercom y Networking es un encuentro para conectar proyectos, compartir ideas y generar nuevas oportunidades de colaboración. La sesión busca dar visibilidad a iniciativas emergentes y facilitar el contacto entre sus participantes. Puedes ampliar la información en las publicaciones de LabProCom enlazadas a continuación.',
+    date: '24 de noviembre · 12:00 h',
     place: 'Facultad de Comunicación (FCom), Universidad de Sevilla',
     status: 'proximamente',
     image: '/sabermaseventos/labprocom.png',
@@ -42,18 +42,6 @@ export const EVENTS: EventItem[] = [
     place: null,
     status: 'en_preparacion',
     image: '/sabermaseventos/Facultad%20de%20comunicación.jpeg',
-  },
-  {
-    id: 'networking-labprocom',
-    title: 'Networking de LabProCom',
-    description:
-      'Queremos impulsar encuentros que permitan conectar a jóvenes periodistas con personas del ámbito académico y profesional, compartir experiencias y descubrir nuevas posibilidades de colaboración.',
-    details:
-      'Un espacio informal para conversar con investigadores y profesionales de la comunicación. No hay fecha confirmada todavía.',
-    date: null,
-    place: null,
-    status: 'proximamente',
-    image: '/sabermaseventos/labprocom.png',
   },
   {
     id: 'consejo-periodistas',
