@@ -10,10 +10,6 @@ export interface NewsItem {
   link?: string | null;
 }
 
-// Enlace al nuevo compendio que has subido a GitHub.
-const NEWS_SOURCE =
-  '/Compendio_de_Noticias_de_Rumbo_Futuro.pdf';
-
 const NEWS_IMAGES = 'noticias/';
 
 export const NEWS_ITEMS: NewsItem[] = [
@@ -25,7 +21,7 @@ export const NEWS_ITEMS: NewsItem[] = [
     body: 'La convocatoria contempla categorías de Ciencia, Cultura, Deporte, Empresa y Acción Social. Las candidaturas pueden presentarse hasta el 15 de noviembre y los galardones recibirán una dotación económica de 6.000 euros brutos.',
     date: '2026-11-01',
     image: `${NEWS_IMAGES}noticia%20enrique%201.jpeg`,
-    link: NEWS_SOURCE,
+    link: '/noticias_rumbo_futuro_v3_Noticia_1_Premios_Andaluces_del_Futuro.pdf',
   },
   {
     id: 'premio-transfiere',
@@ -35,7 +31,7 @@ export const NEWS_ITEMS: NewsItem[] = [
     body: 'El certamen contempla varias categorías y busca reconocer la labor de profesionales de la información en la difusión de la innovación tecnológica desarrollada en España y su convergencia internacional.',
     date: '2026-11-02',
     image: `${NEWS_IMAGES}noticia%20enrique%202.jpeg`,
-    link: NEWS_SOURCE,
+    link: '/noticias_rumbo_futuro_v3_Noticia_2_Premio_Periodismo_Transfiere.pdf',
   },
   {
     id: 'premios-api',
@@ -45,7 +41,7 @@ export const NEWS_ITEMS: NewsItem[] = [
     body: 'Los trabajos premiados abordan los desplazamientos de mujeres europeas y las edificaciones ilegales en espacios naturales protegidos, con investigaciones basadas en datos y documentación.',
     date: '2026-11-03',
     image: `${NEWS_IMAGES}noticia%20mariela%201.jpeg`,
-    link: NEWS_SOURCE,
+    link: '/noticias_rumbo_futuro_v3_Noticia_3_Premios_API.pdf',
   },
   {
     id: 'apm-primer-empleo',
@@ -55,7 +51,7 @@ export const NEWS_ITEMS: NewsItem[] = [
     body: 'La iniciativa ofrece un puesto de trabajo en distintos medios de comunicación a jóvenes periodistas seleccionados entre las candidaturas presentadas.',
     date: '2026-11-04',
     image: `${NEWS_IMAGES}noticia%20laura%202.jpeg`,
-    link: NEWS_SOURCE,
+    link: '/noticias_rumbo_futuro_v3_Noticia_4_Programa_Primer_Empleo_APM-v2.pdf',
   },
   {
     id: 'foros-fape',
@@ -65,7 +61,7 @@ export const NEWS_ITEMS: NewsItem[] = [
     body: 'La jornada celebrada en el Campus de Castellana de la Universidad Camilo José Cela abordó las distintas posibilidades laborales que ofrece actualmente el periodismo y la comunicación.',
     date: '2026-11-05',
     image: `${NEWS_IMAGES}noticia%201%20adri.jpeg`,
-    link: NEWS_SOURCE,
+    link: '/noticias_rumbo_futuro_v3_Noticia_5_Foros_FAPE.pdf',
   },
   {
     id: 'frontiers-ciencia-sociedad',
@@ -75,7 +71,7 @@ export const NEWS_ITEMS: NewsItem[] = [
     body: 'El proyecto facilita estancias y acciones formativas para que periodistas e instituciones de investigación conozcan mejor sus formas de trabajo y refuercen la comunicación científica.',
     date: '2026-11-06',
     image: `${NEWS_IMAGES}noticia%202%20adri.jpeg`,
-    link: NEWS_SOURCE,
+    link: '/noticias_rumbo_futuro_v3_Noticia_6_Frontiers_Ciencia.pdf',
   },
   {
     id: 'rtve-instituto-ue',
@@ -85,7 +81,7 @@ export const NEWS_ITEMS: NewsItem[] = [
     body: 'La iniciativa reúne a profesionales y especialistas para profundizar en el funcionamiento del Parlamento, la Comisión y el Consejo, así como en la verificación de imágenes y la lucha contra la desinformación.',
     date: '2026-11-07',
     image: `${NEWS_IMAGES}Noticia%20laura%201.jpeg`,
-    link: NEWS_SOURCE,
+    link: '/noticias_rumbo_futuro_v3_Noticia_7_RTVE_Instituto_UE.pdf',
   },
   {
     id: 'antena-de-oro-2026',
@@ -101,6 +97,6 @@ La alianza supone un nuevo impulso para FARTVE, presidida por Juan Ignacio Ocañ
 Las Antenas de Oro, que cuentan con 75 años de historia, reconocen anualmente la trayectoria y el trabajo de destacados profesionales de la radio, la televisión y otros ámbitos de la comunicación.`,
     date: '2026-11-08',
     image: `${NEWS_IMAGES}Noticia%203%20Laura.png`,
-    link: NEWS_SOURCE,
+    link: '/noticias_rumbo_futuro_v3_Noticia_8_Premios_Antena_de_Oro.pdf',
   },
 ];
