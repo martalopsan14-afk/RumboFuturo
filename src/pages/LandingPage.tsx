@@ -208,15 +208,15 @@ export function LandingPage() {
           <p className="mt-3 text-base leading-relaxed text-graphite-soft">
             Entra en nuestra web y descubre mejor el proyecto, lo que hacemos y cómo puedes formar parte.
           </p>
-          <a href="#/inicio" className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-coral px-7 py-3 font-sans text-sm font-bold text-ink transition hover:bg-ink hover:text-ivory">
+          <a href="https://rumbo-futuro-corpora-8ae8.bolt.host" target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-coral px-7 py-3 font-sans text-sm font-bold text-ink transition hover:bg-ink hover:text-ivory">
             Visita nuestra web <ArrowRight className="h-4 w-4" />
           </a>
         </div>
         <div className="mt-10 border-t border-ink/10 pt-7">
           <p className="font-sans text-sm font-bold text-ink">También estamos en redes</p>
           <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm font-semibold text-ink">
-            <span>Instagram: @rumbofuturoo</span>
-            <span>TikTok: @rumbofuturoo</span>
+            <a href="https://www.instagram.com/rumbofuturoo?dlrf=MWZ5emxqdm05OTg3Zw==" target="_blank" rel="noopener noreferrer" className="hover:text-coral">Instagram: @rumbofuturoo</a>
+            <a href="https://www.tiktok.com/@rumbofuturoo" target="_blank" rel="noopener noreferrer" className="hover:text-coral">TikTok: @rumbofuturoo</a>
             <a href="mailto:Rumbofuturoo@gmail.com" className="hover:text-coral">Rumbofuturoo@gmail.com</a>
           </div>
           <p className="mt-8 text-xs text-graphite-soft">© {new Date().getFullYear()} Rumbo Futuro</p>
