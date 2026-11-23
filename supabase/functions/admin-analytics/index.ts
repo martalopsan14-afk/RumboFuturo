@@ -37,6 +37,9 @@ Deno.serve(async req => {
   const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   if (!url || !serviceKey) return response({ error: "Configuración de Supabase incompleta" }, 500);
   const supabase = createClient(url, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } });
+  const range = new URL(req.url).searchParams.get('range') ?? '30d';
+  const days = range === '7d' ? 7 : range === '90d' ? 90 : range === 'all' ? null : 30;
+  const cutoff = days === null ? null : new Date(Date.now() - days * 24 * 60 * 60 * 1000);
   try {
     const [{ data: events, error: eventsError }, { data: signups, error: signupsError }] = await Promise.all([
       supabase.from("qr_events").select("id,visitor_id,session_id,event_type,source,created_at").order("created_at", { ascending: true }).limit(20000),
@@ -45,10 +48,12 @@ Deno.serve(async req => {
     if (eventsError) throw eventsError;
     if (signupsError) throw signupsError;
     const allEvents = events ?? [];
-    const pageViews = allEvents.filter((event: any) => ["page_view", "landing_view"].includes(event.event_type));
+    const allPageViews = allEvents.filter((event: any) => ["page_view", "landing_view"].includes(event.event_type));
+    const pageViews = allPageViews.filter((event: any) => !cutoff || new Date(event.created_at) >= cutoff);
     const qrViews = pageViews.filter((event: any) => (event.source ?? "").toLowerCase() === "qr");
     const qrSessions = new Set(qrViews.map((event: any) => event.session_id).filter(Boolean));
-    const registrations = (signups ?? []).filter((signup: any) => signup.interest_type === "qr_landing");
+    const allRegistrations = (signups ?? []).filter((signup: any) => signup.interest_type === "qr_landing");
+    const registrations = allRegistrations.filter((signup: any) => !cutoff || new Date(signup.created_at) >= cutoff);
     const daily = new Map<string, { day: string; visits: number; registrations: number }>();
     const start = new Date(); start.setDate(start.getDate() - 29); start.setHours(0, 0, 0, 0);
     for (let i = 0; i < 30; i++) {
@@ -56,7 +61,7 @@ Deno.serve(async req => {
       const day = date.toISOString().slice(0, 10);
       daily.set(day, { day, visits: 0, registrations: 0 });
     }
-    for (const event of pageViews) {
+    for (const event of allPageViews) {
       const row = daily.get(new Date(event.created_at).toISOString().slice(0, 10));
       if (row) row.visits++;
     }
@@ -76,9 +81,9 @@ Deno.serve(async req => {
       qrUniqueVisitors: new Set(qrViews.map((event: any) => event.visitor_id).filter(Boolean)).size,
       qrUniqueSessions: qrSessions.size,
       registrations: registrations.length,
-      participantCount: participants.length,
+      participantCount: registrations.length,
       conversionRate: qrSessions.size ? Number(((registrations.length / qrSessions.size) * 100).toFixed(2)) : 0,
-      daily: [...daily.values()], participants,
+      daily: [...daily.values()].slice(-30), participants,
       note: "Las visitas se registran únicamente con consentimiento de analítica. Las llegadas QR se identifican con utm_source=qr.",
     });
   } catch (error) {
