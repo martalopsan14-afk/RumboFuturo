@@ -17,7 +17,7 @@ export function QrLandingPage() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'duplicate' | 'error'>('idle');
 
   useEffect(() => {
-    if (consent === 'accepted') void trackQrEvent('page_view');
+    if (consent === 'accepted') void trackQrEvent('page_view', 'qr');
   }, [consent]);
 
   const chooseConsent = (value: 'accepted' | 'rejected') => {
@@ -31,7 +31,7 @@ export function QrLandingPage() {
     if (!privacyAccepted) { setStatus('error'); return; }
     const result = await saveInterest(email, 'qr_landing', 'qr', new Date().toISOString());
     if (result === 'saved') {
-      if (consent === 'accepted') void trackQrEvent('registration');
+      if (consent === 'accepted') void trackQrEvent('registration', 'qr');
       setStatus('success');
       setEmail('');
     } else {
