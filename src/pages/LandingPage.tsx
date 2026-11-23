@@ -23,7 +23,7 @@ export function LandingPage() {
   });
 
   useEffect(() => {
-    if (analyticsConsent === 'accepted') void trackQrEvent('page_view');
+    if (analyticsConsent === 'accepted') void trackQrEvent('page_view', getSignupSource());
   }, [analyticsConsent]);
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
@@ -32,7 +32,7 @@ export function LandingPage() {
     setStatus('sending');
     const result = await saveInterest(email, 'subscription_news', getSignupSource(), new Date().toISOString());
     if (result === 'saved') {
-      if (analyticsConsent === 'accepted') void trackQrEvent('registration');
+      if (analyticsConsent === 'accepted') void trackQrEvent('registration', getSignupSource());
       setStatus('success');
       setEmail('');
     } else {
