@@ -53,18 +53,20 @@ export function QrLandingPage() {
       <section className="relative overflow-hidden bg-ink text-ivory">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="flex flex-col gap-7">
-            <p className="font-editorial text-2xl italic text-coral sm:text-3xl">El siguiente paso empieza aquí</p>
-            <h1 className="font-sans text-4xl font-extrabold leading-tight text-ivory sm:text-5xl lg:text-6xl">Tu futuro en el periodismo no tiene por qué esperar.</h1>
-            <p className="max-w-2xl text-lg leading-relaxed text-ivory/85">Rumbo Futuro conecta a periodistas emergentes con investigadores, expertos y profesionales de la comunicación. Queremos acercarte a la formación práctica, el conocimiento especializado y las oportunidades que impulsan tu carrera.</p>
+            <p className="font-editorial text-2xl italic text-coral sm:text-3xl">El reto que queremos resolver</p>
+            <h1 className="font-sans text-4xl font-extrabold leading-tight text-ivory sm:text-5xl lg:text-6xl">Conectamos el talento periodístico con el conocimiento que merece llegar más lejos.</h1>
+            <p className="max-w-2xl text-lg leading-relaxed text-ivory/85">¿Sabías que muchos periodistas recién graduados tienen dificultades para encontrar trabajo por falta de experiencia práctica, mientras que muchos investigadores de la comunicación generan conocimiento especializado que nunca llega al gran público?</p>
             <a href="#inscripcion" className="inline-flex w-fit items-center gap-3 rounded-full bg-coral px-7 py-4 font-sans text-sm font-bold text-ink transition hover:bg-ivory">
               Quiero dar el siguiente paso <ArrowRight className="h-4 w-4" />
             </a>
           </div>
           <aside className="rounded-[2rem] border border-ivory/20 bg-ivory/5 p-7 shadow-xl sm:p-9">
             <p className="mb-4 font-sans text-xs font-bold uppercase tracking-[0.2em] text-coral">Nuestra propuesta de valor</p>
-            <p className="font-editorial text-2xl italic leading-snug text-ivory sm:text-3xl">Ofrecemos formación práctica y flexible que conecta a periodistas emergentes con investigadores, expertos y profesionales de la comunicación, a un precio competitivo.</p>
+            <p className="font-editorial text-2xl italic leading-snug text-ivory sm:text-3xl">Somos RUMBO FUTURO, la plataforma que conecta ambos mundos.</p>
             <div className="mt-7 h-px bg-ivory/20" />
-            <p className="mt-6 text-base leading-relaxed text-ivory/85">Unimos aprendizaje aplicado, conocimiento especializado y contacto con el entorno profesional para que el talento joven pueda desarrollar sus capacidades y acercarse al mundo laboral.</p>
+            <p className="text-base leading-relaxed text-ivory/85">A través de encuentros, charlas y cursos prácticos a precios competitivos, conectamos a periodistas emergentes con investigadores y profesionales de la comunicación para que colaboren en trabajos reales.</p>
+            <p className="mt-4 text-base leading-relaxed text-ivory/85">Los periodistas ganan experiencia y oportunidades para acercarse al mundo laboral. Los investigadores y profesionales descubren nuevos talentos que colaboran en sus proyectos, y nuestros medios asociados reciben contenido riguroso y listo para publicar.</p>
+            <p className="mt-4 text-sm leading-relaxed text-ivory/70"><strong className="text-coral">Nuestro modelo:</strong> suscripciones accesibles para periodistas, acuerdos con organizaciones y cuotas de colaboración de los medios de comunicación que publican el trabajo conjunto.</p>
           </aside>
         </div>
       </section>
