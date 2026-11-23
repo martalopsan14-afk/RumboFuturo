@@ -22,7 +22,6 @@ export function QrLandingPage() {
   const chooseConsent = (value: 'accepted' | 'rejected') => {
     setConsent(value);
     try { localStorage.setItem(CONSENT_KEY, value); } catch { /* storage may be unavailable */ }
-    if (value === 'accepted') void trackQrEvent('page_view');
   };
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {

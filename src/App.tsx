@@ -26,28 +26,23 @@ const PAGE_COMPONENTS: Record<PageId, ComponentType> = {
 export default function App() {
   const route = useHashRoute();
 
-  // Admin route: render standalone, no public header/footer
-  if (route.type === 'admin') {
-    return <AdminPage />;
-  }
-
-  const PageComponent = PAGE_COMPONENTS[route.page];
-
   useEffect(() => {
+    if (route.type !== 'page') return;
     if (!route.anchor) {
       window.scrollTo({ top: 0, behavior: 'auto' });
       return;
     }
-    const target = document.getElementById(route.anchor);
-    target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, [route.page, route.anchor]);
+    document.getElementById(route.anchor)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [route]);
 
+  if (route.type === 'admin') return <AdminPage />;
+  if (route.type === 'qr') return <QrLandingPage />;
+
+  const PageComponent = PAGE_COMPONENTS[route.page];
   return (
     <div className="flex min-h-screen flex-col bg-ivory font-body text-graphite">
       <SiteHeader activePage={route.page} />
-      <main className="flex-1">
-        <PageComponent />
-      </main>
+      <main className="flex-1"><PageComponent /></main>
       <SiteFooter />
     </div>
   );

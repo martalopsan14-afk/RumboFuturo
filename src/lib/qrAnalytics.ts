@@ -25,6 +25,8 @@ function getVisitorId(): string {
 export async function trackQrEvent(eventType: QrEventType): Promise<void> {
   try {
     if (localStorage.getItem('rumbo_qr_analytics_consent') !== 'accepted') return;
+    if (eventType === 'page_view' && sessionStorage.getItem('rumbo_qr_page_viewed') === '1') return;
+    if (eventType === 'page_view') sessionStorage.setItem('rumbo_qr_page_viewed', '1');
     const params = new URLSearchParams(window.location.search);
     const source = params.get('utm_source') || params.get('source') || 'qr';
     await supabase.from('qr_events').insert({
