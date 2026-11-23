@@ -5,20 +5,14 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "GET, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Client-Info, Apikey",
 };
-
 function response(body: unknown, status = 200) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: { ...corsHeaders, "Content-Type": "application/json" },
-  });
+  return new Response(JSON.stringify(body), { status, headers: { ...corsHeaders, "Content-Type": "application/json" } });
 }
-
 function decodeBase64Url(value: string): Uint8Array {
   const base64 = value.replace(/-/g, "+").replace(/_/g, "/");
-  const binary = atob(base64 + "=".repeat((4 - base64.length % 4) % 4));
-  return Uint8Array.from(binary, char => char.charCodeAt(0));
+  const padded = base64 + "=".repeat((4 - base64.length % 4) % 4);
+  return Uint8Array.from(atob(padded), c => c.charCodeAt(0));
 }
-
 async function verifyAdminToken(token: string): Promise<boolean> {
   try {
     const secret = Deno.env.get("RUMBO_JWT_SECRET");
@@ -32,23 +26,63 @@ async function verifyAdminToken(token: string): Promise<boolean> {
     if (typeof payload.exp !== "number" || Date.now() >= payload.exp * 1000) return false;
     const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["verify"]);
     return await crypto.subtle.verify("HMAC", key, decodeBase64Url(parts[2]), new TextEncoder().encode(parts[0] + "." + parts[1]));
-  } catch {
-    return false;
-  }
+  } catch { return false; }
 }
-
 Deno.serve(async req => {
-  if (req.method === "OPTIONS") return new Response(null, { status: 200, headers: corsHeaders });
+  if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders });
   if (req.method !== "GET") return response({ error: "Método no permitido" }, 405);
-  const match = req.headers.get("Authorization")?.match(/^Bearer\s+(.+)$/i);
+  const match = req.headers.get("Authorization")?.match(/^Bearer\\s+(.+)$/i);
   if (!match || !(await verifyAdminToken(match[1]))) return response({ error: "No autorizado" }, 401);
-
   const url = Deno.env.get("SUPABASE_URL");
-  const key = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-  if (!url || !key) return response({ error: "Configuración de Supabase incompleta" }, 500);
-
-  const supabase = createClient(url, key);
-  const { data, error } = await supabase.rpc("get_qr_analytics");
-  if (error) return response({ error: "No se han podido consultar las analíticas" }, 500);
-  return response(data);
+  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  if (!url || !serviceKey) return response({ error: "Configuración de Supabase incompleta" }, 500);
+  const supabase = createClient(url, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } });
+  try {
+    const [{ data: events, error: eventsError }, { data: signups, error: signupsError }] = await Promise.all([
+      supabase.from("qr_events").select("id,visitor_id,session_id,event_type,source,created_at").order("created_at", { ascending: true }).limit(20000),
+      supabase.from("interest_signups").select("id,email,interest_type,source,created_at").order("created_at", { ascending: false }).limit(10000),
+    ]);
+    if (eventsError) throw eventsError;
+    if (signupsError) throw signupsError;
+    const allEvents = events ?? [];
+    const pageViews = allEvents.filter((event: any) => ["page_view", "landing_view"].includes(event.event_type));
+    const qrViews = pageViews.filter((event: any) => (event.source ?? "").toLowerCase() === "qr");
+    const qrSessions = new Set(qrViews.map((event: any) => event.session_id).filter(Boolean));
+    const registrations = (signups ?? []).filter((signup: any) => signup.interest_type === "qr_landing");
+    const daily = new Map<string, { day: string; visits: number; registrations: number }>();
+    const start = new Date(); start.setDate(start.getDate() - 29); start.setHours(0, 0, 0, 0);
+    for (let i = 0; i < 30; i++) {
+      const date = new Date(start); date.setDate(start.getDate() + i);
+      const day = date.toISOString().slice(0, 10);
+      daily.set(day, { day, visits: 0, registrations: 0 });
+    }
+    for (const event of pageViews) {
+      const row = daily.get(new Date(event.created_at).toISOString().slice(0, 10));
+      if (row) row.visits++;
+    }
+    for (const signup of registrations) {
+      const row = daily.get(new Date(signup.created_at).toISOString().slice(0, 10));
+      if (row) row.registrations++;
+    }
+    const participants = registrations.map((signup: any) => ({
+      id: signup.id, email: signup.email, created_at: signup.created_at,
+      source: signup.source === "qr" ? "QR" : (signup.source ?? "Web"), status: "Registrado",
+    }));
+    return response({
+      totalVisits: pageViews.length,
+      qrVisits: qrViews.length,
+      uniqueVisitors: new Set(pageViews.map((event: any) => event.visitor_id).filter(Boolean)).size,
+      uniqueSessions: new Set(pageViews.map((event: any) => event.session_id).filter(Boolean)).size,
+      qrUniqueVisitors: new Set(qrViews.map((event: any) => event.visitor_id).filter(Boolean)).size,
+      qrUniqueSessions: qrSessions.size,
+      registrations: registrations.length,
+      participantCount: participants.length,
+      conversionRate: qrSessions.size ? Number(((registrations.length / qrSessions.size) * 100).toFixed(2)) : 0,
+      daily: [...daily.values()], participants,
+      note: "Las visitas se registran únicamente con consentimiento de analítica. Las llegadas QR se identifican con utm_source=qr.",
+    });
+  } catch (error) {
+    console.error("admin-analytics", error);
+    return response({ error: "No se han podido cargar las estadísticas y participantes" }, 500);
+  }
 });
