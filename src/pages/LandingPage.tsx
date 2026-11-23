@@ -23,7 +23,7 @@ export function LandingPage() {
   return (
     <main className="flex min-h-screen flex-col bg-ivory text-graphite">
       <header className="mx-auto flex w-full max-w-5xl items-center justify-center px-6 py-8">
-        <img src="/Logo_normal.jpeg" alt="Rumbo Futuro" className="h-20 w-auto max-w-[260px] object-contain" />
+        <img src="/Logo_mini.jpeg" alt="Rumbo Futuro" className="h-20 w-auto max-w-[260px] object-contain" />
       </header>
 
       <section className="flex flex-1 items-center justify-center bg-ink px-6 py-14 text-ivory sm:py-20">
