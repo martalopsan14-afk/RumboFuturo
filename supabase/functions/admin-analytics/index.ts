@@ -69,7 +69,7 @@ Deno.serve(async req => {
     const allRegistrations = allSignups.filter((signup: any) => (signup.source ?? "").toLowerCase() === "qr");
     const registrations = allRegistrations.filter((signup: any) => !cutoff || new Date(signup.created_at) >= cutoff);
     const periodSignups = allSignups.filter((signup: any) => !cutoff || new Date(signup.created_at) >= cutoff);
-    const websiteRegistrations = periodSignups.filter((signup: any) => (signup.source ?? "website").toLowerCase() !== "qr");
+    const websiteRegistrations = periodSignups.filter((signup: any) => signup.interest_type !== "qr_landing");
     const landingPageRegistrations = periodSignups.filter((signup: any) => signup.interest_type === "qr_landing");
     const daily = new Map<string, { day: string; visits: number; registrations: number }>();
     const chartDays = days ?? 30;
