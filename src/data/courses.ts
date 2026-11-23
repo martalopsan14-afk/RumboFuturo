@@ -18,7 +18,7 @@ export const ONLINE_MODALITY: ModalityData = {
   eyebrow: 'Modalidad online',
   title: 'Aprende desde cualquier lugar',
   description:
-    'Estamos preparando una nueva forma de aprender periodismo sin que la distancia sea un obstáculo. Muy pronto podrás acceder a una formación práctica diseñada para desarrollar tus competencias y acercarte al mundo profesional.',
+    'Diseñamos una propuesta para aprender periodismo sin que la distancia sea un obstáculo. Nuestra formación práctica se centra en desarrollar tus competencias y acercarte al mundo profesional. Actualmente preparamos los primeros cursos online.',
   highlights: [
     'Flexibilidad geográfica',
     'Aprendizaje online',
@@ -27,9 +27,9 @@ export const ONLINE_MODALITY: ModalityData = {
     'Próximos cursos mediante suscripción',
     'Posibilidad de acreditar competencias mediante microcredenciales, según las condiciones de cada curso',
   ],
-  statusTitle: 'Próximamente: nuestros cursos online',
+  statusTitle: 'Cursos online en preparación',
   statusText:
-    'Estamos creando nuestros primeros cursos. Muy pronto podrás descubrir los contenidos, las modalidades de suscripción y las opciones formativas.',
+    'Preparamos nuestros primeros cursos y definimos sus contenidos, las modalidades de suscripción y las opciones formativas.',
   interestType: 'online_course',
   ctaLabel: 'Quiero estar al tanto',
   formLabel: 'Recibe un aviso cuando publiquemos los cursos online',
@@ -51,7 +51,7 @@ export const IN_PERSON_MODALITY: ModalityData = {
   ],
   statusTitle: 'Próximamente: nuestra formación presencial',
   statusText:
-    'Estamos trabajando para ofrecer nuevas oportunidades de aprendizaje presencial. En breve anunciaremos más información sobre los cursos, sus contenidos y las condiciones de participación.',
+    'Preparamos nuevas oportunidades de aprendizaje presencial. Los cursos, sus contenidos y las condiciones de participación están en fase de definición.',
   interestType: 'in_person_course',
   ctaLabel: 'Avísame cuando esté disponible',
   formLabel: 'Te avisaremos cuando publiquemos la formación presencial',
@@ -90,13 +90,13 @@ export const COURSE_DRAFTS: CourseDraft[] = [
 }));
 
 export const SUBSCRIPTION_COPY = {
-  title: 'Estamos preparando algo para tu futuro',
+  title: 'Una formación pensada para tu futuro',
   description:
-    'Muy pronto podrás acceder a una formación pensada para ayudarte a desarrollar tus habilidades periodísticas, aprender de profesionales y construir tu camino hacia el mundo laboral.',
+    'Preparamos una formación que te ayuda a desarrollar tus habilidades periodísticas, aprender de profesionales y avanzar en tu camino hacia el mundo laboral.',
   access:
-    'La suscripción permitirá acceder a los cursos que se incorporen a la plataforma, según las condiciones de cada plan.',
+    'La suscripción da acceso a los cursos de la plataforma, según las condiciones de cada plan.',
   pricing:
-    'Los precios, las ventajas y las condiciones definitivas se anunciarán cuando estén aprobados.',
+    'Los precios, las ventajas y las condiciones definitivas están pendientes de aprobación.',
   planTitle: 'Tarjeta de suscripción en preparación',
   planBadge: 'Próximamente',
   formLabel: 'Recibe novedades sobre la suscripción y los próximos cursos',
