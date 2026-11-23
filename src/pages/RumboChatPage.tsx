@@ -112,7 +112,7 @@ export function RumboChatPage() {
       <PageHeader
         eyebrow="RumboChat"
         title="Encuentra tu próximo rumbo profesional"
-        description="¿No sabes qué especialidad periodística encaja contigo, qué formación elegir o con qué profesionales podrías colaborar? RumboChat te ayuda a encontrar la opción que mejor se adapta a tus intereses, tu perfil y tu disponibilidad."
+        description="¿No sabes qué especialidad periodística encaja contigo, qué formación elegir o con qué profesionales podrías colaborar? RumboChat te ayuda a identificar la opción que mejor se adapta a tus intereses, tu perfil y tu disponibilidad."
       />
 
       <Section>
@@ -404,7 +404,7 @@ function ResultModal({ result, onReset }: { result: AgentResponse; onReset: () =
               Gracias por completar el cuestionario de Rumbo Futuro.
             </p>
             <p className="mt-3">
-              Esperamos que esta orientación te haya resultado útil. Si quieres ampliar la información, resolver dudas o recibir asesoramiento personalizado, estaremos encantados de ayudarte.
+              Esperamos que esta orientación te haya resultado útil. Si quieres ampliar la información, resolver dudas o recibir asesoramiento personalizado, podemos ayudarte.
             </p>
             <p className="mt-4 font-sans font-semibold text-ink">
               ¿Quieres contactar con nuestro equipo?
