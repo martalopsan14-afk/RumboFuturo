@@ -44,7 +44,7 @@ export function SubscriptionContent() {
           interestType="subscription_news"
           label={SUBSCRIPTION_COPY.formLabel}
           submitLabel={SUBSCRIPTION_COPY.ctaLabel}
-          successMessage="Gracias. Te enviaremos la información cuando esté disponible."
+          successMessage="Gracias. Registramos tu interés en la suscripción y los próximos cursos."
         />
       </article>
     </div>
