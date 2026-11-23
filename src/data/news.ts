@@ -1,0 +1,102 @@
+
+export interface NewsItem {
+  id: string;
+  category: string;
+  title: string;
+  excerpt: string;
+  body: string;
+  date: string | null;
+  image: string | null;
+  link?: string | null;
+}
+
+const NEWS_IMAGES = 'noticias/';
+
+export const NEWS_ITEMS: NewsItem[] = [
+  {
+    id: 'premios-andaluces-futuro',
+    category: 'Economía',
+    title: 'CaixaBank y Grupo Joly convocan la XIX edición de Premios Andaluces del Futuro',
+    excerpt: 'Los Premios Andaluces del Futuro regresan con una nueva convocatoria para reconocer el talento joven andaluz.',
+    body: 'La convocatoria contempla categorías de Ciencia, Cultura, Deporte, Empresa y Acción Social. Las candidaturas pueden presentarse hasta el 15 de noviembre y los galardones recibirán una dotación económica de 6.000 euros brutos.',
+    date: '2026-11-01',
+    image: `${NEWS_IMAGES}noticia%20enrique%201.jpeg`,
+    link: '/noticias_rumbo_futuro_v3_Noticia_1_Premios_Andaluces_del_Futuro.pdf',
+  },
+  {
+    id: 'premio-transfiere',
+    category: 'Comunicación científica',
+    title: 'Transfiere convoca la XII edición de su Premio de Periodismo para reconocer la divulgación científica y tecnológica',
+    excerpt: 'El Foro Transfiere abre una nueva convocatoria para reconocer trabajos periodísticos sobre innovación y divulgación científica.',
+    body: 'El certamen contempla varias categorías y busca reconocer la labor de profesionales de la información en la difusión de la innovación tecnológica desarrollada en España y su convergencia internacional.',
+    date: '2026-11-02',
+    image: `${NEWS_IMAGES}noticia%20enrique%202.jpeg`,
+    link: '/noticias_rumbo_futuro_v3_Noticia_2_Premio_Periodismo_Transfiere.pdf',
+  },
+  {
+    id: 'premios-api',
+    category: 'Investigación',
+    title: 'Dos investigaciones europeas triunfan en los Premios API',
+    excerpt: 'Dos proyectos internacionales han sido reconocidos en la sexta edición de los premios de la Asociación de Periodistas de Investigación.',
+    body: 'Los trabajos premiados abordan los desplazamientos de mujeres europeas y las edificaciones ilegales en espacios naturales protegidos, con investigaciones basadas en datos y documentación.',
+    date: '2026-11-03',
+    image: `${NEWS_IMAGES}noticia%20mariela%201.jpeg`,
+    link: '/noticias_rumbo_futuro_v3_Noticia_3_Premios_API.pdf',
+  },
+  {
+    id: 'apm-primer-empleo',
+    category: 'Oportunidades profesionales',
+    title: 'La Asociación de Prensa de Madrid abre las puertas del mercado laboral a cinco jóvenes periodistas',
+    excerpt: 'Cinco periodistas emergentes han sido seleccionados para incorporarse a diferentes medios mediante el programa Primer Empleo.',
+    body: 'La iniciativa ofrece un puesto de trabajo en distintos medios de comunicación a jóvenes periodistas seleccionados entre las candidaturas presentadas.',
+    date: '2026-11-04',
+    image: `${NEWS_IMAGES}noticia%20laura%202.jpeg`,
+    link: '/noticias_rumbo_futuro_v3_Noticia_4_Programa_Primer_Empleo_APM-v2.pdf',
+  },
+  {
+    id: 'foros-fape',
+    category: 'Periodismo',
+    title: 'La FAPE reúne profesionales para analizar las nuevas oportunidades profesionales del periodismo',
+    excerpt: 'El ciclo FOROS FAPE reúne a profesionales para analizar la transformación del mercado laboral y las nuevas oportunidades del sector.',
+    body: 'La jornada celebrada en el Campus de Castellana de la Universidad Camilo José Cela abordó las distintas posibilidades laborales que ofrece actualmente el periodismo y la comunicación.',
+    date: '2026-11-05',
+    image: `${NEWS_IMAGES}noticia%201%20adri.jpeg`,
+    link: '/noticias_rumbo_futuro_v3_Noticia_5_Foros_FAPE.pdf',
+  },
+  {
+    id: 'frontiers-ciencia-sociedad',
+    category: 'Comunicación científica',
+    title: 'Frontiers, el espacio donde periodistas e investigadores comparten espacio para acercar la ciencia a la sociedad',
+    excerpt: 'Frontiers busca crear conexiones entre periodistas e investigadores para promover la cobertura de temas de investigación.',
+    body: 'El proyecto facilita estancias y acciones formativas para que periodistas e instituciones de investigación conozcan mejor sus formas de trabajo y refuercen la comunicación científica.',
+    date: '2026-11-06',
+    image: `${NEWS_IMAGES}noticia%202%20adri.jpeg`,
+    link: '/noticias_rumbo_futuro_v3_Noticia_6_Frontiers_Ciencia.pdf',
+  },
+  {
+    id: 'rtve-instituto-ue',
+    category: 'Formación',
+    title: 'RTVE Instituto lanza un programa de mejora de la cobertura informativa en la UE',
+    excerpt: 'Un programa formativo acerca la actualidad comunitaria a jóvenes periodistas y mejora sus competencias sobre las instituciones europeas.',
+    body: 'La iniciativa reúne a profesionales y especialistas para profundizar en el funcionamiento del Parlamento, la Comisión y el Consejo, así como en la verificación de imágenes y la lucha contra la desinformación.',
+    date: '2026-11-07',
+    image: `${NEWS_IMAGES}Noticia%20laura%201.jpeg`,
+    link: '/noticias_rumbo_futuro_v3_Noticia_7_RTVE_Instituto_UE.pdf',
+  },
+  {
+    id: 'antena-de-oro-2026',
+    category: 'Medios de comunicación',
+    title: 'Un acuerdo para impulsar la comunicación de los Premios Antena de Oro',
+    excerpt: 'La FARTVE y el grupo Prensa Ibérica firman un acuerdo de colaboración para impulsar la comunicación y promoción de los Premios Antena de Oro 2026.',
+    body: `La Federación de Asociaciones de Radio y Televisión de España (FARTVE) y el grupo Prensa Ibérica han firmado un acuerdo de colaboración para impulsar la comunicación y promoción de los Premios Antena de Oro 2026, cuya gala se celebrará el próximo mes de noviembre.
+
+El convenio contempla el desarrollo de campañas de difusión, acciones comerciales, acuerdos de patrocinio y distintas iniciativas para aumentar la visibilidad de estos prestigiosos galardones del panorama audiovisual español.
+
+La alianza supone un nuevo impulso para FARTVE, presidida por Juan Ignacio Ocaña, y permitirá aprovechar la experiencia y capacidad de difusión de Prensa Ibérica para reforzar el alcance de los premios.
+
+Las Antenas de Oro, que cuentan con 75 años de historia, reconocen anualmente la trayectoria y el trabajo de destacados profesionales de la radio, la televisión y otros ámbitos de la comunicación.`,
+    date: '2026-11-08',
+    image: `${NEWS_IMAGES}Noticia%203%20Laura.png`,
+    link: '/noticias_rumbo_futuro_v3_Noticia_8_Premios_Antena_de_Oro.pdf',
+  },
+];
