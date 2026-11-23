@@ -5,13 +5,13 @@ import type { NewsItem } from '@/data/news';
 export function NewsCard({ item }: { item: NewsItem }) {
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-ivory shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
-      <div className="aspect-[4/3] overflow-hidden">
+      <div className="flex aspect-[4/3] items-center justify-center overflow-hidden bg-ivory-deep">
         {item.image ? (
           <img
             src={item.image}
             alt={item.title}
             loading="lazy"
-            className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-105"
+            className="h-full w-full object-contain object-center transition duration-500 group-hover:scale-105"
           />
         ) : (
           <div className="flex h-full items-center justify-center bg-ivory-deep px-6 text-center font-sans text-xs font-semibold uppercase tracking-wider text-graphite-soft">
