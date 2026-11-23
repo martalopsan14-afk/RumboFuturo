@@ -28,12 +28,14 @@ export async function trackQrEvent(eventType: QrEventType): Promise<void> {
     if (eventType === 'page_view' && sessionStorage.getItem('rumbo_qr_page_viewed') === '1') return;
     if (eventType === 'page_view') sessionStorage.setItem('rumbo_qr_page_viewed', '1');
     const params = new URLSearchParams(window.location.search);
-    const source = params.get('utm_source') || params.get('source') || 'qr';
+    const source = params.get('utm_source') || params.get('source') || 'direct';
+    const campaign = params.get('utm_campaign') || (source === 'qr' ? 'rumbo_futuro' : null);
     await supabase.from('qr_events').insert({
       visitor_id: getVisitorId(),
       session_id: getId(SESSION_KEY),
       event_type: eventType,
       source: source.slice(0, 80),
+      campaign_id: campaign,
     });
   } catch {
     // Analytics failures must never block a registration or page render.
@@ -42,6 +44,11 @@ export async function trackQrEvent(eventType: QrEventType): Promise<void> {
 
 export interface QrAnalytics {
   totalVisits: number;
+  qrVisits: number;
+  qrUniqueVisitors: number;
+  qrUniqueSessions: number;
+  participantCount: number;
+  participants: Array<{ id: string; email: string; created_at: string; source: string; status: string }>;
   uniqueVisitors: number;
   uniqueSessions: number;
   registrations: number;
