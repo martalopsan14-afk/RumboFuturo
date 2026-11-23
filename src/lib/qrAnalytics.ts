@@ -56,8 +56,8 @@ export interface QrAnalytics {
   daily: Array<{ day: string; visits: number; registrations: number }>;
 }
 
-export async function getQrAnalytics(token: string): Promise<QrAnalytics> {
-  const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-analytics`, {
+export async function getQrAnalytics(token: string, range: '7d' | '30d' | '90d' | 'all' = '30d'): Promise<QrAnalytics> {
+  const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-analytics?range=${range}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   const data = await response.json();
