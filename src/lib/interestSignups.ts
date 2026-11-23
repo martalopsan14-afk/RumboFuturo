@@ -6,7 +6,8 @@ export type InterestType =
   | 'in_person_course'
   | 'subscription_news'
   | 'event_news'
-  | 'qr_landing';
+  | 'qr_landing'
+  | 'event_sinercom';
 
 export type SaveInterestResult = 'saved' | 'duplicate' | 'error';
 
