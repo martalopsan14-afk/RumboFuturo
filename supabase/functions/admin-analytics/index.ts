@@ -31,7 +31,18 @@ async function verifyAdminToken(token: string): Promise<boolean> {
   } catch { return false; }
 }
 Deno.serve(async req => {
-  if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders });
+  if (req.method === "OPTIONS") {
+    // Reflect the browser SDK headers requested during preflight. This keeps
+    // CORS working when supabase-js adds or changes client headers.
+    const requestedHeaders = req.headers.get("Access-Control-Request-Headers");
+    return new Response(null, {
+      status: 204,
+      headers: {
+        ...corsHeaders,
+        "Access-Control-Allow-Headers": requestedHeaders || corsHeaders["Access-Control-Allow-Headers"],
+      },
+    });
+  }
   if (req.method !== "GET") return response({ error: "Método no permitido" }, 405);
   const match = req.headers.get("Authorization")?.match(/^Bearer\s+(.+)$/i);
   if (!match || !(await verifyAdminToken(match[1]))) return response({ error: "No autorizado" }, 401);
@@ -57,6 +68,9 @@ Deno.serve(async req => {
     const allSignups = signups ?? [];
     const allRegistrations = allSignups.filter((signup: any) => (signup.source ?? "").toLowerCase() === "qr");
     const registrations = allRegistrations.filter((signup: any) => !cutoff || new Date(signup.created_at) >= cutoff);
+    const periodSignups = allSignups.filter((signup: any) => !cutoff || new Date(signup.created_at) >= cutoff);
+    const websiteRegistrations = periodSignups.filter((signup: any) => (signup.source ?? "website").toLowerCase() !== "qr");
+    const landingPageRegistrations = periodSignups.filter((signup: any) => signup.interest_type === "qr_landing");
     const daily = new Map<string, { day: string; visits: number; registrations: number }>();
     const chartDays = days ?? 30;
     const start = new Date(); start.setDate(start.getDate() - (chartDays - 1)); start.setHours(0, 0, 0, 0);
@@ -65,7 +79,7 @@ Deno.serve(async req => {
       const day = date.toISOString().slice(0, 10);
       daily.set(day, { day, visits: 0, registrations: 0 });
     }
-    for (const event of allPageViews) {
+    for (const event of allPageViews.filter((event: any) => (event.source ?? "").toLowerCase() === "qr")) {
       const row = daily.get(new Date(event.created_at).toISOString().slice(0, 10));
       if (row) row.visits++;
     }
@@ -86,6 +100,10 @@ Deno.serve(async req => {
       qrUniqueVisitors: new Set(qrViews.map((event: any) => event.visitor_id).filter(Boolean)).size,
       qrUniqueSessions: qrSessions.size,
       registrations: registrations.length,
+      qrRegistrations: registrations.length,
+      websiteRegistrations: websiteRegistrations.length,
+      landingPageRegistrations: landingPageRegistrations.length,
+      totalRegistrations: periodSignups.length,
       participantCount: participants.length,
       totalSignups: participants.length,
       conversionRate: qrSessions.size ? Number(((registrations.length / qrSessions.size) * 100).toFixed(2)) : 0,
